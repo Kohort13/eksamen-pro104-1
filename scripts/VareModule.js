@@ -44,20 +44,32 @@ const VareModule = (function(){
         new Vare(7, "Pizza Di Parma", priceClass4, allergiesG_L_PN, "pizza med crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner")
     ];
     const getAll = () => varer;
-    // const getByAllergy = (allergy) => {
-        
-    //     return varer.filter(vare => vare._allergies === allergy);
-    // }
-    const getByName = (name) => {
-        return varer.filter(vare => vare._productName === name);
+
+    const getByName = (prodName) => {
+        return varer.filter(vare => vare._productName === prodName);
     }
-    const getByID = (ID) => {
-        return varer.filter(vare => vare._productID === ID);
+    const getByID = (id) => {
+        return varer.filter(vare => vare._productID === id);
     }
     const getByPrice = (price) => {
         return varer.filter(vare => vare._price === price);
     }
+    // const getByAlleries = (inputAllergies) => {
+    //     return varer.filter(vare =>{
+    //         vare._allergies.forEach(allergy => {
+    //             if(inputAllergies === allergy.name && allergy.state)
+    //                 return true;
+    //             else
+    //                 return false;
+    //         });
+    //     })
+    // }
+    const getByAllergies = (inputAllergy) => {
+        return varer.filter(vare => {
+            vare._allergies.forEach(allergy => {return (inputAllergy === allergy.name && allergy.state)});
+        })
+    }
 
-    return {getAll, getByName, getByID, getByPrice}
+    return {getAll, getByName, getByID, getByPrice, getByAllergies}
 }());
 export default VareModule;

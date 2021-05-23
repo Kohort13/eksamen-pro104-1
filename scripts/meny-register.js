@@ -7,7 +7,8 @@ import VareModule from './VareModule.js';
 
 function renderTable(){
     let menuBody = document.getElementById("menu-body")
-    let varer = VareModule.getAll();
+    let varer = VareModule.getByAllergies("PineNuts");
+    //let varer = VareModule.getAll();
     for(var i = 0; i < varer.length; i++){
         let result = "";
         result += `
@@ -25,8 +26,5 @@ function renderTable(){
         });
         menuBody.innerHTML += `<tr>${result}</tr>`;
     }
-    // VareModule.getAll().forEach(vare =>{
-        
-    // });
 }
 renderTable();
