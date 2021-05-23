@@ -7,6 +7,7 @@
     <title>Menyer</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <script type = "module" src ="../scripts/meny-register.js"></script>
 </head>
 <body>
     <section class = "section">
@@ -19,13 +20,13 @@
             <table class = "table has-text-centered  is-striped is-narrow is-hoverable">
                 <thead>
                     <tr>
+                        <th>Produkt ID</th>
                         <th>Produkt</th>
                         <th>Pris</th>
                         <th colspan="10">Allergener</th>
                     </tr>
-                </thead>
-                <tbody>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td>Gluten</td>
@@ -39,52 +40,9 @@
                         <td>Soya</td>
                         <td>Selleri</td>
                     </tr>
-                    <tr>
-                        <td><em>Pizza Marinara</em></td>
-                        <!--tomato sause-->
-                        <td>99,-</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                    <tr>
-                        <td><em>Pizza Margherita</em></td>
-                        <!--tomato sause, mozzarella-->
-                        <td>169,-</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                    <tr>
-                        <td><em>Pizza Capricciosa</em></td>
-                        <!--tomato sause, mozzarella, ham, atichokes, mushroom, black olives -->
-                        <td>219,-</td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-check"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-
+                </thead>
+                <tbody id = "menu-body">
+                   
                 </tbody>
             </table>
         </div>

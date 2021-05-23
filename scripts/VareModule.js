@@ -14,6 +14,7 @@ const VareModule = (function(){
             {name: "Soy", state: soy},
             {name: "Celery", state: celery}
         ];
+        return allergies;
     }
     class Vare {
         constructor(productID, productName, price, allergies, description){
@@ -40,12 +41,23 @@ const VareModule = (function(){
         new Vare(4, "Quatro Formaggi", priceClass3, allergiesG_L, "pizza med tomatsaus, mozzarella, gorgonzola, fontina og parmesan"),
         new Vare(5, "Pizza Pepperoni", priceClass2, allergiesG_L, "pizza med tomatsaus, mozzarella, pepperoni"),
         new Vare(6, "Pizza Pesto", priceClass2, allergiesG_L_PN, "pizza med tomatsaus, mozzarella, pesto"),
-        new Vare(7, "Pizza Di Parma", priceClass4, allergiesG_L_PN, "pizza med crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
+        new Vare(7, "Pizza Di Parma", priceClass4, allergiesG_L_PN, "pizza med crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner")
     ];
     const getAll = () => varer;
-    const getByAllergies = (allergies) => {
-        return varer.filter(varer => varer.allergies === allergies);
+    // const getByAllergy = (allergy) => {
+        
+    //     return varer.filter(vare => vare._allergies === allergy);
+    // }
+    const getByName = (name) => {
+        return varer.filter(vare => vare._productName === name);
     }
-    return {getAll, getByAllergies}
+    const getByID = (ID) => {
+        return varer.filter(vare => vare._productID === ID);
+    }
+    const getByPrice = (price) => {
+        return varer.filter(vare => vare._price === price);
+    }
+
+    return {getAll, getByName, getByID, getByPrice}
 }());
 export default VareModule;
