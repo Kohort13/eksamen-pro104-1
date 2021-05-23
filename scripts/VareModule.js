@@ -54,21 +54,18 @@ const VareModule = (function(){
     const getByPrice = (price) => {
         return varer.filter(vare => vare._price === price);
     }
-    // const getByAlleries = (inputAllergies) => {
-    //     return varer.filter(vare =>{
-    //         vare._allergies.forEach(allergy => {
-    //             if(inputAllergies === allergy.name && allergy.state)
-    //                 return true;
-    //             else
-    //                 return false;
-    //         });
-    //     })
-    // }
+
     const getByAllergies = (inputAllergy) => {
-        return varer.filter(vare => {
-            vare._allergies.forEach(allergy => {return (inputAllergy === allergy.name && allergy.state)});
+        let outputArray = [];
+        varer.forEach(vare => {
+            vare._allergies.forEach(allergy => {
+                if(inputAllergy === allergy.name && allergy.state)
+                    outputArray.push(vare);
+            })
         })
+        return outputArray;
     }
+
 
     return {getAll, getByName, getByID, getByPrice, getByAllergies}
 }());

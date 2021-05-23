@@ -6,9 +6,12 @@ import VareModule from './VareModule.js';
 // }
 
 function renderTable(){
-    let menuBody = document.getElementById("menu-body")
-    let varer = VareModule.getByAllergies("PineNuts");
-    //let varer = VareModule.getAll();
+    let menuBody = document.getElementById("menu-body");
+    let varer;
+    if(true)
+        varer = VareModule.getByAllergies("PineNuts");
+    else
+        varer = VareModule.getAll();
     for(var i = 0; i < varer.length; i++){
         let result = "";
         result += `
