@@ -16,7 +16,8 @@ const VareModule = (function(){
         ];
     }
     class Vare {
-        constructor(productName, price, allergies, description){
+        constructor(productID, productName, price, allergies, description){
+            this._productID = productID;
             this._productName = productName;
             this._price = price;
             this._allergies = allergies;
@@ -32,14 +33,14 @@ const VareModule = (function(){
     let allergisL = createAllergies(true, true, false, false, false, false, false, false, false, false);
     let allergiesG_L_PN = createAllergies(true, true, false, false, false, false, false, true, false, false);
     const varer = [
-        new Vare("Pizza Marinara", priceClass1, allergisL, "Glutenfri pizza med tomatsaus"),
-        new Vare("Pizza Margherita", priceClass2, allergisL, "glutenfri pizza med tomatsaus og mozzarella"),
-        new Vare("Pizza Capricciosa", priceClass3, allergiesG_L, "pizza med tomatsaus, mozzarella, skinke, artisjokk, sopp og svarte oliven"),
-        new Vare("Prosciutto e funghi", priceClass4, allergiesG_L_PN, "pizza med tomatsaus, mozzarella, prosciutto, sopp, ruccola og pinjekjenren"),
-        new Vare("Quatro Formaggi", priceClass3, allergiesG_L, "pizza med tomatsaus, mozzarella, gorgonzola, fontina og parmesan"),
-        new Vare("Pizza Pepperoni", priceClass2, allergiesG_L, "pizza med tomatsaus, mozzarella, pepperoni"),
-        new Vare("Pizza Pesto", priceClass2, allergiesG_L_PN, "pizza med tomatsaus, mozzarella, pesto"),
-        new Vare("Pizza Di Parma", priceClass4, allergiesG_L_PN, "pizza med crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
+        new Vare(0, "Pizza Marinara", priceClass1, allergisL, "Glutenfri pizza med tomatsaus"),
+        new Vare(1, "Pizza Margherita", priceClass2, allergisL, "glutenfri pizza med tomatsaus og mozzarella"),
+        new Vare(2, "Pizza Capricciosa", priceClass3, allergiesG_L, "pizza med tomatsaus, mozzarella, skinke, artisjokk, sopp og svarte oliven"),
+        new Vare(3, "Prosciutto e funghi", priceClass4, allergiesG_L_PN, "pizza med tomatsaus, mozzarella, prosciutto, sopp, ruccola og pinjekjenren"),
+        new Vare(4, "Quatro Formaggi", priceClass3, allergiesG_L, "pizza med tomatsaus, mozzarella, gorgonzola, fontina og parmesan"),
+        new Vare(5, "Pizza Pepperoni", priceClass2, allergiesG_L, "pizza med tomatsaus, mozzarella, pepperoni"),
+        new Vare(6, "Pizza Pesto", priceClass2, allergiesG_L_PN, "pizza med tomatsaus, mozzarella, pesto"),
+        new Vare(7, "Pizza Di Parma", priceClass4, allergiesG_L_PN, "pizza med crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
     ];
     const getAll = () => varer;
     const getByAllergies = (allergies) => {
