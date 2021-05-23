@@ -17,7 +17,7 @@ function renderTable(){
         result += `
             <td>${varer[i]._productID}</td>
             <td>${varer[i]._productName}</td>
-            <td>${varer[i]._price}</td>`;
+            <td>${varer[i]._price},-</td>`;
         varer[i]._allergies.forEach(allergy =>{
             if(allergy.state){
                 result += `
