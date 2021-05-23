@@ -5,30 +5,39 @@ function validateUser() {
 
     if(username == "user" && password == "user"){
         window.location = "index.html"; //Sender deg til index siden om login ok.
-        //return false;
     }
     else{
-        alert("Feil brukernavn eller passord")
+        let errorField = document.getElementById("error-message");
+        errorField.innerHTML = `<p class="has-text-danger is-italic">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <i class="fas fa-exclamation"></i>
+                                        </span>
+                                        <span>Feil passord</span>
+                                    </span>
+                                </p>`;
     }
 }
-const rmCheck = document.getElementById("remember"), usernameInput = document.getElementById("username");
+const rmCheck = document.getElementById("remember"), usernameInput = document.getElementById("username"), passwordInput = document.getElementById("password");
 
 if (localStorage.checkbox && localStorage.checkbox !== "") {
     rmCheck.setAttribute("checked","checked");
     usernameInput.value = localStorage.username;
+    passwordInput.value = localStorage.password;
 }else{
     rmCheck.removeAttribute("checked");
     usernameInput.value = "";
+    passwordInput.value = "";
 }
 
 function rememberMe(){
-    if(rmCheck.checked && usernameInput.value !== "") {
+    if(rmCheck.checked && usernameInput.value !== "" && passwordInput.value !== "") {
         localStorage.username = usernameInput.value;
+        localStorage.password = passwordInput.value;
         localStorage.checkbox = rmCheck.value;
-        alert("is checked")
     } else {
         localStorage.username = "";
+        localStorage.password = "";
         localStorage.checkbox = "";
-        alert("is not checked")
     }
 }
