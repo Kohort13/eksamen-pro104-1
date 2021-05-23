@@ -1,4 +1,4 @@
-import VareModule from './VareModule.js';
+import VareModule from './modules/VareModule.js';
 
 
 // function checkAllergies(){
