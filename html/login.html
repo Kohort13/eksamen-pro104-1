@@ -19,11 +19,15 @@
                                 <div class="block">
                                     <h1 class="title">Gyldne Pizza</h1>
                                     <h3 class="subtitle">Velkommen</h3>
-                                    <input class="input mb-2" type="text" placeholder="brukernavn">
-                                    <input class="input" type="password" placeholder="passord">
+                                    <input class="input mb-2" type="text" placeholder="brukernavn" id = "username">
+                                    <input class="input" type="password" placeholder="passord" id = "password">
+                                </div>
+                                <div class = "Block">
+                                    <label><input type = "checkbox" checked = "checked" name = "remember"> Remember me</label>
+                                <!--Funker ikke enda-->
                                 </div>
                                 <div class="block">
-                                    <button class="button is-success is-rounded is-outlined">
+                                    <button class="button is-success is-rounded is-outlined" id = "submit" onclick="validateUser()">
                                         <span>Logg inn</span>
                                         <span class="icon">
                                             <i class="fas fa-check"></i>
