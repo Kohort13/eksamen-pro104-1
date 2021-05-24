@@ -8,7 +8,7 @@ function validateUser() {
     }
     else{
         let errorField = document.getElementById("error-message");
-        errorField.innerHTML = `<p class="has-text-danger is-italic">
+        errorField.innerHTML = `<p class="help has-text-danger">
                                     <span class="icon-text">
                                         <span class="icon">
                                             <i class="fas fa-exclamation"></i>
