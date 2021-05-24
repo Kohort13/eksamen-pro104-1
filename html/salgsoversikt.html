@@ -17,26 +17,26 @@
     <section class="section">
         <div class="field is-horizontal">
             <div id="buttons" class="buttons has-addons mr-3">
-                <button class="button is-inverted">
+                <button id="period-day" title="Setter sluttdato til samme dag" class="button is-inverted">
                     <span class="icon is-small">
                         <i class="fas fa-calendar-day"></i>
                     </span>
                     <span>Dag</span>
                 </button>
-                <button class="button is-active is-info">
+                <button id="period-week" class="button is-active is-info" title="Setter sluttdato en uke frem i tid">
                     <span class="icon is-small">
                         <i class="fas fa-calendar-week"></i>
                     </span>
                     <span>Uke</span>
                 </button>
-                <button class="button">
+                <button id="period-free-select" class="button" title="Setter sluttdato en måned frem i tid som standard, men lar deg også fritt velge slutt" >
                     <span class="icon is-small">
                         <i class="fas fa-calendar-alt"></i>
                     </span>
                     <span>Fri periode</span>
                 </button>
             </div>
-            <div class="field is-small has-addons mr-3">
+            <div class="field has-addons mr-3">
                 <div class="control">
                     <div class="button is-info is-static">
                         <span>Fra</span>
@@ -46,12 +46,12 @@
                     </div>
                 </div>
                 <div class="control">
-                    <input class="input" type="date">
+                    <input id="from-date" class="input" type="date">
                 </div>
             </div>
-            <div class="field has-addons">
+            <div id="optional-to-date" class="field is-hidden has-addons mr-3">
                 <div class="control">
-                    <div class="button is-info is-static is-unselectable">
+                    <div class="button is-info is-static">
                         <span>Til</span>
                         <span class="icon is-small">
                             <i class="fas fa-chevron-right"></i>
@@ -59,9 +59,10 @@
                     </div>
                 </div>
                 <div class="control">
-                    <input class="input" type="date" placeholder="dd/mm/åå">
+                    <input id="to-date" class="input" type="date">
                 </div>
             </div>
+            <button id="filter-table" class="button is-success">Søk</button>
         </div>
         <div class="columns">
             <div class="column">
