@@ -26,15 +26,15 @@ function renderTable(array){
 
     for(var i = 0; i < array.length; i++){
         let result = "";
-        if(previousType != array[i]._productType){
-            previousType = array[i]._productType;
+        if(previousType != array[i].productType){
+            previousType = array[i].productType;
             result += `<tr><td colspan="13" class="has-text-centered"><b>${previousType}</b></td><tr>`;
         }
         result += `
-            <td class="is-narrow">${array[i]._productID}</td>
-            <td class="is-narrow" title="${array[i]._description}"><em>${array[i]._productName}</em></td>
-            <td>${array[i]._price},-</td>`;
-        array[i]._allergies.forEach(allergy =>{
+            <td class="is-narrow">${array[i].productID}</td>
+            <td class="is-narrow" title="${array[i].description}"><em>${array[i].productName}</em></td>
+            <td>${array[i].price},-</td>`;
+        array[i].allergies.forEach(allergy =>{
             if(allergy.state){
                 result += `<td class="has-text-centered"><i class="fas fa-check has-text-danger"></i></td>`;
             }else{
