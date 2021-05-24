@@ -2,9 +2,8 @@ import VareModule from "./VareModule.js";
 const SalgModule = (function(){
 
     class OrderLine {
-        constructor(itemID, quantity){
-            this._orderID = orderID;
-            this._itemID = itemID;
+        constructor(item, quantity){
+            this._item = item;
             this._quantity = quantity;
         }
         get orderID(){ return this._orderID; }
@@ -32,11 +31,8 @@ const SalgModule = (function(){
     }
 
     //TODO make itemID actually correspond to menu items, instead of strings
-    let pizza1 = new OrderLine(0, 2);
-    let pizza2 = new OrderLine(1, 2);
-    let pizza3 = new OrderLine(2, 2);
-    
-    const orders = [];
+    const products = VareModule.getAll();
+    const orders = [];    
 
     const getAll = () => orders;
     const getByDate = (date) => {
