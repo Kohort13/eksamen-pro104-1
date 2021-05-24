@@ -6,44 +6,39 @@ function initialise(){
 }
 initialise();
 function renderTable(array){
-    let menuHead = document.getElementById("menu-head");
     let tableTitles = `
-        <th>Produkt ID</th>
-        <th>Produkt navn</th>
-        <th>Pris</th>
-        <th colspan="10">Allergener</th>`;
-        let allergyTitles = "";
-        let allegyNames = VareModule.getAllAllergies();
-        allergyTitles += `<td colspan="3"></td>`;
-        allegyNames.forEach(name => {
-            allergyTitles += `
-                <td>${name}</td>`;
-        });
+    <th>ID</th>
+    <th>Produkt navn</th>
+    <th class="is-narrow">Pris</th>
+    <th colspan="10" class="has-text-centered">Allergener</th>`;
+    let allergyTitles = `<td colspan="3"></td>`;
+    let allegyNames = VareModule.getAllAllergies();
+    allegyNames.forEach(name => {
+        allergyTitles += `<td class="has-text-centered">${name}</td>`;
+    });
+
+    const menuHead = document.getElementById("menu-head");
     menuHead.innerHTML = `<tr>${tableTitles}</tr><tr>${allergyTitles}</tr>`;
-
-
-    let menuBody = document.getElementById("menu-body");
-    menuBody.innerHTML = "";
     
     let previousType;
+    const menuBody = document.getElementById("menu-body");
+    menuBody.innerHTML = "";
 
     for(var i = 0; i < array.length; i++){
         let result = "";
         if(previousType != array[i]._productType){
             previousType = array[i]._productType;
-            result += `<tr><td colspan="13"><b>${previousType}</b></td><tr>`;
+            result += `<tr><td colspan="13" class="has-text-centered"><b>${previousType}</b></td><tr>`;
         }
         result += `
-            <td>${array[i]._productID}</td>
-            <td title="${array[i]._description}"><em>${array[i]._productName}</em></td>
+            <td class="is-narrow">${array[i]._productID}</td>
+            <td class="is-narrow" title="${array[i]._description}"><em>${array[i]._productName}</em></td>
             <td>${array[i]._price},-</td>`;
         array[i]._allergies.forEach(allergy =>{
             if(allergy.state){
-                result += `
-                <td><i class="fas fa-check has-text-danger"></i></td>`;
+                result += `<td class="has-text-centered"><i class="fas fa-check has-text-danger"></i></td>`;
             }else{
-                result += `
-                <td><i class="fas fa-times has-text-info-dark"></i></td>`;
+                result += `<td class="has-text-centered"><i class="fas fa-times has-text-info-dark"></i></td>`;
             }
         });
         menuBody.innerHTML += `<tr>${result}</tr>`;
