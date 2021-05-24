@@ -1,10 +1,13 @@
 import VareModule from './modules/VareModule.js';
-
-
+let searchInput;
+function initialise(){
+    searchInput = document.getElementById("search-input");
+    searchInput.addEventListener('keydown', menuSearch);
+}
+initialise();
 function renderTable(array){
     let menuHead = document.getElementById("menu-head");
-    let tableTitles = "";
-    tableTitles += `
+    let tableTitles = `
         <th>Produkt ID</th>
         <th>Produkt navn</th>
         <th>Pris</th>
@@ -16,10 +19,11 @@ function renderTable(array){
             allergyTitles += `
                 <td>${name}</td>`;
         });
-    menuHead.innerHTML += `<tr>${tableTitles}</tr><tr>${allergyTitles}</tr>`;
+    menuHead.innerHTML = `<tr>${tableTitles}</tr><tr>${allergyTitles}</tr>`;
 
 
     let menuBody = document.getElementById("menu-body");
+    menuBody.innerHTML = "";
     
     let previousType;
 
@@ -48,7 +52,6 @@ function renderTable(array){
 renderTable(VareModule.getAll());
 
 function menuSearch(){
-    alert("yo");
-    // let searchInput = document.getElementById("search-input").value;
-    // renderTable(VareModule.getByName(searchInput));
+    let searchInput = document.getElementById("search-input").value;
+    renderTable(VareModule.getByName(searchInput));
 }

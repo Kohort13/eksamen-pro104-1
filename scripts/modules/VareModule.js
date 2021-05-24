@@ -53,7 +53,7 @@ const VareModule = (function(){
     const getAll = () => varer;
 
     const getByName = (prodName) => {
-        return varer.filter(vare => vare._productName === prodName);
+        return varer.filter(vare => vare._productName.toLowerCase().includes(prodName.toLowerCase()));
     }
     const getByID = (id) => {
         return varer.filter(vare => vare._productID === id);
