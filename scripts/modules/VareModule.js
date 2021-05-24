@@ -25,6 +25,12 @@ const VareModule = (function(){
             this._allergies = allergies;
             this._description = description;
         }
+        get productID() { return this._productID; }
+        get productType() { return this._productType; }
+        get productName() { return this._productName; }
+        get price() { return this._price; }
+        get allergies() { return this._allergies; }
+        get description() { return this._description; }
     }
     let priceClass1 = 99;
     let priceClass2 = 149;
@@ -53,22 +59,22 @@ const VareModule = (function(){
     const getAll = () => varer;
 
     const getByName = (prodName) => {
-        return varer.filter(vare => vare._productName.toLowerCase().includes(prodName.toLowerCase()));
+        return varer.filter(vare => vare.productName.toLowerCase().includes(prodName.toLowerCase()));
     }
     const getByID = (id) => {
-        return varer.filter(vare => vare._productID === id);
+        return varer.filter(vare => vare.productID === id);
     }
     const getByPrice = (price) => {
-        return varer.filter(vare => vare._price === price);
+        return varer.filter(vare => vare.price === price);
     }
     const getByProductType = (type) => {
-        return varer.filter(vare => vare._productType === type);
+        return varer.filter(vare => vare.productType === type);
     }
 
     const getByAllergies = (inputAllergy) => {
         let outputArray = [];
         varer.forEach(vare => {
-            vare._allergies.forEach(allergy => {
+            vare.allergies.forEach(allergy => {
                 if(inputAllergy === allergy.name && allergy.state)
                     outputArray.push(vare);
             })
