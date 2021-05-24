@@ -1,11 +1,7 @@
 import VareModule from './modules/VareModule.js';
 
 
-// function checkAllergies(){
-
-// }
-
-function renderTable(){
+function renderTable(array){
     let menuHead = document.getElementById("menu-head");
     let tableTitles = "";
     tableTitles += `
@@ -24,21 +20,20 @@ function renderTable(){
 
 
     let menuBody = document.getElementById("menu-body");
-    let varer;
+    
+    let previousType;
 
-    varer = VareModule.getAll();
-
-    // if(false)
-    //     varer = VareModule.getByAllergies("PineNuts");
-    // else
-    //     varer = VareModule.getAll();
-    for(var i = 0; i < varer.length; i++){
+    for(var i = 0; i < array.length; i++){
         let result = "";
+        if(previousType != array[i]._productType){
+            previousType = array[i]._productType;
+            result += `<tr><td colspan="13"><b>${previousType}</b></td><tr>`;
+        }
         result += `
-            <td>${varer[i]._productID}</td>
-            <td title="${varer[i]._description}">${varer[i]._productName}</td>
-            <td>${varer[i]._price},-</td>`;
-        varer[i]._allergies.forEach(allergy =>{
+            <td>${array[i]._productID}</td>
+            <td title="${array[i]._description}"><em>${array[i]._productName}</em></td>
+            <td>${array[i]._price},-</td>`;
+        array[i]._allergies.forEach(allergy =>{
             if(allergy.state){
                 result += `
                 <td><i class="fas fa-check has-text-danger"></i></td>`;
@@ -50,4 +45,10 @@ function renderTable(){
         menuBody.innerHTML += `<tr>${result}</tr>`;
     }
 }
-renderTable();
+renderTable(VareModule.getAll());
+
+function menuSearch(){
+    alert("yo");
+    // let searchInput = document.getElementById("search-input").value;
+    // renderTable(VareModule.getByName(searchInput));
+}
