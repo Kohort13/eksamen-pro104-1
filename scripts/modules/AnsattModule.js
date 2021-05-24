@@ -15,9 +15,9 @@ const AnsattModule = (function(){
     }
 
     const ansatte = [
-        new Ansatt("Ola", "Nordmensch", 69696969, "ola@nordmench.org", "Storgata 12, 0858 Oslo", "12.06.1978", 221.4, "Assisterende Kokk", "Restaurant 2"), 
-        new Ansatt("Trine", "Svenskamensch", 69696969, "trine@svensk.se", "Storgata 14, 0858 Oslo", "12.06.1989", 221.4, "Kokk", "Restaurant 2"), 
-        new Ansatt("Bob Kåre", "Johnniebjørn", 69696969, "bob@kåre.org", "Storgata 66, 0858 Oslo", "12.06.1996", 221.4, "Assisterende Avdelingssjef", "Restaurant 2")
+        new Ansatt("Ola", "Nordmensch", 98480551, "ola@nordmench.org", "Storgata 12, 0858 Oslo", "12.06.1978", "465 000kr", "Assisterende Kokk", "Restaurant 2"), 
+        new Ansatt("Trine", "Svenskamensch", 48983802, "trine@svensk.se", "Storgata 14, 0858 Oslo", "12.06.1989", "647 000kr", "Kokk", "Restaurant 2"), 
+        new Ansatt("Bob Kåre", "Johnniebjørn", 47985826, "bob@kåre.org", "Storgata 66, 0858 Oslo", "12.06.1996", "731 000kr", "Assisterende Avdelingssjef", "Restaurant 4")
     ];
 
     const getAll = () => ansatte;

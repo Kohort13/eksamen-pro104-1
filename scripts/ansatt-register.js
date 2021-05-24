@@ -1,38 +1,91 @@
 import AnsattModule from './modules/AnsattModule.js';
 //JavaScript for ansatt-registeret
-
-
-/* 
-var testTag = document.getElementById("testid");
-var testBtn = document.getElementById("test-btn");
-
-function renderAnsatte() {
-    var alleAnsatte = AnsattModule.getAll();
-    for (var i = 0; i < alleAnsatt.length; i++) {
-        var ansattRegister = "";
-        ansattRegister += `
-        <p> ${alleAnsatte[i]._firstName} </p>
-        <br>
-        `;
-        testTag.innerHTML += `test  ${ansattRegister}`
-    }
-
-}
-renderAnsatte();
-*/
-
-function renderTable(){
+/*
+function ansattRegister(){
     var menuBody = document.getElementById("testid");
-    var varer;
-        varer = AnsattModule.getAll();
-    for(var i = 0; i < varer.length; i++){
-        let result = "";
+    var ansatte;
+        ansatte = AnsattModule.getAll();
+    for(var i = 0; i < ansatte.length; i++){
+        var result = "";
         result += `
             <br>
-            ${varer[i]._firstName}
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="block">
+                        <div class="media-left">
+                            <figure class="image is-128x128 is-rounded">
+                                <img class="is-rounded" src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                            </figure>
+                            </div>
+                        </div>
+                            <div class="container is-fluid">
+                                <div class="notification ">
+                                ${ansatte[i]._firstName} ${ansatte[i]._lastName}
+                                </div>
+                            </div>
+                        <div class="block">
+                            <h2 class="title is-size-5 has-text-centered">${ansatte[i]._position}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
             `;
            
         menuBody.innerHTML += `${result}`;
     }
 }
-renderTable();
+ansattRegister();
+*/
+
+function ansattRegister(){
+    var menuBody = document.getElementById("testid");
+    var ansatte;
+        ansatte = AnsattModule.getAll();
+    for(var i = 0; i < ansatte.length; i++){
+        var result = "";
+        result += 
+        `
+            <br>
+            <div class="box">
+                <article class="media">
+                    <div class="media-left">
+                        <figure class="image is-128x128">
+                            <img src="https://bulma.io/images/placeholders/256x256.png" alt="Placeholder Image">
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>${ansatte[i]._firstName} ${ansatte[i]._lastName}</strong> 
+                                - 
+                                <strong>${ansatte[i]._position}</strong>
+                                <br>
+                                <small>
+                                <b>Kontaktinformasjon:</b>
+                                <br>
+                                ${ansatte[i]._birthDate}
+                                <br>
+                                ${ansatte[i]._telephone}
+                                <br>
+                                ${ansatte[i]._email}
+                                <br>
+                                ${ansatte[i]._address}
+                                <br>
+                                <b>Jobbinformasjon:</b>
+                                <br>
+                                ${ansatte[i]._position} - ${ansatte[i]._restaurant}
+                                <br>
+                                ${ansatte[i]._salary}
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        `;
+           
+        menuBody.innerHTML += `${result}`;
+    }
+}
+ansattRegister();
