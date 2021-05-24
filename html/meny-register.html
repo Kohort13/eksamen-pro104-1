@@ -11,40 +11,33 @@
 </head>
 <body>
     <section class = "section">
-        <h1 class = "title">Meny</h1>
-        <h3 class="subtitle is-italic">Vareregister</h3>
-        <p>Test</p>
+        <div class = "column">
+            <h1 class = "title">Meny</h1>
+            <h3 class= "subtitle is-italic">Vareregister</h3>
+        </div>
+        <div class = "panel-block">
+            <div class = "panel">
+                <p class="control has-icons-left">
+                    <input class ="input" type="text" placeholder="Søk i meny" id = "menuSearch">
+                    <span class="icon is-left">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                    </span>
+                </p>
+            </div>
+        </div>
     </section>
     <section class = "section">
-        <div class = " columns">
-            <table class = "table has-text-centered  is-striped is-narrow is-hoverable">
-                <thead>
-                    <tr>
-                        <th>Produkt ID</th>
-                        <th>Produkt</th>
-                        <th>Pris</th>
-                        <th colspan="10">Allergener</th>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Gluten</td>
-                        <td>Laktose</td>
-                        <td>Egg</td>
-                        <td>Peanøtter</td>
-                        <td>Nøtter</td>
-                        <td>Skalldyr</td>
-                        <td>Fisk</td>
-                        <td>Pinjekjerner</td>
-                        <td>Soya</td>
-                        <td>Selleri</td>
-                    </tr>
-                </thead>
-                <tbody id = "menu-body">
-                   
-                </tbody>
-            </table>
+        <div class ="column">
+            <div class = " columns">
+                <div class="column">
+                    <div class="table-container">
+                        <table class = "table has-text-centered  is-striped is-narrow is-hoverable">
+                            <thead id = "menu-head"></thead>
+                            <tbody id = "menu-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </body>
