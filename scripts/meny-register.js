@@ -6,9 +6,25 @@ import VareModule from './modules/VareModule.js';
 // }
 
 function renderTable(){
+    let menuHead = document.getElementById("menu-head");
+    let tableTitles = "";
+    tableTitles += `
+        <th>Produkt ID</th>
+        <th>Produkt navn</th>
+        <th>Pris</th>
+        <th colspan="10">Allergener</th>`;
+        let allergyTitles = "";
+        let allegyNames = VareModule.getAllAllergies();
+        allergyTitles += `<td colspan="3"></td>`;
+        allegyNames.forEach(name => {
+            allergyTitles += `
+                <td>${name}</td>`;
+        });
+
+        menuHead.innerHTML += `<tr>${tableTitles}</tr><tr>${allergyTitles}</tr>`;
     let menuBody = document.getElementById("menu-body");
     let varer;
-    if(true)
+    if(false)
         varer = VareModule.getByAllergies("PineNuts");
     else
         varer = VareModule.getAll();

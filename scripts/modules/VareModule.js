@@ -30,6 +30,7 @@ const VareModule = (function(){
     let priceClass2 = 149;
     let priceClass3 = 169;
     let priceClass4 = 219;
+    let nonAlcoholicDrikPrice = 55;
 
     let allergiesG_L = createAllergies(true, true, false, false, false, false, false, false, false, false);
     let allergiesL = createAllergies(false, true, false, false, false, false, false, false, false, false);
@@ -44,9 +45,10 @@ const VareModule = (function(){
         new Vare(5, productType.PIZZA, "Pizza Pepperoni", priceClass2, allergiesG_L, "pizza med tomatsaus, mozzarella, pepperoni"),
         new Vare(6, productType.PIZZA, "Pizza Pesto", priceClass2, allergiesG_L_PN, "pizza med tomatsaus, mozzarella, pesto"),
         new Vare(7, productType.PIZZA, "Pizza Di Parma", priceClass4, allergiesG_L_PN, "pizza med crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
-        new Vare(8, productType.DRINK, "Coca Cola", 55, noAllergies, "500ml glass coca cola"),
-        new Vare(9, productType.DRINK, "Kaffe", 55, noAllergies, "500ml glass coca cola"),
-        new Vare(10, productType.DRINK, "Cappuccino", 55, allergiesL, "kaffe med melk")
+        new Vare(7, productType.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, "pizza med tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk og toppet med basilikum"),
+        new Vare(8, productType.DRINK, "Coca Cola", nonAlcoholicDrikPrice, noAllergies, "500ml glass coca cola"),
+        new Vare(9, productType.DRINK, "Kaffe", nonAlcoholicDrikPrice, noAllergies, "500ml glass coca cola"),
+        new Vare(10, productType.DRINK, "Cappuccino", nonAlcoholicDrikPrice, allergiesL, "kaffe med melk")
     ];
     const getAll = () => varer;
 
@@ -73,8 +75,23 @@ const VareModule = (function(){
         })
         return outputArray;
     }
+    const getAllAllergies = ()=> {
+        const allAllergies = createAllergies(false, false, false, false, false, false, false, false, false, false);
+        const allergyNames = [];
+        allAllergies.forEach(allegy =>{
+            allergyNames.push(allegy.name);
+        })
+        return allergyNames;
+    }
+    const findItemByname = (name) =>{
+        varer.forEach(vare => {
+            if(vare.name.toLowerCase().includes(name.toLowerCase())){
+                return vare;
+            }
+        })
+    }
 
 
-    return {getAll, getByName, getByID, getByPrice, getByProductType, getByAllergies}
+    return {getAll, getByName, getByID, getByPrice, getByProductType, getByAllergies, getAllAllergies, findItemByname}
 }());
 export default VareModule;
