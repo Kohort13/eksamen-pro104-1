@@ -90,8 +90,19 @@ const VareModule = (function(){
             }
         })
     }
+    const getSortedByType = ()=>{
+        return varer.sort((v, v2) => {
+            if(v.type > v2.type){
+                return 1;
+            }else if(v.type === v2.type){
+                return 0;                
+            }else{
+                return -1;
+            }
+        });
+    }
 
-
-    return {getAll, getByName, getByID, getByPrice, getByProductType, getByAllergies, getAllAllergies, findItemByname}
+    return {getAll, getByName, getByID, getByPrice, getByProductType, getByAllergies,
+         getAllAllergies, findItemByname, getSortedByType}
 }());
 export default VareModule;
