@@ -7,7 +7,7 @@
     <title>Hovedside</title> <!--Kan endre tittel senere-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-    <script src = "../scripts/index.js" defer></script>
+    <script type="module" src="../scripts/index.js"></script>
     <style>
         .card:hover{
             background-color: #efefef;
@@ -74,37 +74,39 @@
                 </section>
                 <section>
                     <nav class="panel">
-                        <p class="panel-heading" >Kunngjøring</p>
+                        <p class="panel-heading" >Kunngjøringer</p>
                         <div class="panel-block">
                             <p class="control has-icons-left">
-                                <input class="input" type="text" placeholder="Search">
+                                <input class="input" type="text" placeholder="Søk">
                                 <span class="icon is-left">
                                     <i class="fas fa-search" aria-hidden="true"></i>
                                 </span>
                             </p>
                         </div>
-                        <div style="height: 150px; overflow: scroll;" id="kunngjøring">
+                        <div style="height: 300px; overflow-x: hidden; overflow-y: auto;" id="kunngjøring">
                         </div>
                     </nav>
                 </section>
             </div>
             <div class="column is-4">
-                <!--Panel for informasjon skal inn her-->
-                <p class="panel-heading">Åpningstider</p>
-                <a class="panel-block is-active">
-                     <br class="panel-icon">
-                    </br>Mandag: 12-22 </br>Tirsdag: 12-22 </br>Onsdag: 12-22 </br>Torsdag: 8-22 </br>Fredag: 12-00 </br>Lørdag: 12-00 </br>Søndag: 12-00</br></br></br>
-                </a>
-                <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-link" aria-hidden="true"></i>
+                <nav class="panel">
+                    <!--Panel for informasjon skal inn her-->
+                    <p class="panel-heading">Ressurser</p>
+                    <a class="panel-block is-active pt-4 pb-4">
+                        Mandag: 12-22 <br>Tirsdag: 12-22 <br>Onsdag: 12-22 <br>Torsdag: 8-22 <br>Fredag: 12-00 <br>Lørdag: 12-00 <br>Søndag: 12-00
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-link" aria-hidden="true"></i>
                         </span>lenker til resurser
-                </a>
-                 <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-phone" aria-hidden="true"></i>
-                        </span>Telefonnummer
-                </a>
+                    </a>
+                     <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                        </span>
+                        <span>Telefonnummer</span>
+                    </a>
+                </nav>
             </div>
         </section>
         </section>
