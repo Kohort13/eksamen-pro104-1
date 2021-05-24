@@ -17,13 +17,14 @@ const VareModule = (function(){
         return allergies;
     }
     class Vare {
-        constructor(productID, productType, productName, price, allergies, description){
+        constructor(productID, productType, productName, price, allergies, description, vegetarian){
             this._productID = productID;
             this._productType = productType;
             this._productName = productName;
             this._price = price;
             this._allergies = allergies;
             this._description = description;
+            this._vegetarian = vegetarian; 
         }
         get productID() { return this._productID; }
         get productType() { return this._productType; }
@@ -31,6 +32,7 @@ const VareModule = (function(){
         get price() { return this._price; }
         get allergies() { return this._allergies; }
         get description() { return this._description; }
+        get vegetarian() { return this._vegetarian; }
     }
     let priceClass1 = 99;
     let priceClass2 = 149;
@@ -43,15 +45,15 @@ const VareModule = (function(){
     let allergiesG_L_PN = createAllergies(true, true, false, false, false, false, false, true, false, false);
     let noAllergies = createAllergies(false, false, false, false, false, false, false, false, false, false);
     const varer = [
-        new Vare(0, productType.PIZZA, "Pizza Marinara", priceClass1, allergiesL, "Glutenfri pizza med tomatsaus"),
-        new Vare(1, productType.PIZZA, "Pizza Margherita", priceClass2, allergiesL, "Glutenfri pizza med tomatsaus og mozzarella"),
-        new Vare(2, productType.PIZZA, "Pizza Capricciosa", priceClass3, allergiesG_L, "Pizza med tomatsaus, mozzarella, skinke, artisjokk, sopp og svarte oliven"),
-        new Vare(3, productType.PIZZA, "Prosciutto e funghi", priceClass4, allergiesG_L_PN, "Pizza med tomatsaus, mozzarella, prosciutto, sopp, ruccola og pinjekjenren"),
-        new Vare(4, productType.PIZZA, "Quatro Formaggi", priceClass3, allergiesG_L, "Pizza med tomatsaus, mozzarella, gorgonzola, fontina og parmesan"),
-        new Vare(5, productType.PIZZA, "Pizza Pepperoni", priceClass2, allergiesG_L, "Pizza med tomatsaus, mozzarella, pepperoni"),
-        new Vare(6, productType.PIZZA, "Pizza Pesto", priceClass2, allergiesG_L_PN, "Pizza med tomatsaus, mozzarella, pesto"),
-        new Vare(7, productType.PIZZA, "Pizza Di Parma", priceClass4, allergiesG_L_PN, "Pizza med crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
-        new Vare(7, productType.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, "Pizza med tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk og toppet med basilikum"),
+        new Vare(0, productType.PIZZA, "Pizza Marinara", priceClass1, allergiesL, "tomatsaus", true),
+        new Vare(1, productType.PIZZA, "Pizza Margherita", priceClass2, allergiesL, "tomatsaus og mozzarella", true),
+        new Vare(2, productType.PIZZA, "Pizza Capricciosa", priceClass3, allergiesG_L, "tomatsaus, mozzarella, skinke, artisjokk, sopp og svarte oliven"),
+        new Vare(3, productType.PIZZA, "Prosciutto e funghi", priceClass4, allergiesG_L_PN, "tomatsaus, mozzarella, prosciutto, sopp, ruccola og pinjekjerner"),
+        new Vare(4, productType.PIZZA, "Quatro Formaggi", priceClass3, allergiesG_L, "tomatsaus, mozzarella, gorgonzola, fontina og parmesan", true),
+        new Vare(5, productType.PIZZA, "Pizza Pepperoni", priceClass2, allergiesG_L, "tomatsaus, mozzarella, pepperoni"),
+        new Vare(6, productType.PIZZA, "Pizza Pesto", priceClass2, allergiesG_L_PN, "tomatsaus, mozzarella, pesto", true),
+        new Vare(7, productType.PIZZA, "Pizza Di Parma", priceClass4, allergiesG_L_PN, "crème fraîche, cherry tomater, artisjokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
+        new Vare(7, productType.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, "tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk og toppet med basilikum", true),
         new Vare(8, productType.DRINK, "Coca Cola", nonAlcoholicDrikPrice, noAllergies, "500ml glass coca cola"),
         new Vare(9, productType.DRINK, "Kaffe", nonAlcoholicDrikPrice, noAllergies, "500ml glass coca cola"),
         new Vare(10, productType.DRINK, "Cappuccino", nonAlcoholicDrikPrice, allergiesL, "Kaffe med melk")
