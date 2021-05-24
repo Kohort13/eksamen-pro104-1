@@ -2,7 +2,7 @@ import VareModule from './modules/VareModule.js';
 let searchInput;
 function initialise(){
     searchInput = document.getElementById("search-input");
-    searchInput.addEventListener('keydown', menuSearch);
+    searchInput.addEventListener('keyup', menuSearch);
 }
 initialise();
 function renderTable(array){
@@ -52,6 +52,9 @@ function renderTable(array){
 renderTable(VareModule.getAll());
 
 function menuSearch(){
-    let searchInput = document.getElementById("search-input").value;
-    renderTable(VareModule.getByName(searchInput));
+    if(searchInput.value == ""){
+        renderTable(VareModule.getSortedByType())
+    }else{
+        renderTable(VareModule.getByName(searchInput.value));
+    }
 }
