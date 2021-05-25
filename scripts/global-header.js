@@ -1,9 +1,9 @@
 function renderHeader(){
   let mainHeader = document.getElementById("main-header");
   mainHeader.innerHTML = `
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-size-4" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <h1 class="navbar-item  is-size-3 has-text-centered">🍕 Gyldne Pizza</h1>     
+        <h1 class="navbar-item">🍕 Gyldne Pizza</h1>     
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -17,19 +17,19 @@ function renderHeader(){
           Hjem
         </a>
   
-        <div class="navbar-item  is-size-3 has-dropdown is-hoverable">
+        <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             More
           </a>
   
           <div class="navbar-dropdown">
-            <a href="ansatt-register.html" class="navbar-item" style="font-size: 200%;">
+            <a href="ansatt-register.html" class="navbar-item">
               👤Ansatt register
             </a>
-            <a href="meny-register.html" class="navbar-item" style="font-size: 200%;">
+            <a href="meny-register.html" class="navbar-item">
               🍕Meny register
             </a>
-            <a href="salgsoversikt.html" class="navbar-item" style="font-size: 200%;">
+            <a href="salgsoversikt.html" class="navbar-item">
               📈 Salgsoversikt
             </a>
           </div>
