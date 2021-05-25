@@ -19,20 +19,32 @@ const VareModule = (function(){
         return allergies;
     }
     class Vare {
-        constructor(productID, productType, productName, price, allergies, description){
+        constructor(productID, productType, productName, price, allergies, isVegetarian, ingredients){
             this._productID = productID;
             this._productType = productType;
             this._productName = productName;
             this._price = price;
             this._allergies = allergies;
-            this._description = description;
+            this._isVegetarian = isVegetarian;
+            this._ingredients = ingredients;
         }
         get productID() { return this._productID; }
         get productType() { return this._productType; }
         get productName() { return this._productName; }
         get price() { return this._price; }
         get allergies() { return this._allergies; }
-        get description() { return this._description; }
+        get ingredients() { return this._ingredients; }
+        getDescription(){
+            let description = ""
+            switch(this.productType){
+                case productType.PIZZA: 
+                description = `Pizza med ${this.ingredients}`;
+                break;
+                default: 
+                description = this.ingredients;
+            }
+            return description;
+        }
     }
     let priceClass1 = 99;
     let priceClass2 = 149;
@@ -47,18 +59,18 @@ const VareModule = (function(){
     const idGenerator = new UtilsModule.IdGenerator();
     const getUniqueID = () => { return idGenerator.getID()}
     const varer = [
-        new Vare(getUniqueID(), productType.PIZZA, "Pizza Marinara", priceClass1, allergiesL, "Glutenfri pizza med tomatsaus"),
-        new Vare(getUniqueID(), productType.PIZZA, "Pizza Margherita", priceClass2, allergiesL, "Glutenfri pizza med tomatsaus og mozzarella"),
-        new Vare(getUniqueID(), productType.PIZZA, "Pizza Capricciosa", priceClass3, allergiesG_L, "Pizza med tomatsaus, mozzarella, skinke, artisjokk, sopp og svarte oliven"),
-        new Vare(getUniqueID(), productType.PIZZA, "Prosciutto e funghi", priceClass4, allergiesG_L_PN, "Pizza med tomatsaus, mozzarella, prosciutto, sopp, ruccola og pinjekjenren"),
-        new Vare(getUniqueID(), productType.PIZZA, "Quatro Formaggi", priceClass3, allergiesG_L, "Pizza med tomatsaus, mozzarella, gorgonzola, fontina og parmesan"),
-        new Vare(getUniqueID(), productType.PIZZA, "Pizza Pepperoni", priceClass2, allergiesG_L, "Pizza med tomatsaus, mozzarella, pepperoni"),
-        new Vare(getUniqueID(), productType.PIZZA, "Pizza Pesto", priceClass2, allergiesG_L_PN, "Pizza med tomatsaus, mozzarella, pesto"),
-        new Vare(getUniqueID(), productType.PIZZA, "Pizza Di Parma", priceClass4, allergiesG_L_PN, "Pizza med crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
-        new Vare(getUniqueID(), productType.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, "Pizza med tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk og toppet med basilikum"),
-        new Vare(getUniqueID(), productType.DRINK, "Coca Cola", nonAlcoholicDrikPrice, noAllergies, "500ml glass coca cola"),
-        new Vare(getUniqueID(), productType.DRINK, "Kaffe", nonAlcoholicDrikPrice, noAllergies, "Svart Kaffe"),
-        new Vare(getUniqueID(), productType.DRINK, "Cappuccino", nonAlcoholicDrikPrice, allergiesL, "Kaffe med melk")
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza Marinara", priceClass1, allergiesL, true, "tomatsaus"),
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza Margherita", priceClass2, allergiesL, true, "tomatsaus og mozzarella"),
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza Capricciosa", priceClass3, allergiesG_L, false, "tomatsaus, mozzarella, skinke, artisjokk, sopp og svarte oliven"),
+        new Vare(getUniqueID(), productType.PIZZA, "Prosciutto e funghi", priceClass4, allergiesG_L_PN, false, "tomatsaus, mozzarella, prosciutto, sopp, ruccola og pinjekjenren"),
+        new Vare(getUniqueID(), productType.PIZZA, "Quatro Formaggi", priceClass3, allergiesG_L, true, "tomatsaus, mozzarella, gorgonzola, fontina og parmesan"),
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza Pepperoni", priceClass2, allergiesG_L, false, "tomatsaus, mozzarella, pepperoni"),
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza Pesto", priceClass2, allergiesG_L_PN, true, "tomatsaus, mozzarella, pesto"),
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza Di Parma", priceClass4, allergiesG_L_PN, false, "crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, true, "tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk og toppet med basilikum"),
+        new Vare(getUniqueID(), productType.DRINK, "Coca Cola", nonAlcoholicDrikPrice, noAllergies, false, "500ml glass coca cola"),
+        new Vare(getUniqueID(), productType.DRINK, "Kaffe", nonAlcoholicDrikPrice, noAllergies, false, "Svart Kaffe"),
+        new Vare(getUniqueID(), productType.DRINK, "Cappuccino", nonAlcoholicDrikPrice, allergiesL, false, "Kaffe med melk")
     ];
     const getAll = () => varer;
 

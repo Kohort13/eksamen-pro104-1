@@ -54,7 +54,7 @@ function renderTable(array){
         }
         result += `
             <td class="is-narrow">${array[i].productID}</td>
-            <td class="is-narrow" title="${array[i].description}"><em>${array[i].productName}</em></td>
+            <td class="is-narrow" title="${array[i].getDescription()}"><em>${array[i].productName}</em></td>
             <td>${array[i].price},-</id></td>`;
         array[i].allergies.forEach(allergy =>{
             if(allergy.state){
