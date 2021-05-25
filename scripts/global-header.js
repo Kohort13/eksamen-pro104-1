@@ -26,13 +26,16 @@ function renderHeader(){
   
           <div class="navbar-dropdown">
             <a href="ansatt-register.html" class="navbar-item">
-              👤Ansatt register
+              👤 Ansattregister
             </a>
             <a href="meny-register.html" class="navbar-item">
-              🍕Meny register
+              🍕 Vareregister
             </a>
             <a href="salgsoversikt.html" class="navbar-item">
               📈 Salgsoversikt
+            </a>
+            <a href="meny-test.html" class="navbar-item">
+              📝 Menyen
             </a>
           </div>
         </div>
