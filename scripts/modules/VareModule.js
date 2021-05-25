@@ -2,7 +2,13 @@ import UtilsModule from "./UtilsModule.js";
 
 const VareModule = (function(){
 
-    const productType = {DRINK: 'Drikke', PIZZA: 'Pizza'};
+    const productType = {
+        HOT_DRINK: 'Varm drikke', 
+        MINERAL_WATER: 'Mineralvann', 
+        BEER: 'Øl', 
+        WINE: 'Vin', 
+        PIZZA: 'Pizza'
+    };
     function createAllergies(gluten, lactose, egg, peanuts, nuts, shellfish, fish, pineNuts, soy, celery){
         let allergies = [
             {name: "Gluten", state: gluten},
@@ -48,8 +54,11 @@ const VareModule = (function(){
     let priceClass2 = 149;
     let priceClass3 = 169;
     let priceClass4 = 219;
-    let nonAlcoholicDrikPrice = 55;
+    let nonAlcoholicDrinkPrice = 55;
+    let alcoholicDrinkPrice = 89;
+    let craftAlcoholicDrinkPrice = 129;
 
+    let allergiesG = createAllergies(true, false, false, false, false, false, false, false, false, false);
     let allergiesG_L = createAllergies(true, true, false, false, false, false, false, false, false, false);
     let allergiesG_L_E = createAllergies(true, true, true, false, false, false, false, false, false, false);
     let allergiesL = createAllergies(false, true, false, false, false, false, false, false, false, false);
@@ -72,9 +81,15 @@ const VareModule = (function(){
         new Vare(getUniqueID(), productType.PIZZA, "Pizza Pesto", priceClass2, allergiesG_L_PN, true, "tomatsaus, mozzarella, pesto"),
         new Vare(getUniqueID(), productType.PIZZA, "Pizza Di Parma", priceClass4, allergiesG_L_PN, false, "crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
         new Vare(getUniqueID(), productType.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, true, "tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk og toppet med basilikum"),
-        new Vare(getUniqueID(), productType.DRINK, "Coca Cola", nonAlcoholicDrikPrice, noAllergies, false, "500ml glass coca cola"),
-        new Vare(getUniqueID(), productType.DRINK, "Kaffe", nonAlcoholicDrikPrice, noAllergies, false, "Svart Kaffe"),
-        new Vare(getUniqueID(), productType.DRINK, "Cappuccino", nonAlcoholicDrikPrice, allergiesL, false, "Kaffe med melk")
+        new Vare(getUniqueID(), productType.MINERAL_WATER, "Coca Cola", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass coca cola"),
+        new Vare(getUniqueID(), productType.MINERAL_WATER, "Coca Cola Zero", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass coca cola"),
+        new Vare(getUniqueID(), productType.MINERAL_WATER, "Fanta", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass fanta"),
+        new Vare(getUniqueID(), productType.MINERAL_WATER, "Sprite", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass sprite"),
+        new Vare(getUniqueID(), productType.MINERAL_WATER, "Sprite Zero", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass sprite zero"),
+        new Vare(getUniqueID(), productType.BEER, "Heineken", alcoholicDrinkPrice, allergiesG, false, "500ml glass Heineken, fra tapp"),
+        new Vare(getUniqueID(), productType.BEER, "Brewdog Lost Lager", nonAlcoholicDrinkPrice, allergiesG, false, "500ml glass fanta"),
+        new Vare(getUniqueID(), productType.HOT_DRINK, "Kaffe", nonAlcoholicDrinkPrice, noAllergies, false, "Svart Kaffe"),
+        new Vare(getUniqueID(), productType.HOT_DRINK, "Cappuccino", nonAlcoholicDrinkPrice, allergiesL, false, "Kaffe med melk")
     ];
     const getAll = () => varer;
 
@@ -131,7 +146,7 @@ const VareModule = (function(){
     }
 
     const getByProductType = (type) => {
-        return varer.filter(vare => vare.productType === type);
+        return varer.filter(vare => vare.productType.toLowerCase().includes(type.toLowerCase()));
     }
     const getSortedByType = ()=>{
         return varer.sort((v, v2) => {
