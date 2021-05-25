@@ -13,12 +13,12 @@ mainHeader.innerHTML += `<nav class="navbar" role="navigation" aria-label="main 
       <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item is-size-3 ">
-          Hjem
+         ${Hjem}
         </a>
   
         <div class="navbar-item  is-size-3 has-dropdown is-hoverable">
           <a class="navbar-link">
-            More
+            ${Mer}
           </a>
   
           <div class="navbar-dropdown">
