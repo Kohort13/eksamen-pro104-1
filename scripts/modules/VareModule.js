@@ -95,7 +95,7 @@ const VareModule = (function(){
     }
 
     const getByID = (id) => {
-        return varer.filter(vare => vare.productID === id);
+        return varer[id];
     }
     const getSortedByID = () => {
         return varer.sort(((v, v2) => {
