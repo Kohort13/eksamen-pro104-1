@@ -1,8 +1,9 @@
 function renderHeader(){
-var mainHeader = document.getElementById("main-header");
-mainHeader.innerHTML += `<nav class="navbar" role="navigation" aria-label="main navigation">
+  let mainHeader = document.getElementById("main-header");
+  mainHeader.innerHTML = `
+  <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <h1 class="navbar-item  is-size-3 has-text-centered">${Gyldne}${Pizza}</h1>     
+        <h1 class="navbar-item  is-size-3 has-text-centered">🍕 Gyldne Pizza</h1>     
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -12,7 +13,7 @@ mainHeader.innerHTML += `<nav class="navbar" role="navigation" aria-label="main 
       
       <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item is-size-3 ">
+        <a href="index.html" class="navbar-item">
           Hjem
         </a>
   
@@ -23,13 +24,13 @@ mainHeader.innerHTML += `<nav class="navbar" role="navigation" aria-label="main 
   
           <div class="navbar-dropdown">
             <a href="ansatt-register.html" class="navbar-item" style="font-size: 200%;">
-              ${Ansatt}${register}
+              👤Ansatt register
             </a>
             <a href="meny-register.html" class="navbar-item" style="font-size: 200%;">
-              ${Meny}${register}
+              🍕Meny register
             </a>
             <a href="salgsoversikt.html" class="navbar-item" style="font-size: 200%;">
-              ${Salgsoversikt}
+              📈 Salgsoversikt
             </a>
           </div>
         </div>
@@ -38,7 +39,7 @@ mainHeader.innerHTML += `<nav class="navbar" role="navigation" aria-label="main 
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-light">
+            <a href="login.html"  class="button is-light">
               Log out
             </a>
           </div>
