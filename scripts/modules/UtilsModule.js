@@ -20,8 +20,15 @@ const UtilsModule = (function(){
         }
         return numString;
     }
+
+    class IdGenerator {
+        id = 1;
+        getID(){
+            return this.id++;
+        }
+    }
     
-    return {randomNumberInRange, getRandomDate, leadingZeros}
+    return {randomNumberInRange, getRandomDate, leadingZeros, IdGenerator}
 }());
 
 export default UtilsModule;
