@@ -1,10 +1,11 @@
 import LoremModule from "./modules/LoremModule.js";
+import SalgsModule from "./modules/SalgModule.js";
 //Funksjoner for index-siden
 function renderAnnouncement() {
-    const lorem = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, rerum.";
     let kunngjøringText = document.getElementById('kunngjøring');
-    renderProfits(kunngjøringText);
-    renderFreeShifts(kunngjøringText);
+    let stickyAnnouncements = document.getElementById('sticky-announcements');
+    renderProfits(stickyAnnouncements);
+    renderFreeShifts(stickyAnnouncements);
 
     for (let i = 0; i < 45; i++) {
         kunngjøringText.innerHTML +=
@@ -20,7 +21,7 @@ function renderAnnouncement() {
 }
 function renderProfits(output) {
     // Solution for formatting number from https://stackoverflow.com/a/32355056
-    let profit = String(45000).replace(/(.)(?=(\d{3})+$)/g,'$1 ');
+    let profit = String(SalgsModule.getTodaysProfits()).replace(/(.)(?=(\d{3})+$)/g,'$1 ');
 
     output.innerHTML += 
     `<a class="panel-block">

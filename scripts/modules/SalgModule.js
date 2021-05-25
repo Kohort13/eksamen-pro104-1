@@ -90,7 +90,12 @@ const SalgModule = (function(){
             order.orderLines.forEach(line => { return (line.itemID === id)});
         })
     }
-    return {getAll, getByDate, getByItemID, getSumOfOrders}
+
+    const getTodaysProfits = () => {
+        //TODO - actually calculate profits for today
+        return getSumOfOrders(orders);
+    }
+    return {getAll, getByDate, getByItemID, getSumOfOrders, getTodaysProfits}
 
 }());
 
