@@ -1,10 +1,11 @@
 import VareModule from './modules/VareModule.js';
 
 let searchInput;
+let sortPriceBtn;
 function initialise(){
     searchInput = document.getElementById("search-input");
     searchInput.addEventListener('keyup', menuSearch);
-
+    
     let tableTitles = `
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodId"><span>ID</span><span class = "icon"><i class="fas fa-caret-down"></i></span></a></th>
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodName"><span>Produkt Navn</span><span class="icon"><i class="fas fa-caret-down"></i></span></a></th>
@@ -18,6 +19,9 @@ function initialise(){
     
     const menuHead = document.getElementById("menu-head");
     menuHead.innerHTML = `<tr>${tableTitles}</tr><tr>${allergyTitles}</tr>`;
+    sortPriceBtn = document.getElementById("prodPrice");
+    sortPriceBtn.innerHTML = `<span>Pris</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
+    sortPriceBtn.addEventListener('click', sortByPrice);
 }
 initialise();
 
@@ -58,32 +62,17 @@ function menuSearch(){
     }
 }
 
-let price;
-price = document.getElementById("prodPrice");
-
-
-price.innerHTML = `<span>Pris</span>
-                    <span class = "icon">
-                        <i class="fas fa-caret-down"></i>
-                    </span>`;
-
 function sortByPrice(){
-    price = document.getElementById("prodPrice");
-    if(price.lastChild.firstChild.hasAttribute("class", "fa-caret-down")){
+    let icon = sortPriceBtn.children[1].firstChild;
+
+    if(icon.classList.contains("fa-caret-down")){
         renderTable(VareModule.getSortedByPrice());
-        price.innerHTML = `<span>Test</span>
-                            <span class = "icon">
-                                <i class="fas fa-caret-up"></i>
-                            </span>`;
-
-    }else if(price.lastChild.firstChild.hasAttribute("class", "fa-caret-up")){
+        icon.classList.toggle("fa-caret-down", false);
+        icon.classList.toggle("fa-caret-up", true);
+    }else if(icon.classList.contains("fa-caret-up")){
         renderTable(VareModule.getSortedByPrice().reverse());
-        price.innerHTML = `<span>Test</span>
-                            <span class = "icon">
-                                <i class="fas fa-caret-down"></i>
-                            </span>`;
-
+        icon.classList.toggle("fa-caret-up", false);
+        icon.classList.toggle("fa-caret-down", true);
     }
 }
-price.addEventListener('click', sortByPrice);
 
