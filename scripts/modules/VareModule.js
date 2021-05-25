@@ -6,15 +6,15 @@ const VareModule = (function(){
     function createAllergies(gluten, lactose, egg, peanuts, nuts, shellfish, fish, pineNuts, soy, celery){
         let allergies = [
             {name: "Gluten", state: gluten},
-            {name: "Lactose", state: lactose},
+            {name: "Laktose", state: lactose},
             {name: "Egg", state: egg},
-            {name: "Peanuts", state: peanuts},
-            {name: "Nuts", state: nuts},
-            {name: "Shellfish", state: shellfish},
-            {name: "Fish", state: fish},
-            {name: "PineNuts", state: pineNuts},
-            {name: "Soy", state: soy},
-            {name: "Celery", state: celery}
+            {name: "Peanøtter", state: peanuts},
+            {name: "Nøtter", state: nuts},
+            {name: "Skalldyr", state: shellfish},
+            {name: "Fisk", state: fish},
+            {name: "Pinjekjerner", state: pineNuts},
+            {name: "Soya", state: soy},
+            {name: "Selleri", state: celery}
         ];
         return allergies;
     }
