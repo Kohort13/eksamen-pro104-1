@@ -35,25 +35,8 @@ const SalgModule = (function(){
         }
     }
 
-    const restaurants = RestaurantModule.getAll();
-    const productBN = (name) => {return VareModule.getByName(name)[0]}; //Wrapping function in simplified name to clean up array initialiser
-    const empById = (id) => { return AnsattModule.getByIndex(id) };
     const getRandom = (min, max) => { return UtilsModule.randomNumberInRange(min, max); }
     const idGenerator = new UtilsModule.IdGenerator();
-    const randomID = () => {return idGenerator.getID() + UtilsModule.leadingZeros(UtilsModule.randomNumberInRange(0, 10000),5)}
-
-    const createRandomOrder = () => {
-        const id = idGenerator.getID() + UtilsModule.leadingZeros(getRandom(0, 10000),5);
-        const restaurant = RestaurantModule.getById(getRandom(0, 3));
-        const employee = AnsattModule.getByIndex(getRandom(0, 3));
-        const numberOfItems = getRandom(1, 4);
-        let orderLines = [];
-        for(let i = 0; i < numberOfItems; i++){
-            let product = VareModule.getByID(getRandom(0, 5));
-            orderLines.push(new OrderLine(product, 5));
-        }
-        return new Order(id, UtilsModule.getRandomDate(), employee, restaurant, orderLines);
-    }
 
     //Generates 60 random orders for the database
     let orders = [];
@@ -72,6 +55,11 @@ const SalgModule = (function(){
         }
         let randomOrder = new Order(id, UtilsModule.getRandomDate(), employee, restaurant, orderLines);
         orders.push(randomOrder);
+    }
+    const getSumOfOrders = (array) => {
+        let sum = 0;
+        array.forEach(element => sum += element.getOrderSum());
+        return sum;
     }
 
     //Returns all elements, sorted chronologically
@@ -94,7 +82,7 @@ const SalgModule = (function(){
         return orders;
     }
     const getByDate = (date) => {
-        return orders.filter( order => {order.date === date});
+        return orders.filter( order => {order.date >= date});
     }
 
     const getByItemID = (id) => {        
@@ -102,7 +90,7 @@ const SalgModule = (function(){
             order.orderLines.forEach(line => { return (line.itemID === id)});
         })
     }
-    return {getAll, getByDate, getByItemID}
+    return {getAll, getByDate, getByItemID, getSumOfOrders}
 
 }());
 

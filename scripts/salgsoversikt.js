@@ -9,12 +9,14 @@ let periodSelection = PeriodTypes.WEEK;
 const RenderModes = {ALL: 4}
 let renderMode, columns = RenderModes.ALL;
 
-const initButtons = (function(){
+const initialise = (function(){
     let children = document.getElementById("buttons").children;
     for(let i = 0; i < children.length; i++){
         if(children[i].hasAttribute("class", "button"))
             children[i].addEventListener("click", function() {setTimePeriod(children, this)});
     }
+    renderTable(SalgModule.getAll());
+
 }());
 
 function setTimePeriod(children, element){
@@ -44,33 +46,53 @@ function renderHeader(){
         cells += `<th>Column ${i+1}</th>`;
     }
     tableHeader.innerHTML = `<tr>${cells}</tr>`;
+    switch(renderMode){
+        case RenderModes.ALL: 
+            tableHeader.innerHTML = `
+            <tr>
+                <th class="is-narrow">ID</th>
+                <th>Dato</th>
+                <th>Ansatt</th>
+                <th>Beløp</th>
+            </tr>`;
+        break;
+        default:
+            tableHeader.innerHTML = `
+            <tr>
+                <th class="is-narrow">ID</th>
+                <th>Dato</th>
+                <th>Ansatt</th>
+                <th>Beløp</th>
+            </tr>`;
+    }
     tableHeader.innerHTML = `
         <tr>
-            <th class="is-narrow">ID</th>
+            <th class="is-narrow has-text-centered">ID</th>
             <th>Dato</th>
             <th>Ansatt</th>
             <th>Beløp</th>
         </tr>`;
 }
 
-function renderFooter(){
+function renderFooter(array){
     let cells = "";
-    for(let i = 0; i < columns; i++){
+    for(let i = 0; i < columns-1; i++){
         cells += `<td>Sum ${i+1}</td>`;
     }
-    tableFooter.innerHTML = `<tr>${cells}</tr>`;
+    const sumCell = `<td>${SalgModule.getSumOfOrders(array)}</td>`;
+    tableFooter.innerHTML = `<tr>${cells}${sumCell}</tr>`;
 }
 
 function renderTable(array){
     renderHeader();
-    renderFooter();
+    renderFooter(array);
     //renderGenericContent(); //This generates 10 rows of cell data    
-    renderAll();
+    renderAll(array);
 }
 
 function renderAll(array){
     tableBody.innerHTML = "";
-    SalgModule.getAll().forEach(order =>{
+    array.forEach(order =>{
         tableBody.innerHTML += `
             <td>${order.orderID}</td>
             <td>${order.date}</td>
@@ -96,4 +118,3 @@ function renderGenericContent(){
         tableBody.innerHTML += `<tr>${cells}</tr>`;
     }
 }
-renderTable(SalgModule.getAll());
