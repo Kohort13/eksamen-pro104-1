@@ -1,4 +1,4 @@
-const AnsattModule = (function(){
+const RestaurantModule = (function(){
     class Restaurant {
         constructor(id, name, address, phone){
             this.id = id;
@@ -26,4 +26,4 @@ const AnsattModule = (function(){
     return {getAll, getById, getByName}
 }());
 
-export default AnsattModule;
+export default RestaurantModule;
