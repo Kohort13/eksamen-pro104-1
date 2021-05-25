@@ -33,6 +33,7 @@ const VareModule = (function(){
         get productName() { return this._productName; }
         get price() { return this._price; }
         get allergies() { return this._allergies; }
+        get isVegetarian() { return this._isVegetarian; }
         get ingredients() { return this._ingredients; }
         getDescription(){
             let description = ""
