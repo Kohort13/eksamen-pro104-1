@@ -51,14 +51,20 @@ const VareModule = (function(){
     let nonAlcoholicDrikPrice = 55;
 
     let allergiesG_L = createAllergies(true, true, false, false, false, false, false, false, false, false);
+    let allergiesG_L_E = createAllergies(true, true, true, false, false, false, false, false, false, false);
     let allergiesL = createAllergies(false, true, false, false, false, false, false, false, false, false);
     let allergiesG_L_PN = createAllergies(true, true, false, false, false, false, false, true, false, false);
+    let allergiesG_L_F = createAllergies(true, true, false, false, false, false, true, false, false, false);
     let noAllergies = createAllergies(false, false, false, false, false, false, false, false, false, false);
     const idGenerator = new UtilsModule.IdGenerator();
     const getUniqueID = () => { return idGenerator.getID()}
     const varer = [
         new Vare(getUniqueID(), productType.PIZZA, "Pizza Marinara", priceClass1, allergiesL, true, "tomatsaus"),
         new Vare(getUniqueID(), productType.PIZZA, "Pizza Margherita", priceClass2, allergiesL, true, "tomatsaus og mozzarella"),
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza Veronese", priceClass2, allergiesG_L, false, "tomatsaus, prosciutto, sopp"),
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza Quattro stagioni", priceClass2, allergiesG_L_E, false, "tomatsaus, artisjokk, oliven, paprika, mozzarella, tomater, kokt egg og mushrooms"),
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza Pugliese", priceClass1, allergiesG_L, true, "tomatsaus, oliven, kapers, mozzarella, tomater"),
+        new Vare(getUniqueID(), productType.PIZZA, "Pizza alla Napoletana", priceClass1, allergiesG_L_F, false, "tomatsaus, oliven, kapers, mozzarella, tomater"),
         new Vare(getUniqueID(), productType.PIZZA, "Pizza Capricciosa", priceClass3, allergiesG_L, false, "tomatsaus, mozzarella, skinke, artisjokk, sopp og svarte oliven"),
         new Vare(getUniqueID(), productType.PIZZA, "Prosciutto e funghi", priceClass4, allergiesG_L_PN, false, "tomatsaus, mozzarella, prosciutto, sopp, ruccola og pinjekjenren"),
         new Vare(getUniqueID(), productType.PIZZA, "Quatro Formaggi", priceClass3, allergiesG_L, true, "tomatsaus, mozzarella, gorgonzola, fontina og parmesan"),
