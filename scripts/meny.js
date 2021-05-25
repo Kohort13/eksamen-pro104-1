@@ -7,37 +7,34 @@ function generatePizza(){
     const pizzaer = VareModule.getByProductType("Pizza");
 
     for (let i = 0; i < pizzaer.length; i++) {
-        document.getElementById("test").innerHTML = pizzaer.toString();
+        if(pizzaer[i].isVegetarian){
 
-        if(pizzaer.isVegetarian){
-
-            testDiv += `
-                <h1>${pizzaer.id[i]}.
-                    <b> ${pizzaer.name[i]} </b>${pizzaer.price[i]} 
+            testDiv.innerHTML += `
+                <h1>${pizzaer[i].productID}.
+                    <b> ${pizzaer[i].productName} </b>${pizzaer[i].price} 
                         <span style="color: green;">Vegetar</span>
                         <span class="icon is-small">
                             <i class="fas fa-leaf" style="color: green;"></i>
                         </span>
                 </h1>
-                <p>${pizzaer.ingredients[i]}</p>
+                <p>${pizzaer[i].ingredients}</p>
                 <hr>
             `;
 
         } else {
 
-            testDiv += `
-                <h1>${pizzaer.id[i]}.
-                    <b> ${pizzaer.name[i]} </b>${pizzaer.price[i]} 
+            testDiv.innerHTML += `
+                <h1>${pizzaer[i].productID}.
+                    <b> ${pizzaer[i].productName} </b>${pizzaer[i].price} 
                 </h1>
-                <p>${pizzaer.ingredients[i]}</p>
+                <p>${pizzaer[i].ingredients}</p>
                 <hr>
             `;
-        }
-        
-    }
-
-    
+        }        
+    }    
 }
+
+
 generatePizza(VareModule.getAll);
 
 function generateDrinks(){
