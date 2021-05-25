@@ -36,15 +36,12 @@ const VareModule = (function(){
         get isVegetarian() { return this._isVegetarian; }
         get ingredients() { return this._ingredients; }
         getDescription(){
-            let description = ""
             switch(this.productType){
                 case productType.PIZZA: 
-                description = `Pizza med ${this.ingredients}`;
-                break;
+                    return `Pizza med ${this.ingredients}`;
                 default: 
-                description = this.ingredients;
+                    return this.ingredients;
             }
-            return description;
         }
     }
     let priceClass1 = 99;
