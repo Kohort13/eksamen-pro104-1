@@ -1,3 +1,6 @@
+import UtilsModule from "./UtilsModule.js";
+import RestaurantModule from "./RestaurantModule.js"
+
 const AnsattModule = (function(){
 
     const Positions = {
@@ -7,13 +10,6 @@ const AnsattModule = (function(){
         ASS_CHEF: 'Assisterende kokk',
         WAITER: 'Servitør'         
     };
-    const Restaurants = {
-        RES_1: 'Restaurant 1', 
-        RES_2: 'Restaurant 2', 
-        RES_3: 'Restaurant 3', 
-        RES_4: 'Restaurant 4'
-    };
-
     class Ansatt {
         constructor(firstName, lastName, tel, email, addr, birthDate, salary, position, restaurant){
             this._firstName = firstName;
@@ -30,11 +26,16 @@ const AnsattModule = (function(){
             return `${this._firstName} ${this._lastName}`;
         }
     }
-
+    const randomPhoneNr = () => { 
+        let number = UtilsModule.randomNumberInRange(90000000, 99999999).toString();
+        //TODO - consider moving this to ansatt-register.js instead (so that class has phone stored as int instead of string)
+        return `${number.substr(0, 3)} ${number.substr(2, 2)} ${number.substr(4, 3)}`; 
+    };
+    const randomBirthDate = () => { return UtilsModule.getRandomDate(1969, 1999)};
     const ansatte = [
-        new Ansatt("Ola", "Nordmensch", 98480551, "ola@nordmench.org", "Storgata 12, 0858 Oslo", "12.06.1978", "465 000kr", Positions.ASS_CHEF, Restaurants.RES_1), 
-        new Ansatt("Trine", "Svenskamensch", 48983802, "trine@svensk.se", "Storgata 14, 0858 Oslo", "12.06.1989", "647 000kr", Positions.CHEF, Restaurants.RES_2), 
-        new Ansatt("Bob Kåre", "Johnniebjørn", 47985826, "bob@kåre.org", "Storgata 66, 0858 Oslo", "12.06.1996", "731 000kr", Positions.ASS_MANAGER, Restaurants.RES_3)
+        new Ansatt("Ola", "Nordmensch", randomPhoneNr(), "ola@nordmench.org", "Storgata 12, 0858 Oslo", randomBirthDate(), "465 000kr", Positions.ASS_CHEF, RestaurantModule.getById(1).name), 
+        new Ansatt("Trine", "Svenskamensch", randomPhoneNr(), "trine@svensk.se", "Storgata 14, 0858 Oslo", randomBirthDate(), "647 000kr", Positions.CHEF, RestaurantModule.getById(2).name), 
+        new Ansatt("Bob Kåre", "Johnniebjørn", randomPhoneNr(), "bob@kåre.org", "Storgata 66, 0858 Oslo", randomBirthDate(), "731 000kr", Positions.ASS_MANAGER, RestaurantModule.getById(3).name)
     ];
 
     const getAll = () => ansatte;

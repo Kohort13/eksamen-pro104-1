@@ -9,14 +9,14 @@ const RestaurantModule = (function(){
     }
 
     const restaurants = [
-        new Restaurant(1, "GP Storgata", "Storgata 27, 0000 OSLO", 22323332),
-        new Restaurant(2, "GP Bjølsen", "Storgata 27, 0000 OSLO", 22323332),
-        new Restaurant(3, "GP Løkka", "Storgata 27, 0000 OSLO", 22323332),
-        new Restaurant(4, "GP Bislett", "Thereses Gate 12, 0000 OSLO", 22323332)
+        new Restaurant(1, "Avd. Storgata", "Storgata 27, 0000 OSLO", 22323332),
+        new Restaurant(2, "Avd. Bjølsen", "Storgata 27, 0000 OSLO", 22323332),
+        new Restaurant(3, "Avd. Løkka", "Storgata 27, 0000 OSLO", 22323332),
+        new Restaurant(4, "Avd. Bislett", "Thereses Gate 12, 0000 OSLO", 22323332)
     ];
 
     const getAll = () => restaurants;
-    const getById = (id) => { return restaurants[id]; }
+    const getById = (id) => { return restaurants[id-1]; }
     const getByName = (name) => { 
         restaurants.forEach(restaurant => {
             if(restaurant.name === name)
