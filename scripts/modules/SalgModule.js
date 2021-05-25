@@ -1,8 +1,9 @@
 import VareModule from "./VareModule.js";
 import AnsattModule from "./AnsattModule.js";
 import RestaurantModule from "./RestaurantModule.js"
-const SalgModule = (function(){
+import UtilsModule from "./UtilsModule.js";
 
+const SalgModule = (function(){
     class OrderLine {
         constructor(item, quantity){
             this._item = item;
@@ -34,39 +35,44 @@ const SalgModule = (function(){
         }
     }
 
-    //TODO make itemID actually correspond to menu items, instead of strings
-    const products = VareModule.getAll();
     const restaurants = RestaurantModule.getAll();
     const productBN = (name) => {return VareModule.getByName(name)[0]}; //Wrapping function in simplified name to clean up array initialiser
     const empById = (id) => { return AnsattModule.getByIndex(id) };
-    const randomNumber = (min, max) => { return Math.floor(Math.random() * (max-min) + min)}
-    const randomDate = () => { 
-        const day = randomNumber(1, 28); 
-        const month = randomNumber(1, 12);
-        const year = randomNumber(1, 21);
-        const dayStr = (day < 10) ? "0" + day.toString() : day.toString();
-        const monthStr = (month < 10) ? "0" + month.toString() : month.toString();
-        let yearStr = "20"
-        yearStr += (year < 10) ? "0" + year.toString() : year.toString();
+    const getRandom = (min, max) => { return UtilsModule.randomNumberInRange(min, max); }
+    const idGenerator = new UtilsModule.IdGenerator();
+    const randomID = () => {return idGenerator.getID() + UtilsModule.leadingZeros(UtilsModule.randomNumberInRange(0, 10000),5)}
 
-        return `${dayStr}-${monthStr}-${yearStr}`;
-    };
+    const createRandomOrder = () => {
+        const id = idGenerator.getID() + UtilsModule.leadingZeros(getRandom(0, 10000),5);
+        const restaurant = RestaurantModule.getById(getRandom(0, 3));
+        const employee = AnsattModule.getByIndex(getRandom(0, 3));
+        const numberOfItems = getRandom(1, 4);
+        let orderLines = [];
+        for(let i = 0; i < numberOfItems; i++){
+            let product = VareModule.getByID(getRandom(0, 5));
+            orderLines.push(new OrderLine(product, 5));
+        }
+        return new Order(id, UtilsModule.getRandomDate(), employee, restaurant, orderLines);
+    }
 
-    //Using random function to generate faux-unique ids for each order
-    const orders = [
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(0), restaurants[1], [new OrderLine(productBN("quatro"),1), new OrderLine(productBN("cola"),2)]),
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(1), restaurants[1], [new OrderLine(productBN("marinara"),1), new OrderLine(productBN("cola"),1)]),
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(1), restaurants[2], [new OrderLine(productBN("prosc"),2), new OrderLine(productBN("cola"),3)]),
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(2), restaurants[0], [new OrderLine(productBN("pesto"),5), new OrderLine(productBN("cola"),12)]),
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(0), restaurants[0], [new OrderLine(productBN("pepperoni"),3), new OrderLine(productBN("cola"),6)]),
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(0), restaurants[0], [new OrderLine(productBN("pepperoni"),3), new OrderLine(productBN("cola"),6)]),
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(1), restaurants[1], [new OrderLine(productBN("marinara"),1), new OrderLine(productBN("cola"),1)]),
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(0), restaurants[0], [new OrderLine(productBN("quatro"),1), new OrderLine(productBN("cola"),2)]),
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(1), restaurants[0], [new OrderLine(productBN("fung"),3), new OrderLine(productBN("cola"),6)]),
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(1), restaurants[0], [new OrderLine(productBN("prosc"),2), new OrderLine(productBN("cola"),3)]),
-        new Order((Math.random() * 1000).toFixed(0), randomDate(), empById(2), restaurants[0], [new OrderLine(productBN("pesto"),5), new OrderLine(productBN("cola"),12)]),
-        new Order((Math.random() * 1000).toFixed(0), "21-05-2021", empById(1), restaurants[0], [new OrderLine(productBN("fung"),3), new OrderLine(productBN("cola"),6)]),
-    ];
+    //Generates 60 random orders for the database
+    let orders = [];
+    const numOfEmployees = AnsattModule.getAll().length;
+    const numOfItems = VareModule.getAll().length;
+    for(let i = 0; i < 60; i++){
+        const id = idGenerator.getID() + UtilsModule.leadingZeros(getRandom(0, 10000),5);
+        const restaurant = RestaurantModule.getById(getRandom(0, 3));
+        const employee = AnsattModule.getByIndex(getRandom(0, numOfEmployees));
+        
+        let linesToGenerate = getRandom(1, 4);
+        let orderLines = [];
+        for(; linesToGenerate >= 1; linesToGenerate--){
+            let product = VareModule.getByID(getRandom(0, numOfItems));
+            orderLines.push(new OrderLine(product, getRandom(1, 5)));
+        }
+        let randomOrder = new Order(id, UtilsModule.getRandomDate(), employee, restaurant, orderLines);
+        orders.push(randomOrder);
+    }
 
     //Returns all elements, sorted chronologically
     const getAll = () => {
