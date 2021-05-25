@@ -12,76 +12,77 @@
 
 </head>
 <body>
-    <header id="main-header">
-    
-    </header>
+    <div class="container" id="main-header"></div>
+
     <section class="section">
-        <div class="field is-horizontal">
-            <div id="buttons" class="buttons has-addons mr-3">
-                <button id="period-day" title="Setter sluttdato til samme dag" class="button is-inverted">
-                    <span class="icon is-small">
-                        <i class="fas fa-calendar-day"></i>
-                    </span>
-                    <span>Dag</span>
-                </button>
-                <button id="period-week" class="button is-active is-info" title="Setter sluttdato en uke frem i tid">
-                    <span class="icon is-small">
-                        <i class="fas fa-calendar-week"></i>
-                    </span>
-                    <span>Uke</span>
-                </button>
-                <button id="period-free-select" class="button" title="Setter sluttdato en måned frem i tid som standard, men lar deg også fritt velge slutt" >
-                    <span class="icon is-small">
-                        <i class="fas fa-calendar-alt"></i>
-                    </span>
-                    <span>Fri periode</span>
-                </button>
-            </div>
-            <div class="field has-addons mr-3">
-                <div class="control">
-                    <div class="button is-info is-static">
-                        <span>Fra</span>
+        <div class="container">
+            <div class="field is-horizontal">
+                <div id="buttons" class="buttons has-addons mr-3">
+                    <button id="period-day" title="Setter sluttdato til samme dag" class="button is-inverted">
                         <span class="icon is-small">
-                            <i class="fas fa-chevron-left"></i>
+                            <i class="fas fa-calendar-day"></i>
                         </span>
+                        <span>Dag</span>
+                    </button>
+                    <button id="period-week" class="button is-active is-info" title="Setter sluttdato en uke frem i tid">
+                        <span class="icon is-small">
+                            <i class="fas fa-calendar-week"></i>
+                        </span>
+                        <span>Uke</span>
+                    </button>
+                    <button id="period-free-select" class="button" title="Setter sluttdato en måned frem i tid som standard, men lar deg også fritt velge slutt" >
+                        <span class="icon is-small">
+                            <i class="fas fa-calendar-alt"></i>
+                        </span>
+                        <span>Fri periode</span>
+                    </button>
+                </div>
+                <div class="field has-addons mr-3">
+                    <div class="control">
+                        <div class="button is-info is-static">
+                            <span>Fra</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <input id="from-date" class="input" type="date">
                     </div>
                 </div>
-                <div class="control">
-                    <input id="from-date" class="input" type="date">
-                </div>
-            </div>
-            <div id="optional-to-date" class="field is-hidden has-addons mr-3">
-                <div class="control">
-                    <div class="button is-info is-static">
-                        <span>Til</span>
-                        <span class="icon is-small">
-                            <i class="fas fa-chevron-right"></i>
-                        </span>
+                <div id="optional-to-date" class="field is-hidden has-addons mr-3">
+                    <div class="control">
+                        <div class="button is-info is-static">
+                            <span>Til</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <input id="to-date" class="input" type="date">
                     </div>
                 </div>
-                <div class="control">
-                    <input id="to-date" class="input" type="date">
-                </div>
+                <button id="filter-table" class="button is-success">Søk</button>
             </div>
-            <button id="filter-table" class="button is-success">Søk</button>
-        </div>
-        <div class="columns">
-            <div class="column">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="table-container" style="height: 50vh; overflow-y: scroll;">
-                            <table class="table has-text-weight-light is-fullwidth is-striped is-hoverable">
-                                <thead id="table-head"></thead>
-                                <tfoot id="table-foot" class="has-text-weight-bold">
-                                </tfoot>
-                                <tbody class="is-bordered" id="table-body" >
-                                </tbody>
-                            </table>
+            <div class="columns">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="table-container" style="height: 50vh; overflow-y: scroll;">
+                                <table class="table has-text-weight-light is-fullwidth is-striped is-hoverable">
+                                    <thead id="table-head"></thead>
+                                    <tfoot id="table-foot" class="has-text-weight-bold">
+                                    </tfoot>
+                                    <tbody class="is-bordered" id="table-body" >
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
         </div>
-    </section>
 </body>
 </html>
