@@ -51,24 +51,66 @@ const VareModule = (function(){
         new Vare(5, productType.PIZZA, "Pizza Pepperoni", priceClass2, allergiesG_L, "Pizza med tomatsaus, mozzarella, pepperoni"),
         new Vare(6, productType.PIZZA, "Pizza Pesto", priceClass2, allergiesG_L_PN, "Pizza med tomatsaus, mozzarella, pesto"),
         new Vare(7, productType.PIZZA, "Pizza Di Parma", priceClass4, allergiesG_L_PN, "Pizza med crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
-        new Vare(7, productType.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, "Pizza med tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk og toppet med basilikum"),
-        new Vare(8, productType.DRINK, "Coca Cola", nonAlcoholicDrikPrice, noAllergies, "500ml glass coca cola"),
-        new Vare(9, productType.DRINK, "Kaffe", nonAlcoholicDrikPrice, noAllergies, "500ml glass coca cola"),
-        new Vare(10, productType.DRINK, "Cappuccino", nonAlcoholicDrikPrice, allergiesL, "Kaffe med melk")
+        new Vare(8, productType.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, "Pizza med tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk og toppet med basilikum"),
+        new Vare(9, productType.DRINK, "Coca Cola", nonAlcoholicDrikPrice, noAllergies, "500ml glass coca cola"),
+        new Vare(10, productType.DRINK, "Kaffe", nonAlcoholicDrikPrice, noAllergies, "Svart Kaffe"),
+        new Vare(11, productType.DRINK, "Cappuccino", nonAlcoholicDrikPrice, allergiesL, "Kaffe med melk")
     ];
     const getAll = () => varer;
 
     const getByName = (prodName) => {
         return varer.filter(vare => vare.productName.toLowerCase().includes(prodName.toLowerCase()));
     }
+    const findItemByname = (name) =>{
+        varer.forEach(vare => {
+            if(vare.name.toLowerCase().includes(name.toLowerCase())){
+                return vare;
+            }
+        })
+    }
     const getByID = (id) => {
         return varer.filter(vare => vare.productID === id);
     }
+    const sortByID = () => {
+        return varer.sort((v, v2) => {
+            if(v.id > v2.id){
+                return 1;
+            }else if(v.id === v2.id){
+                return 0;
+            }else{
+                return -1;
+            }
+        })
+    }
+
     const getByPrice = (price) => {
         return varer.filter(vare => vare.price === price);
     }
+    const getSortedByPrice = () =>{
+        return varer.sort((v, v2) => {
+            if(v.price > v2.price){
+                return 1;
+            }else if(v.price === v2.price){
+                return 0;
+            }else{
+                return -1;
+            }
+        })
+    }
+
     const getByProductType = (type) => {
         return varer.filter(vare => vare.productType === type);
+    }
+    const getSortedByType = ()=>{
+        return varer.sort((v, v2) => {
+            if(v.type > v2.type){
+                return 1;
+            }else if(v.type === v2.type){
+                return 0;                
+            }else{
+                return -1;
+            }
+        });
     }
 
     const getByAllergies = (inputAllergy) => {
@@ -89,26 +131,10 @@ const VareModule = (function(){
         })
         return allergyNames;
     }
-    const findItemByname = (name) =>{
-        varer.forEach(vare => {
-            if(vare.name.toLowerCase().includes(name.toLowerCase())){
-                return vare;
-            }
-        })
-    }
-    const getSortedByType = ()=>{
-        return varer.sort((v, v2) => {
-            if(v.type > v2.type){
-                return 1;
-            }else if(v.type === v2.type){
-                return 0;                
-            }else{
-                return -1;
-            }
-        });
-    }
 
-    return {getAll, getByName, getByID, getByPrice, getByProductType, getByAllergies,
-         getAllAllergies, findItemByname, getSortedByType}
+
+
+    return {getAll, getByName, getByID, sortByID, getByPrice, getSortedByPrice, 
+        getByProductType, getSortedByType, getByAllergies, getAllAllergies, findItemByname}
 }());
 export default VareModule;
