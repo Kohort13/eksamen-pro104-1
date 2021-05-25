@@ -68,19 +68,31 @@ const VareModule = (function(){
             }
         })
     }
-    const getByID = (id) => {
-        return varer.filter(vare => vare.productID === id);
-    }
-    const sortByID = () => {
-        return varer.sort((v, v2) => {
-            if(v.id > v2.id){
+    const getSortedByName = () =>{
+        return varer.sort((v, v2) =>{
+            if(v.productName > v2.productName){
                 return 1;
-            }else if(v.id === v2.id){
+            }else if(v.productName === v2.productName){
                 return 0;
             }else{
                 return -1;
             }
         })
+    }
+
+    const getByID = (id) => {
+        return varer.filter(vare => vare.productID === id);
+    }
+    const getSortedByID = () => {
+        return varer.sort(((v, v2) => {
+            if(v.productID > v2.productID){
+                return 1;
+            }else if(v.productID === v2.productID){
+                return 0;
+            }else{
+                return -1;
+            }
+        }))
     }
 
     const getByPrice = (price) => {
@@ -134,7 +146,7 @@ const VareModule = (function(){
 
 
 
-    return {getAll, getByName, getByID, sortByID, getByPrice, getSortedByPrice, 
+    return {getAll, getByName, getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, 
         getByProductType, getSortedByType, getByAllergies, getAllAllergies, findItemByname}
 }());
 export default VareModule;
