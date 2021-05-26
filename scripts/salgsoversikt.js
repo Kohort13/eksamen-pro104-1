@@ -1,7 +1,12 @@
 import SalgModule from "./modules/SalgModule.js";
+import UtilsModule from "./modules/UtilsModule.js"
 const tableBody = document.getElementById("table-body");
 const tableHeader = document.getElementById("table-head");
 const tableFooter = document.getElementById("table-foot");
+const fromDateField = document.getElementById("from-date");
+const toDateField = document.getElementById("to-date");
+const searchBtn = document.getElementById("filter-table");
+const toDateDiv = document.getElementById("optional-to-date");
 
 const PeriodTypes = {DAY: 'day', WEEK: 'week', FREE: 'free'};
 let periodSelection = PeriodTypes.WEEK;
@@ -15,27 +20,54 @@ const initialise = (function(){
         if(children[i].hasAttribute("class", "button"))
             children[i].addEventListener("click", function() {setTimePeriod(children, this)});
     }
-    renderTable(SalgModule.getAll());
+    //fromDateField.addEventListener("blur", debugBlur);
+    //toDateField.addEventListener("blur", debugBlur);
+    searchBtn.addEventListener('click', runSearch);
+    const currentDate = new Date();
+    let fromDate = new Date();
+    fromDate.setDate(currentDate.getDate()-7);
 
+    fromDateField.value = fromDate.toISOString().substr(0,10);
+    toDateField.value = currentDate.toISOString().substr(0,10);
+    renderTable(SalgModule.getByDateRange(fromDate, currentDate));
+    
 }());
 
+function runSearch(){
+    let fromDate = new Date(fromDateField.value);
+    let toDate = new Date(fromDateField.value);
+    switch(periodSelection){
+        case PeriodTypes.WEEK:
+            toDate.setDate(toDate.getDate()+8);
+            break;
+        case PeriodTypes.DAY:
+            toDate.setDate(toDate.getDate()+1)
+            break;
+        case PeriodTypes.FREE:
+            toDate = new Date(toDateField.value);
+            toDate.setDate(toDate.getDate()+1);
+            break;
+    }
+    renderTable(SalgModule.getByDateRange(fromDate, toDate));
+}
+
 function setTimePeriod(children, element){
-    const toDateField = document.getElementById("optional-to-date");
     for(let i = 0; i < children.length; i++){
         children[i].setAttribute("class", "button");
     }
     element.setAttribute("class", "button is-info");
     if(element.id === "period-day"){
-        toDateField.classList.add("is-hidden");
+        toDateDiv.classList.add("is-hidden");
         periodSelection = PeriodTypes.DAY;
     }else if(element.id === "period-week"){
-        toDateField.classList.add("is-hidden");
+        toDateDiv.classList.add("is-hidden");
         periodSelection = PeriodTypes.WEEK;
     }else if(element.id === "period-free-select"){
-        toDateField.classList.remove("is-hidden");
+        toDateDiv.classList.remove("is-hidden");
 
         periodSelection = PeriodTypes.FREE;
     }
+
 }
 
 
@@ -95,7 +127,7 @@ function renderAll(array){
     array.forEach(order =>{
         tableBody.innerHTML += `
             <td>${order.orderID}</td>
-            <td>${order.date}</td>
+            <td>${order.date.toISOString().substr(0, 10)}</td>
             <td>${order.employeeID.fullName}</td>
             <td>${order.getOrderSum()}</td>
         `;

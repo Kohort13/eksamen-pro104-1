@@ -38,11 +38,7 @@ const SalgModule = (function(){
     const getRandom = (min, max) => { return UtilsModule.randomNumberInRange(min, max); }
     const idGenerator = new UtilsModule.IdGenerator();
 
-    //Generates 60 random orders for the database
-    let orders = [];
-    const numOfEmployees = AnsattModule.getAll().length;
-    const numOfItems = VareModule.getAll().length;
-    for(let i = 0; i < 60; i++){
+    function generateRandomOrder(afterDate) {
         const id = idGenerator.getID() + UtilsModule.leadingZeros(getRandom(0, 10000),5);
         const restaurant = RestaurantModule.getById(getRandom(0, 3));
         const employee = AnsattModule.getByIndex(getRandom(0, numOfEmployees));
@@ -53,9 +49,20 @@ const SalgModule = (function(){
             let product = VareModule.getByID(getRandom(0, numOfItems));
             orderLines.push(new OrderLine(product, getRandom(1, 5)));
         }
-        let randomOrder = new Order(id, UtilsModule.getRandomDate(), employee, restaurant, orderLines);
-        orders.push(randomOrder);
+        return new Order(id, UtilsModule.getRandomDate(afterDate), employee, restaurant, orderLines);
+        
     }
+    //Generates 60 random orders for the database
+    let orders = [];
+    const numOfEmployees = AnsattModule.getAll().length;
+    const numOfItems = VareModule.getAll().length;
+    for(let i = 0; i < 60; i++){
+        orders.push(generateRandomOrder());
+    }
+    for(let i = 0; i < 30; i++){
+        orders.push(generateRandomOrder(2021));
+    }
+    orders.sort(function(a, b){ return (a.date.valueOf() - b.date.valueOf()); });        
     const getSumOfOrders = (array) => {
         let sum = 0;
         array.forEach(element => sum += element.getOrderSum());
@@ -65,37 +72,24 @@ const SalgModule = (function(){
     //Returns all elements, sorted chronologically
     const getAll = () => {
         orders.sort(function(a, b){
-            const dayA = a.date.substr(0,2);
-            const dayB = b.date.substr(0,2);
-            return (dayA - dayB);
-        });
-        orders.sort(function(a, b){
-            const monthA = a.date.substr(3,2);
-            const monthB = b.date.substr(3,2);    
-            return (monthA - monthB);
-        });
-        orders.sort(function(a, b){
-            const yearA = a.date.substr(6,4);
-            const yearB = b.date.substr(6,4);    
-            return (yearA - yearB);
+            const dateA = a.date.valueOf();
+            const dateB = b.date.valueOf();
+            return (dateA - dateB);
         });        
         return orders;
     }
     const getByDate = (date) => {
-        return orders.filter( order => {order.date >= date});
+        return orders.filter( (order) => order.date > date);
     }
-
-    const getByItemID = (id) => {        
-        return orders.filter(order => {
-            order.orderLines.forEach(line => { return (line.itemID === id)});
-        })
+    const getByDateRange = (from, to) => {
+        return orders.filter( order => order.date > from && order.date < to);
     }
 
     const getTodaysProfits = () => {
         //TODO - actually calculate profits for today
         return getSumOfOrders(orders);
     }
-    return {getAll, getByDate, getByItemID, getSumOfOrders, getTodaysProfits}
+    return {getAll, getByDate, getSumOfOrders, getTodaysProfits, getByDateRange}
 
 }());
 
