@@ -4,12 +4,16 @@ const UtilsModule = (function(){
     const getRandomDate = (startYear, endYear) => { 
         const dayStr = leadingZeros(randomNumberInRange(1, 28),2);
         const monthStr = leadingZeros(randomNumberInRange(1, 12),2);
+        let randomDate = new Date();
         if(!startYear)
             startYear = 2000;
         if(!endYear)
             endYear = 2021;
-        const yearStr = leadingZeros(randomNumberInRange(startYear, endYear),2);
-        return `${dayStr}-${monthStr}-${yearStr}`;
+        randomDate.setFullYear(randomNumberInRange(startYear, endYear));
+        randomDate.setMonth(randomNumberInRange(0, 11));
+        randomDate.setDate(randomNumberInRange(1, 31))
+        return randomDate;
+        //return `${randomDate.getFullYear()}-${leadingZeros(randomDate.getMonth()+1,2)}-${leadingZeros(randomDate.getDate(), 2)}`;
     };
 
     const leadingZeros = (num, digits) => {
