@@ -145,7 +145,10 @@ const VareModule = (function(){
         })
     }
 
-    const getByProductType = (type) => {
+    const getByProductType = (type, array) => {
+        if(array){
+            return array.productType.toLowerCase().includes(type.toLowerCase());
+        }
         return varer.filter(vare => vare.productType.toLowerCase().includes(type.toLowerCase()));
     }
     const getSortedByType = ()=>{
