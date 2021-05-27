@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menyer</title>
+    <title>Vareregister</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
     <script type="module" src ="../scripts/meny-register.js"></script>
@@ -16,7 +16,7 @@
 
     <section class = "section">
         <div class="container">
-            <div class="modal is-active is-clipped" id = "add-prod-modal">
+            <div class="modal fade is-active id = "add-prod-modal">
                 <div class="modal-background"></div>
                 <div class="modal-card">
                   <header class="modal-card-head">
@@ -34,9 +34,9 @@
                     <input class = "input" type="text" required placeholder="Pris" id="new-prod-price">
                     <div class = "table-container">
                         <p>Huk av allergener:</p>
-                        <table class ="table is-striped is-narrow is-hoverable">
-                            <thead id = "allergener-check-tablehead"></thead>
-                            <tbody id = "allergener-checkbox"></tbody>
+                        <table class ="table is-fullwidth is-striped is-narrow is-hoverable">
+                            <thead id = "allergies-check-tablehead"></thead>
+                            <tbody id = "allergies-checkbox"></tbody>
                         </table> 
                     </div>
                     <!-- Gluten <input type="checkbox" id="gluten-check">
@@ -44,8 +44,8 @@
                     
                 </section>
                   <footer class="modal-card-foot">
-                    <button class="button is-success">Lagre Produkt</button>
-                    <button class="button">Kanseller</button>
+                    <button class="button is-success" type="button" id="save-prod-btn">Lagre Produkt</button>
+                    <button class="button is-danger" type ="button" data-dismiss="modal" id="cancel-btn">Kanseller</button>
                   </footer>
                 </div>
               </div>

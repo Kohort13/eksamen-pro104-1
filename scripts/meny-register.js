@@ -22,15 +22,19 @@ function initialise(){
     let allergyTitles = `<td colspan="3"></td>`;
     
     allegyNames.forEach(name => {
-        allergyTitles += `<td class="has-text-centered">${name}</td>`;
+        allergyTitles += `<td class="has-text-centered"><em>${name}</em></td>`;
     });
     
     const menuHead = document.getElementById("menu-head");
     menuHead.innerHTML = `<tr>${tableTitles}</tr><tr>${allergyTitles}</tr>`;
     
-    let checkAllergiesTableHead;
-    checkAllergiesTableHead = document.getElementById("allergener-check-tablehead");
-    checkAllergiesTableHead.innerHTML = `<tr>${allergyTitles}</tr>`;
+    const checkAllergiesTableHead = document.getElementById("allergies-check-tablehead");
+    const checkAllergyTableBody = document.getElementById("allergies-checkbox");
+
+    checkAllergiesTableHead.innerHTML += `<td class="has-text-centered">${allergyTitles}</td>`;
+    allegyNames.forEach(name =>{
+        checkAllergyTableBody.innerHTML += `<td><input type="checkbox" id="${name}"></td>`;
+    });
 
     sortPriceBtn = document.getElementById("prodPrice");
     sortPriceBtn.innerHTML = `<span>Pris</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
