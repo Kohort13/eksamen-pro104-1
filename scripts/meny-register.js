@@ -15,7 +15,7 @@ function initialise(){
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodId"></a></th>
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodName"></a></th>
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodPrice"></a></th>
-    <th colspan="10" class="has-text-centered">Allergener</th>`;
+    <th colspan="10" class="has-text-centered"><a class="has-text-grey-dark" id = "prodAllergies">Allergener</a></th>`;
     let allergyTitles = `<td colspan="3"></td>`;
     
     allegyNames.forEach(name => {
