@@ -3,11 +3,11 @@ import UtilsModule from "./UtilsModule.js";
 const VareModule = (function(){
 
     const productTypes = {
-        HOT_DRINK: 'Varm drikke', 
+        PIZZA: 'Pizza',
         MINERAL_WATER: 'Mineralvann', 
         BEER: 'Øl', 
         WINE: 'Vin', 
-        PIZZA: 'Pizza'
+        HOT_DRINK: 'Varm drikke' 
     };
     function createAllergies(gluten, lactose, egg, peanuts, nuts, shellfish, fish, pineNuts, soy, celery){
         let allergies = [
