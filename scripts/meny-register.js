@@ -2,6 +2,7 @@ import VareModule from './modules/VareModule.js';
 
 let searchInput;
 let addProductBtn;
+let closeAddProductBtn;
 let sortPriceBtn;
 let sortNameBtn;
 let sortIdBtn;
@@ -41,7 +42,7 @@ function initialise(){
     });
     checkAllergiesTableHead.innerHTML +=`<tr>${tableHeadCheck}</tr>`;
     checkAllergyTableBody.innerHTML +=`<tr>${tableBodyCheck}</tr>`;
-
+    
     sortPriceBtn = document.getElementById("prodPrice");
     sortPriceBtn.innerHTML = `<span>Pris</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
     sortPriceBtn.addEventListener('click', sortByPrice);
@@ -53,9 +54,14 @@ function initialise(){
     sortIdBtn = document.getElementById("prodId");
     sortIdBtn.innerHTML =`<span>ID</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
     sortIdBtn.addEventListener('click', sortById);
-    
+
+
     addProductBtn = document.getElementById("add-prod-btn");
-    addProductBtn.addEventListener('click', addProduct);
+    addProductBtn.addEventListener('click', addProduct,);
+    
+    closeAddProductBtn = document.getElementById("close-btn");
+    closeAddProductBtn.addEventListener('click', exitAddProduct);
+    
 }
 initialise();
 
@@ -63,7 +69,7 @@ initialise();
 function renderTable(array){
     const menuBody = document.getElementById("menu-body");
     menuBody.innerHTML = "";
-
+    
     let type;
     let types = VareModule.getAllProductTypes();
     for(type in types){
@@ -75,7 +81,7 @@ function renderTable(array){
             <td class="is-narrow">${vare.productID}</td>
             <td class="is-narrow" title="${vare.getDescription()}"><em>${vare.productName}</em></td>
             <td>${vare.price},-</id></td>`;
-
+            
             vare.allergies.forEach(allergy =>{
                 if(allergy.state){
                     result += `<td class="has-text-centered"><span class = "icon"><i class="fas fa-check has-text-danger"></i></span></td>`;
@@ -111,7 +117,7 @@ function sortByPrice(){
 }
 function sortByName(){
     let icon = sortNameBtn.children[1].firstChild;
-
+    
     if(icon.classList.contains("fa-caret-down")){
         renderTable(VareModule.getSortedByName().reverse());
         icon.classList.toggle("fa-caret-up", true);
@@ -124,7 +130,7 @@ function sortByName(){
 }
 function sortById(){
     let icon = sortIdBtn.children[1].firstChild;
-
+    
     if(icon.classList.contains("fa-caret-down")){
         renderTable(VareModule.getSortedByID().reverse());
         icon.classList.toggle("fa-caret-up", true);
@@ -136,8 +142,22 @@ function sortById(){
     }
 }
 
+const openModal = document.getElementById("add-prod-modal");
+
+function openAddProduct(){
+    openModal.classList.toggle("is-active", true);
+}
 function addProduct(){
-    alert("yo")
+    openAddProduct();
+    setNewProdId();
+}
+function exitAddProduct(){
+    openModal.classList.toggle("is-active", false);
+}
+function setNewProdId(){
+    let test = 2
+    const newProdID = document.getElementById("new-prod-id");
+    newProdID.placeholder = test;
 }
 
 
