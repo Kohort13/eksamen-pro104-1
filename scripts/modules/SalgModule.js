@@ -38,7 +38,7 @@ const SalgModule = (function(){
     const getRandom = (min, max) => { return UtilsModule.randomNumberInRange(min, max); }
     const idGenerator = new UtilsModule.IdGenerator();
 
-    function generateRandomOrder(afterDate) {
+    function generateRandomOrder(afterDate, specificDate) {
         const id = idGenerator.getID() + UtilsModule.leadingZeros(getRandom(0, 10000),5);
         const restaurant = RestaurantModule.getById(getRandom(0, 3));
         const employee = AnsattModule.getByIndex(getRandom(0, numOfEmployees));
@@ -49,9 +49,12 @@ const SalgModule = (function(){
             let product = VareModule.getByID(getRandom(0, numOfItems));
             orderLines.push(new OrderLine(product, getRandom(1, 5)));
         }
-        return new Order(id, UtilsModule.getRandomDate(afterDate), employee, restaurant, orderLines);
-        
+        if(specificDate){
+            return new Order(id, specificDate, employee, restaurant, orderLines);
+        }
+        return new Order(id, UtilsModule.getRandomDate(afterDate), employee, restaurant, orderLines);    
     }
+
     //Generates 60 random orders for the database
     let orders = [];
     const numOfEmployees = AnsattModule.getAll().length;
@@ -61,6 +64,7 @@ const SalgModule = (function(){
     }
     for(let i = 0; i < 30; i++){
         orders.push(generateRandomOrder(2021));
+        orders.push(generateRandomOrder(null, new Date()));
     }
     orders.sort(function(a, b){ return (a.date.valueOf() - b.date.valueOf()); });        
     const getSumOfOrders = (array) => {
@@ -79,9 +83,14 @@ const SalgModule = (function(){
         return orders;
     }
     const getByDate = (date) => {
-        return orders.filter( (order) => order.date > date);
+        return orders.filter( (order) => {
+            if(order.date.getFullYear() === date.getFullYear() && order.date.getMonth() === date.getMonth() && order.date.getDate() === date.getDate())
+                return true;
+        });
     }
     const getByDateRange = (from, to) => {
+        from.setDate(from.getDate());
+        to.setDate(to.getDate());
         return orders.filter( order => order.date > from && order.date < to);
     }
 

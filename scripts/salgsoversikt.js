@@ -25,7 +25,7 @@ const initialise = (function(){
     searchBtn.addEventListener('click', runSearch);
     const currentDate = new Date();
     let fromDate = new Date();
-    fromDate.setDate(currentDate.getDate()-7);
+    fromDate.setDate(currentDate.getDate()-6);
 
     fromDateField.value = fromDate.toISOString().substr(0,10);
     toDateField.value = currentDate.toISOString().substr(0,10);
@@ -38,10 +38,10 @@ function runSearch(){
     let toDate = new Date(fromDateField.value);
     switch(periodSelection){
         case PeriodTypes.WEEK:
-            toDate.setDate(toDate.getDate()+8);
+            toDate.setDate(toDate.getDate()+7);
             break;
         case PeriodTypes.DAY:
-            toDate.setDate(toDate.getDate()+1)
+            toDate.setDate(toDate.getDate());
             break;
         case PeriodTypes.FREE:
             toDate = new Date(toDateField.value);
