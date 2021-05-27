@@ -41,12 +41,20 @@ initialise();
 
 
 function renderTable(array){
-    
-    let previousType;
     const menuBody = document.getElementById("menu-body");
     menuBody.innerHTML = "";
 
-    for(var i = 0; i < array.length; i++){
+    let type;
+    let types = VareModule.getAllProductTypes();
+    for(type in types){
+        menuBody.innerHTML += `<tr><td colspan="13" class="has-text-centered"><b>${types[type]}</b></td><tr>`;
+        const byTypeArray = VareModule.getByProductType(types[type].toString(), array);
+        byTypeArray.forEach(vare =>{
+            menuBody.innerHTML += "Vare<br>"
+        });
+    }
+    
+    /*for(var i = 0; i < array.length; i++){
         let result = "";
         if(previousType != array[i].productType){
             previousType = array[i].productType;
@@ -64,7 +72,7 @@ function renderTable(array){
             }
         });
         menuBody.innerHTML += `<tr>${result}</tr>`;
-    }
+    }*/
 }
 renderTable(VareModule.getAll());
 
@@ -78,7 +86,6 @@ function menuSearch(){
 
 function sortByPrice(){
     let icon = sortPriceBtn.children[1].firstChild;
-
     if(icon.classList.contains("fa-caret-down")){
         renderTable(VareModule.getSortedByPrice().reverse());
         icon.classList.toggle("fa-caret-up", true);
