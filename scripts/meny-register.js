@@ -50,29 +50,22 @@ function renderTable(array){
         menuBody.innerHTML += `<tr><td colspan="13" class="has-text-centered"><b>${types[type]}</b></td><tr>`;
         const byTypeArray = VareModule.getByProductType(types[type].toString(), array);
         byTypeArray.forEach(vare =>{
-            menuBody.innerHTML += "Vare<br>"
+            let result = "";
+            result += `
+            <td class="is-narrow">${vare.productID}</td>
+            <td class="is-narrow" title="${vare.getDescription()}"><em>${vare.productName}</em></td>
+            <td>${vare.price},-</id></td>`;
+
+            vare.allergies.forEach(allergy =>{
+                if(allergy.state){
+                    result += `<td class="has-text-centered"><span class = "icon"><i class="fas fa-check has-text-danger"></i></span></td>`;
+                }else{
+                    result += `<td class="has-text-centered"><span class = "icon"><i class="fas fa-times has-text-info-dark"></i></span></td>`;
+                }
+            });
+            menuBody.innerHTML += `<tr>${result}</tr>`;
         });
     }
-    
-    /*for(var i = 0; i < array.length; i++){
-        let result = "";
-        if(previousType != array[i].productType){
-            previousType = array[i].productType;
-            result += `<tr><td colspan="13" class="has-text-centered"><b>${previousType}</b></td><tr>`;
-        }
-        result += `
-            <td class="is-narrow">${array[i].productID}</td>
-            <td class="is-narrow" title="${array[i].getDescription()}"><em>${array[i].productName}</em></td>
-            <td>${array[i].price},-</id></td>`;
-        array[i].allergies.forEach(allergy =>{
-            if(allergy.state){
-                result += `<td class="has-text-centered"><span class = "icon"><i class="fas fa-check has-text-danger"></i></span></td>`;
-            }else{
-                result += `<td class="has-text-centered"><span class = "icon"><i class="fas fa-times has-text-info-dark"></i></span></td>`;
-            }
-        });
-        menuBody.innerHTML += `<tr>${result}</tr>`;
-    }*/
 }
 renderTable(VareModule.getAll());
 
