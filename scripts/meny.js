@@ -4,7 +4,7 @@ var pizzaDiv = document.getElementById("pizza");
 var sodaDiv = document.getElementById("soda");
 var hotDrinksDiv = document.getElementById("hotDrink");
 var beerDiv = document.getElementById("beer");
-//var wineDiv = document.getElementById("wine");
+var wineDiv = document.getElementById("wine");
 
 
 //GENERATING PIZZAS
@@ -85,7 +85,7 @@ function generateBeer(){
 }
 generateBeer(VareModule.getAll);
 
-/** 
+
 function generateWine(){
     const wine = VareModule.getByProductType("Vin");
     for (let i = 0; i < wine.length; i++){
@@ -100,5 +100,5 @@ function generateWine(){
     }
 }
 generateWine(VareModule.getAll);
-*/
+
 
