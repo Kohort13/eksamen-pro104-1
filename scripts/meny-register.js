@@ -38,7 +38,7 @@ function initialise(){
     
     let tableBodyCheck ="";
     allegyNames.forEach(name =>{
-        tableBodyCheck+= `<td class="has-text-centered"><input type="checkbox" id="${name}"></td>`;
+        tableBodyCheck += `<td class="has-text-centered"><input type="checkbox" id="${name}"></td>`;
     });
     checkAllergiesTableHead.innerHTML +=`<tr>${tableHeadCheck}</tr>`;
     checkAllergyTableBody.innerHTML +=`<tr>${tableBodyCheck}</tr>`;
@@ -159,5 +159,16 @@ function setNewProdId(){
     const newProdID = document.getElementById("new-prod-id");
     newProdID.placeholder = test;
 }
+function getInputFromAddProd(){
+    const newProdName = document.getElementById("new-prod-name");
+    const newProdPrice = document.getElementById("new-prod-price");
 
+    let newProdAllergies =``;
+    
+    allegyNames.forEach(name =>{
+        newProdAllergies = document.getElementById(name).checked;
+        console.log(newProdAllergies);
+    });
+}
+getInputFromAddProd();
 
