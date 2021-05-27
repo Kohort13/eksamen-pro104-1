@@ -16,7 +16,7 @@
 
     <section class = "section">
         <div class="container">
-            <div class="modal is-active" id = "add-prod-modal">
+            <div class="modal is-active is-clipped" id = "add-prod-modal">
                 <div class="modal-background"></div>
                 <div class="modal-card">
                   <header class="modal-card-head">
@@ -25,7 +25,24 @@
                   </header>
                   <section class="modal-card-body">
                     <!-- Content ... -->
-                  </section>
+                    
+                    <p>Ny <b>produkt ID</b>:</p>
+                    <input class ="input" type="text" id="new-prod-id" disabled>
+                    <p>Skriv inn nytt <b>produkt navn</b>:</p>
+                    <input class ="input" type ="text" required placeholder="Produkt navn" id="new-prod-name">
+                    <p>Skriv inn <b>pris</b> på produktet:</p>
+                    <input class = "input" type="text" required placeholder="Pris" id="new-prod-price">
+                    <div class = "table-container">
+                        <p>Huk av allergener:</p>
+                        <table class ="table is-striped is-narrow is-hoverable">
+                            <thead id = "allergener-check-tablehead"></thead>
+                            <tbody id = "allergener-checkbox"></tbody>
+                        </table> 
+                    </div>
+                    <!-- Gluten <input type="checkbox" id="gluten-check">
+                    Laktose <input type="checkbox"id = "lactose-check"> -->
+                    
+                </section>
                   <footer class="modal-card-foot">
                     <button class="button is-success">Lagre Produkt</button>
                     <button class="button">Kanseller</button>

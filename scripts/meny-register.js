@@ -8,10 +8,11 @@ let sortIdBtn;
 
 let allegyNames = VareModule.getAllAllergies();
 
+
 function initialise(){
     searchInput = document.getElementById("search-input");
     searchInput.addEventListener('keyup', menuSearch);
-
+    
     
     let tableTitles = `
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodId"></a></th>
@@ -27,6 +28,10 @@ function initialise(){
     const menuHead = document.getElementById("menu-head");
     menuHead.innerHTML = `<tr>${tableTitles}</tr><tr>${allergyTitles}</tr>`;
     
+    let checkAllergiesTableHead;
+    checkAllergiesTableHead = document.getElementById("allergener-check-tablehead");
+    checkAllergiesTableHead.innerHTML = `<tr>${allergyTitles}</tr>`;
+
     sortPriceBtn = document.getElementById("prodPrice");
     sortPriceBtn.innerHTML = `<span>Pris</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
     sortPriceBtn.addEventListener('click', sortByPrice);
@@ -38,7 +43,7 @@ function initialise(){
     sortIdBtn = document.getElementById("prodId");
     sortIdBtn.innerHTML =`<span>ID</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
     sortIdBtn.addEventListener('click', sortById);
-
+    
     addProductBtn = document.getElementById("add-prod-btn");
     addProductBtn.addEventListener('click', addProduct);
 }
@@ -124,3 +129,5 @@ function sortById(){
 function addProduct(){
     alert("yo")
 }
+
+
