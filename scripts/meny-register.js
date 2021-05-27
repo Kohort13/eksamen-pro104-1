@@ -1,6 +1,7 @@
 import VareModule from './modules/VareModule.js';
 
 let searchInput;
+let addProductBtn;
 let sortPriceBtn;
 let sortNameBtn;
 let sortIdBtn;
@@ -10,6 +11,7 @@ let allegyNames = VareModule.getAllAllergies();
 function initialise(){
     searchInput = document.getElementById("search-input");
     searchInput.addEventListener('keyup', menuSearch);
+
     
     let tableTitles = `
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodId"></a></th>
@@ -24,18 +26,21 @@ function initialise(){
     
     const menuHead = document.getElementById("menu-head");
     menuHead.innerHTML = `<tr>${tableTitles}</tr><tr>${allergyTitles}</tr>`;
-
+    
     sortPriceBtn = document.getElementById("prodPrice");
     sortPriceBtn.innerHTML = `<span>Pris</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
     sortPriceBtn.addEventListener('click', sortByPrice);
-
+    
     sortNameBtn = document.getElementById("prodName");
     sortNameBtn.innerHTML = `<span>Produkt Navn</span><span class="icon"><i class="fas fa-caret-down"></i></span>`;
     sortNameBtn.addEventListener('click', sortByName);
-
+    
     sortIdBtn = document.getElementById("prodId");
     sortIdBtn.innerHTML =`<span>ID</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
     sortIdBtn.addEventListener('click', sortById);
+
+    addProductBtn = document.getElementById("add-prod-btn");
+    addProductBtn.addEventListener('click', addProduct);
 }
 initialise();
 
@@ -114,4 +119,8 @@ function sortById(){
         icon.classList.toggle("fa-caret-up", false);
         icon.classList.toggle("fa-caret-down", true);
     }
+}
+
+function addProduct(){
+    alert("yo")
 }
