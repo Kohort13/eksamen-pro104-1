@@ -19,22 +19,28 @@ function initialise(){
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodName"></a></th>
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodPrice"></a></th>
     <th colspan="10" class="has-text-centered"><a class="has-text-grey-dark" id = "prodAllergies">Allergener</a></th>`;
-    let allergyTitles = `<td colspan="3"></td>`;
+    let emptyTitles = `<td colspan="3"></td>`;
+    let allergyTitles = "";
     
     allegyNames.forEach(name => {
-        allergyTitles += `<td class="has-text-centered"><em>${name}</em></td>`;
+        allergyTitles += `<td class="has-text-centered">${name}</td>`;
     });
     
     const menuHead = document.getElementById("menu-head");
-    menuHead.innerHTML = `<tr>${tableTitles}</tr><tr>${allergyTitles}</tr>`;
+    menuHead.innerHTML = `<tr>${tableTitles}</tr><tr>${emptyTitles}${allergyTitles}</tr>`;
     
     const checkAllergiesTableHead = document.getElementById("allergies-check-tablehead");
     const checkAllergyTableBody = document.getElementById("allergies-checkbox");
 
-    checkAllergiesTableHead.innerHTML += `<td class="has-text-centered">${allergyTitles}</td>`;
+    let tableHeadCheck = "";
+    tableHeadCheck += `${allergyTitles}`;
+    
+    let tableBodyCheck ="";
     allegyNames.forEach(name =>{
-        checkAllergyTableBody.innerHTML += `<td><input type="checkbox" id="${name}"></td>`;
+        tableBodyCheck+= `<td class="has-text-centered"><input type="checkbox" id="${name}"></td>`;
     });
+    checkAllergiesTableHead.innerHTML +=`<tr>${tableHeadCheck}</tr>`;
+    checkAllergyTableBody.innerHTML +=`<tr>${tableBodyCheck}</tr>`;
 
     sortPriceBtn = document.getElementById("prodPrice");
     sortPriceBtn.innerHTML = `<span>Pris</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
