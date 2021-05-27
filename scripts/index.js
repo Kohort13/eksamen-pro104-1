@@ -7,17 +7,19 @@ function renderAnnouncement() {
     renderProfits(stickyAnnouncements);
     renderFreeShifts(stickyAnnouncements);
 
-    for (let i = 0; i < 45; i++) {
-        kunngjøringText.innerHTML +=
-        `<a class="panel-block">
+    kunngjøringText.innerHTML += createAnnouncement("Dette er en eksempelkunngjøring");
+
+    for (let i = 0; i < 15; i++) {
+        kunngjøringText.innerHTML += createAnnouncement(LoremModule.getLorem());        
+    }                      
+}
+function createAnnouncement(announcement) {
+    return `<a class="panel-block">
             <span class="panel-icon has-text-info">
                 <i class="fas fa-comment" aria-hidden="true"></i>
             </span>
-            <span>${LoremModule.getLorem()}</span>
-        </a>` ;
-        
-    }
-                      
+            <span>${announcement}</span>
+        </a>`
 }
 function renderProfits(output) {
     // Solution for formatting number from https://stackoverflow.com/a/32355056
