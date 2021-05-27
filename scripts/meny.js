@@ -1,12 +1,15 @@
 import VareModule from "./modules/VareModule.js"
 
 var pizzaDiv = document.getElementById("pizza");
-var drikkeDiv = document.getElementById("drikke");
+var sodaDiv = document.getElementById("soda");
+var hotDrinksDiv = document.getElementById("hotDrink");
+var beerDiv = document.getElementById("beer");
+//var wineDiv = document.getElementById("wine");
 
+
+//GENERATING PIZZAS
 function generatePizza(){
-
     const pizzaer = VareModule.getByProductType("Pizza");
-
     for (let i = 0; i < pizzaer.length; i++) {
         if(pizzaer[i].isVegetarian){
 
@@ -21,9 +24,7 @@ function generatePizza(){
                 <p>${pizzaer[i].ingredients}</p>
                 <hr>
             `;
-
         } else {
-
             pizzaDiv.innerHTML += `
                 <h1>${pizzaer[i].productID}.
                     <b> ${pizzaer[i].productName} </b>${pizzaer[i].price}kr 
@@ -34,16 +35,14 @@ function generatePizza(){
         }        
     }    
 }
-
-
 generatePizza(VareModule.getAll);
 
-function generateDrinks(){
-
+//GENERATING ALL OF THE DIFFERENT DRINKS (SODA, HOT DRINKS AND BEER)
+function generateSoda(){
     const brus = VareModule.getByProductType("Mineralvann");
     for (let i = 0; i < brus.length; i++){
 
-        drikkeDiv.innerHTML += `
+        sodaDiv.innerHTML += `
             <h1>${brus[i].productID}. 
                 <b> ${brus[i].productName} </b> ${brus[i].price}kr
             </h1>
@@ -51,11 +50,15 @@ function generateDrinks(){
             <hr>
         `;
     }
+}
+generateSoda(VareModule.getAll);
 
+
+function generateHotDrinks(){
     const hotDrink = VareModule.getByProductType("Varm drikke");
     for (let i = 0; i < hotDrink.length; i++){
 
-        drikkeDiv.innerHTML += `
+        hotDrinksDiv.innerHTML += `
             <h1>${hotDrink[i].productID}. 
                 <b> ${hotDrink[i].productName} </b> ${hotDrink[i].price}kr
             </h1>
@@ -63,11 +66,15 @@ function generateDrinks(){
             <hr>
         `;
     }
+}
+generateHotDrinks(VareModule.getAll);
 
+
+function generateBeer(){
     const beer = VareModule.getByProductType("Øl");
     for (let i = 0; i < beer.length; i++){
 
-        drikkeDiv.innerHTML += `
+        beerDiv.innerHTML += `
             <h1>${beer[i].productID}. 
                 <b> ${beer[i].productName} </b> ${beer[i].price}kr
             </h1>
@@ -75,11 +82,15 @@ function generateDrinks(){
             <hr>
         `;
     }
+}
+generateBeer(VareModule.getAll);
 
+/** 
+function generateWine(){
     const wine = VareModule.getByProductType("Vin");
     for (let i = 0; i < wine.length; i++){
 
-        drikkeDiv.innerHTML += `
+        wineDiv.innerHTML += `
             <h1>${wine[i].productID}. 
                 <b> ${wine[i].productName} </b> ${wine[i].price}kr
             </h1>
@@ -87,12 +98,7 @@ function generateDrinks(){
             <hr>
         `;
     }
-
 }
-generateDrinks(VareModule.getAll);
-
-//HOT_DRINK: 'Varm drikke', 
-//MINERAL_WATER: 'Mineralvann', 
-//BEER: 'Øl', 
-//WINE: 'Vin', 
+generateWine(VareModule.getAll);
+*/
 
