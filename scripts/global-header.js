@@ -3,8 +3,8 @@ function renderHeader(){
   mainHeader.innerHTML = `
   <nav class="navbar is-size-4" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a href="index.html">
-          <h1 class="navbar-item">🍕 Gyldne Pizza</h1>     
+        <a class="navbar-item" href="index.html">
+          <img src="../resources/logoforslag.png">
         </a>
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
           <span aria-hidden="true"></span>
