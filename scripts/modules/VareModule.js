@@ -57,6 +57,8 @@ const VareModule = (function(){
     let nonAlcoholicDrinkPrice = 55;
     let alcoholicDrinkPrice = 89;
     let craftAlcoholicDrinkPrice = 129;
+    let expensiveWine = 1500;
+    let glassOfWine = 149;
 
     let allergiesG = createAllergies(true, false, false, false, false, false, false, false, false, false);
     let allergiesG_L = createAllergies(true, true, false, false, false, false, false, false, false, false);
@@ -81,13 +83,18 @@ const VareModule = (function(){
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Pesto", priceClass2, allergiesG_L_PN, true, "tomatsaus, mozzarella, pesto"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Di Parma", priceClass4, allergiesG_L_PN, false, "crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, true, "tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk og toppet med basilikum"),
-        new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Coca Cola", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass coca cola"),
-        new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Coca Cola Zero", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass coca cola"),
-        new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Fanta", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass fanta"),
-        new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Sprite", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass sprite"),
-        new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Sprite Zero", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass sprite zero"),
+        new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Coca Cola", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass mineralvann"),
+        new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Coca Cola Zero", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass mineralvann"),
+        new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Fanta", nonAlcoholicDrinkPrice, noAllergies, false, "500ml mineralvann"),
+        new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Sprite", nonAlcoholicDrinkPrice, noAllergies, false, "500ml mineralvann"),
+        new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Sprite Zero", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass mineralvann"),
         new Vare(getUniqueID(), productTypes.BEER, "Heineken", alcoholicDrinkPrice, allergiesG, false, "500ml glass Heineken, fra tapp"),
-        new Vare(getUniqueID(), productTypes.BEER, "Brewdog Lost Lager", nonAlcoholicDrinkPrice, allergiesG, false, "500ml glass fanta"),
+        new Vare(getUniqueID(), productTypes.BEER, "Brewdog Lost Lager", craftAlcoholicDrinkPrice, allergiesG, false, "330ml flaske med Brewdog Lost Lager"),
+        new Vare(getUniqueID(), productTypes.WINE, "Brunello Di Montalcino", expensiveWine, noAllergies, false, "750ml flaske med Brunello Di Montalcino fra Toscana"),
+        new Vare(getUniqueID(), productTypes.WINE, "Cote des Roses Rosé 2019", glassOfWine, noAllergies, false, "140ml Glass med Rosévin"),
+        new Vare(getUniqueID(), productTypes.WINE, " Bogle Chardonnay 2018", glassOfWine, noAllergies, false, "140ml Glass med Hvitvin"),
+        new Vare(getUniqueID(), productTypes.WINE, "Ripasso valpolicella", glassOfWine, noAllergies, false, "140ml Glass med Rødvin"),
+        new Vare(getUniqueID(), productTypes.WINE, "Mionetto Prosecco Brut", glassOfWine, noAllergies, false, "140ml Glass med Prosecco"),
         new Vare(getUniqueID(), productTypes.HOT_DRINK, "Kaffe", nonAlcoholicDrinkPrice, noAllergies, false, "Svart Kaffe"),
         new Vare(getUniqueID(), productTypes.HOT_DRINK, "Cappuccino", nonAlcoholicDrinkPrice, allergiesL, false, "Kaffe med melk")
     ];
