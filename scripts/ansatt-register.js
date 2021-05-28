@@ -52,11 +52,11 @@ function ansattRegister(){
             <div id="ansatt-box" class="box">
             <strong>${ansatte[i]._firstName} ${ansatte[i]._lastName}</strong> - <strong>${ansatte[i]._position}</strong> 
             <br>
-            <a id="modal-button" class = "button is-secondary modal-button" data-target = "#modal">Se mer informasjon</a>
+            <a id="modal-button${[i]}" class = "button is-secondary modal-button" data-target = "#modal">Se mer informasjon</a>
 
 
 
-                <div id="ansatt-modal" class="modal" >
+                <div id="ansatt-modal${[i]}" class="modal" >
                     <div class="modal-background"></div>
                     <div class="modal-content">
 
@@ -108,16 +108,16 @@ function ansattRegister(){
            
         menuBody.innerHTML += `${result}`;
     }
+    var modalButton = document.querySelector(`#modal-button${[i]}`);
+    var ansattModal = document.querySelector(`#ansatt-modal${[i]}`)
+    var modalCloseBtn = document.querySelector('#image-modal-close');
+    modalButton.addEventListener('click', function(){
+        ansattModal.classList.add('is-active');
+      });
+    
+      modalCloseBtn.addEventListener('click', function(){
+        ansattModal.classList.remove('is-active');
+      });
 }
 ansattRegister();
 
-var modalButton = document.querySelector("#modal-button");
-var ansattModal = document.querySelector("#ansatt-modal")
-var modalCloseBtn = document.querySelector('#image-modal-close');
-modalButton.addEventListener('click', function(){
-    ansattModal.classList.add('is-active');
-  });
-
-  modalCloseBtn.addEventListener('click', function(){
-    ansattModal.classList.remove('is-active');
-  });
