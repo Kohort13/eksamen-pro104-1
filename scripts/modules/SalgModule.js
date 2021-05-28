@@ -38,7 +38,7 @@ const SalgModule = (function(){
     const getRandom = (min, max) => { return UtilsModule.randomNumberInRange(min, max); }
     const idGenerator = new UtilsModule.IdGenerator();
 
-    function generateRandomOrder(afterDate, specificDate) {
+    const generateRandomOrder = (afterDate, specificDate) => {
         const id = idGenerator.getID() + UtilsModule.leadingZeros(getRandom(0, 10000),5);
         const restaurant = RestaurantModule.getById(getRandom(0, 3));
         const employee = AnsattModule.getByIndex(getRandom(0, numOfEmployees));
@@ -96,7 +96,7 @@ const SalgModule = (function(){
 
     const getTodaysProfits = () => {
         //TODO - actually calculate profits for today
-        return getSumOfOrders(orders);
+        return getSumOfOrders(getByDate(new Date()));
     }
     return {getAll, getByDate, getSumOfOrders, getTodaysProfits, getByDateRange}
 

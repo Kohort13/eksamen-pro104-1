@@ -20,16 +20,13 @@ const initialise = (function(){
         if(children[i].hasAttribute("class", "button"))
             children[i].addEventListener("click", function() {setTimePeriod(children, this)});
     }
-    //fromDateField.addEventListener("blur", debugBlur);
-    //toDateField.addEventListener("blur", debugBlur);
     searchBtn.addEventListener('click', runSearch);
     const currentDate = new Date();
     let fromDate = new Date();
     fromDate.setDate(currentDate.getDate()-6);
-
     fromDateField.value = fromDate.toISOString().substr(0,10);
     toDateField.value = currentDate.toISOString().substr(0,10);
-    renderTable(SalgModule.getByDateRange(fromDate, currentDate));
+    runSearch();
     
 }());
 
@@ -39,16 +36,18 @@ function runSearch(){
     switch(periodSelection){
         case PeriodTypes.WEEK:
             toDate.setDate(toDate.getDate()+7);
+            renderTable(SalgModule.getByDateRange(fromDate, toDate));
             break;
-        case PeriodTypes.DAY:
-            toDate.setDate(toDate.getDate());
+            case PeriodTypes.DAY:
+                toDate.setDate(toDate.getDate());
+                renderTable(SalgModule.getByDate(fromDate));
             break;
         case PeriodTypes.FREE:
             toDate = new Date(toDateField.value);
             toDate.setDate(toDate.getDate()+1);
+            renderTable(SalgModule.getByDateRange(fromDate, toDate));
             break;
     }
-    renderTable(SalgModule.getByDateRange(fromDate, toDate));
 }
 
 function setTimePeriod(children, element){
@@ -64,9 +63,12 @@ function setTimePeriod(children, element){
         periodSelection = PeriodTypes.WEEK;
     }else if(element.id === "period-free-select"){
         toDateDiv.classList.remove("is-hidden");
-
+        let toDate = new Date(fromDateField.value);
+        toDate.setDate(toDate.getDate() + 30);
+        toDateField.value = toDate.toISOString().substr(0,10);
         periodSelection = PeriodTypes.FREE;
     }
+    runSearch();
 
 }
 
@@ -133,7 +135,7 @@ function renderAll(array){
         `;
     })
 }
-function renderGenericContent(){
+/*function renderGenericContent(){
     tableBody.innerHTML = "";
     let cellNr = 1;
     let rows = 10;
@@ -149,4 +151,4 @@ function renderGenericContent(){
         }
         tableBody.innerHTML += `<tr>${cells}</tr>`;
     }
-}
+}*/
