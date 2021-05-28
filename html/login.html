@@ -17,22 +17,47 @@
                     <div class="column is-4">
                         <div class="card">
                             <div class="card-content">
-                                <div class="block">
-                                    <h1 class="title">Gyldne Pizza</h1>
-                                    <h3 class="subtitle">Velkommen</h3>
-                                    <input class="input mb-2" type="text" placeholder="brukernavn" id="username">
-                                    <input class="input" type="password" placeholder="passord" id="password">
-                                    <label><input type="checkbox" value="remember" id="remember" onclick = "rememberMe()"> Husk meg</label>
-                                    <area id="error-message">
-                                </div>
-                                <div class="block">
-                                    <button type="submit "class="button is-success is-rounded is-outlined" id="submit" onclick="validateUser()">
-                                        <span>Logg inn</span>
-                                        <span class="icon">
-                                            <i class="fas fa-check"></i>
+                                <h1 class="title">Gyldne Pizza</h1>
+                                <h3 class="subtitle">Velkommen</h3>
+                                <form form="login-form" action="index.html" id="login-form">
+                                    <div class="field">
+                                        <label class="label">Brukernavn</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input mb-2" type="text" placeholder="brukernavn" id="username">
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label">Passord</label>
+                                        <div class="control has-icons-left">
+                                        <input class="input" type="password" placeholder="passord" id="password">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-lock"></i>
                                         </span>
-                                    </button>
-                                </div>
+                                        </div>
+                                        <p id="wrong-password" class="help is-danger is-hidden">Ugyldig login</p>
+                                    </div>
+                                    
+                                    <div class="field is-hidden"> <!--Disabled remember-me function-->
+                                        <div class="control">
+                                        <label><input type="checkbox" value="remember" id="remember" onclick = "rememberMe()"> Husk meg</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="field">
+                                      <div class="control">
+                                        <button type="submit "class="button is-success is-rounded is-outlined" id="submit">
+                                            <span>Logg inn</span>
+                                            <span class="icon">
+                                                <i class="fas fa-check"></i>
+                                            </span>
+                                        </button>
+                                      </div>
+                                      
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
