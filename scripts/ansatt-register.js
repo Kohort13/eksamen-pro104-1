@@ -49,11 +49,14 @@ function ansattRegister(){
         result += 
         `
             <br>
-            <div class="box">
-            <strong>${ansatte[i]._firstName} ${ansatte[i]._lastName}</strong> - <strong>${ansatte[i]._position}</strong>
+            <div id="ansatt-box" class="box">
+            <strong>${ansatte[i]._firstName} ${ansatte[i]._lastName}</strong> - <strong>${ansatte[i]._position}</strong> 
+            <br>
+            <a id="modal-button" class = "button is-secondary modal-button" data-target = "#modal">Se mer informasjon</a>
 
 
-                <div class="modal">
+
+                <div id="ansatt-modal" class="modal" >
                     <div class="modal-background"></div>
                     <div class="modal-content">
 
@@ -91,6 +94,9 @@ function ansattRegister(){
                             </p>
                         </div>
                     </div>
+                    </div>
+                        <button id="image-modal-close" class="modal-close"></button>
+                    </div>
                 </article>
 
                     </div>
@@ -104,3 +110,14 @@ function ansattRegister(){
     }
 }
 ansattRegister();
+
+var modalButton = document.querySelector("#modal-button");
+var ansattModal = document.querySelector("#ansatt-modal")
+var modalCloseBtn = document.querySelector('#image-modal-close');
+modalButton.addEventListener('click', function(){
+    ansattModal.classList.add('is-active');
+  });
+
+  modalCloseBtn.addEventListener('click', function(){
+    ansattModal.classList.remove('is-active');
+  });
