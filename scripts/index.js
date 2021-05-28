@@ -1,5 +1,6 @@
 import LoremModule from "./modules/LoremModule.js";
-import SalgsModule from "./modules/SalgModule.js";
+import SalgModule from "./modules/SalgModule.js";
+
 //Funksjoner for index-siden
 function renderAnnouncement() {
     let kunngjøringText = document.getElementById('kunngjøring');
@@ -34,7 +35,7 @@ function createAnnouncement(announcement) {
 }
 function renderProfits(output) {
     // Solution for formatting number from https://stackoverflow.com/a/32355056
-    let profit = String(SalgsModule.getTodaysProfits()).replace(/(.)(?=(\d{3})+$)/g,'$1 ');
+    let profit = String(SalgModule.getTodaysProfits()).replace(/(.)(?=(\d{3})+$)/g,'$1 ');
 
     output.innerHTML += 
     `<a class="panel-block">

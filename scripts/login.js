@@ -1,26 +1,20 @@
 //Funksjon for login-knapp
+document.getElementById('login-form').onsubmit = function() {
+    return validateUser();
+};
 function validateUser() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-
-    if(username == "user" && password == "user"){
-        window.location = "index.html"; //Sender deg til index siden om login ok.
-    }
-    else{
-        let errorField = document.getElementById("error-message");
-        errorField.innerHTML = `<p class="help has-text-danger">
-                                    <span class="icon-text">
-                                        <span class="icon">
-                                            <i class="fas fa-exclamation"></i>
-                                        </span>
-                                        <span>Feil passord</span>
-                                    </span>
-                                </p>`;
+    
+    if(username !== "user" || password !== "user"){ //Terrible security, only here as a proof-of-concept
+        document.getElementById("wrong-password").classList.toggle("is-hidden", false);
+        return false;
     }
 }
+
 const rmCheck = document.getElementById("remember"), usernameInput = document.getElementById("username"), passwordInput = document.getElementById("password");
 
-if (localStorage.checkbox && localStorage.checkbox !== "") {
+/*if (localStorage.checkbox && localStorage.checkbox !== "") {
     rmCheck.setAttribute("checked","checked");
     usernameInput.value = localStorage.username;
     passwordInput.value = localStorage.password;
@@ -29,6 +23,7 @@ if (localStorage.checkbox && localStorage.checkbox !== "") {
     usernameInput.value = "";
     passwordInput.value = "";
 }
+
 
 function rememberMe(){
     if(rmCheck.checked && usernameInput.value !== "" && passwordInput.value !== "") {
@@ -40,4 +35,4 @@ function rememberMe(){
         localStorage.password = "";
         localStorage.checkbox = "";
     }
-}
+}*/
