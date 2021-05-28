@@ -4,15 +4,20 @@ const RestaurantModule = (function(){
             this.id = id;
             this.name = name;
             this.address = address;
-            this.phone = phone;
+            this._phone = phone;
+        }
+        get phone() {
+            let formattedNumber = this._phone.toString();
+            formattedNumber = formattedNumber.replace(/(\d{2})(\d{2})(\d{2})(\d{2})/, "$1 $2 $3 $4");
+            return formattedNumber;
         }
     }
 
     const restaurants = [
-        new Restaurant(1, "Avd. Storgata", "Storgata 27, 0000 OSLO", 22323332),
-        new Restaurant(2, "Avd. Bjølsen", "Storgata 27, 0000 OSLO", 22323332),
-        new Restaurant(3, "Avd. Løkka", "Storgata 27, 0000 OSLO", 22323332),
-        new Restaurant(4, "Avd. Bislett", "Thereses Gate 12, 0000 OSLO", 22323332)
+        new Restaurant(1, "Avd. Storgata", "Storgata 27, 0000 OSLO", 12345678),
+        new Restaurant(2, "Avd. Bjølsen", "Storgata 27, 0000 OSLO", 23456789),
+        new Restaurant(3, "Avd. Løkka", "Storgata 27, 0000 OSLO", 34567890),
+        new Restaurant(4, "Avd. Bislett", "Thereses Gate 12, 0000 OSLO", 45678901)
     ];
 
     const getAll = () => restaurants;
