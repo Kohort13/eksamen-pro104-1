@@ -1,5 +1,6 @@
 import LoremModule from "./modules/LoremModule.js";
 import SalgModule from "./modules/SalgModule.js";
+import AnsattModule from "./modules/AnsattModule.js"
 
 //Funksjoner for index-siden
 function renderAnnouncement() {
@@ -8,16 +9,15 @@ function renderAnnouncement() {
     renderProfits(stickyAnnouncements);
     renderFreeShifts(stickyAnnouncements);
 
-    kunngjøringText.innerHTML += createAnnouncement("Ferie og fridager i skolen, alle må si i fra når de vil ha ferie i sommeren før sluten av mai");
-    kunngjøringText.innerHTML += createAnnouncement("Hurra!!!Ola Normensch har bursdag neste uke!!!!");
-    kunngjøringText.innerHTML += createAnnouncement("Kalle inn for hastemøte for Oslos åpning til sommeren.");
-    kunngjøringText.innerHTML += createAnnouncement("Rørlegebesøk 03.juni. Kjøkkenet skal eventuelt stenges neste helg pga lekasje. Heng en lapp på døra asap.");
-    kunngjøringText.innerHTML += createAnnouncement("møte i starten av uke om ny sommer meny, alle servitører skal delta");
-    kunngjøringText.innerHTML += createAnnouncement("Falsk brannalarm i andre etasje, får befaring på hele bygge av Sectorias Alram");
-    kunngjøringText.innerHTML += createAnnouncement("Ingen vakt er dekket på siste helg iaugust. Det haster med oppdatering av feriekalenderen.");
-    kunngjøringText.innerHTML += createAnnouncement("Sommer meny klar til bruk!");
-    kunngjøringText.innerHTML += createAnnouncement("opplæring om sikkerhet neste mandag før åpningstid. Alle må være på møte.");
-    kunngjøringText.innerHTML += createAnnouncement("Ny ledig servitør stilling som ringevikar til sommeren.");
+    kunngjøringText.innerHTML += createAnnouncement("Ferie og fridager i skolen: alle må si i fra når de vil ha ferie i sommeren før slutten av mai", "fa-exclamation", "has-text-danger");
+    kunngjøringText.innerHTML += createAnnouncement(`Hurra! ${AnsattModule.getByIndex(0).fullName} har bursdag neste uke! 🍰`, "fa-user");
+    kunngjøringText.innerHTML += createAnnouncement("Innkalling til hastemøte for Oslos åpning til sommeren.");
+    kunngjøringText.innerHTML += createAnnouncement("Rørleggerbesøk 03.juni. Kjøkkenet må eventuelt stenges neste helg pga lekkasje. Heng en lapp på døra asap.");
+    kunngjøringText.innerHTML += createAnnouncement("Møte i starten av uken om ny sommer-meny. Alle servitører skal delta");
+    kunngjøringText.innerHTML += createAnnouncement("Falsk brannalarm i andre etasje, får befaring på hele bygge av Sectorias Alarm");
+    kunngjøringText.innerHTML += createAnnouncement("Sommer-meny klar til bruk!");
+    kunngjøringText.innerHTML += createAnnouncement("Opplæring om sikkerhet neste mandag før åpningstid. Alle må være på møte.");
+    kunngjøringText.innerHTML += createAnnouncement("Ny ledig stilling som servitør-ringevikar til sommeren.");
 
 
 
@@ -25,10 +25,15 @@ function renderAnnouncement() {
         kunngjøringText.innerHTML += createAnnouncement(LoremModule.getLorem());        
     }                      
 }
-function createAnnouncement(announcement) {
+function createAnnouncement(announcement, icon, colour) {
+    if(!icon){
+        icon = "fa-comment"
+    }if(!colour){
+        colour = "has-text-info";
+    }
     return `<a class="panel-block">
-            <span class="panel-icon has-text-info">
-                <i class="fas fa-comment" aria-hidden="true"></i>
+            <span class="panel-icon ${colour}">
+                <i class="fas ${icon}" aria-hidden="true"></i>
             </span>
             <span>${announcement}</span>
         </a>`
