@@ -36,6 +36,8 @@ function ansattRegister(){
     }
 }
 ansattRegister();
+
+
 */
 
 function ansattRegister(){
@@ -48,6 +50,14 @@ function ansattRegister(){
         `
             <br>
             <div class="box">
+            <strong>${ansatte[i]._firstName} ${ansatte[i]._lastName}</strong> - <strong>${ansatte[i]._position}</strong>
+
+
+                <div class="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+
+
                 <article class="media">
                     <div class="media-left">
                         <figure class="image is-128x128">
@@ -82,6 +92,11 @@ function ansattRegister(){
                         </div>
                     </div>
                 </article>
+
+                    </div>
+                    <button class="modal-close is-large" aria-label="close"></button>
+                </div>
+              
             </div>
         `;
            
