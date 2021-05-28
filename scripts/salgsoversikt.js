@@ -64,7 +64,7 @@ function setTimePeriod(children, element){
     }else if(element.id === "period-free-select"){
         toDateDiv.classList.remove("is-hidden");
         let toDate = new Date(fromDateField.value);
-        toDate.setDate(toDate.getDate() + 30);
+        toDate.setMonth(toDate.getMonth() + 1);
         toDateField.value = toDate.toISOString().substr(0,10);
         periodSelection = PeriodTypes.FREE;
     }
