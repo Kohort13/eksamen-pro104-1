@@ -100,6 +100,10 @@ const VareModule = (function(){
     ];
     const getAll = () => varer;
 
+    // const addVare = (newVare) =>{
+    //     varer.push(newVare);
+    // }
+
     const getByName = (prodName) => {
         return varer.filter(vare => vare.productName.toLowerCase().includes(prodName.toLowerCase()));
     }

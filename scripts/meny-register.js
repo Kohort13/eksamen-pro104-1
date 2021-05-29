@@ -248,16 +248,25 @@ function saveNewProd(){
     let newProdPrice = document.getElementById("new-prod-price").value;
     
     //checks user input on checkboxes for allergies.
-    let newProdAllergies =``;
+    let newProdAllergies =[];
     allegyNames.forEach(name =>{
         newProdAllergies += document.getElementById(name).checked;
     });
+    let newProdIsVegitarian = document.getElementById("is-vegitarian-checkbox").checked;
+
 
     //checks user input on description
     let newProductDescription = document.getElementById("new-prod-description").value;
-    // console.log(newProdType);
-    // console.log(newProdAllergies);
-    // console.log(newProdName);
-    // console.log(newProdPrice);
-    // console.log(newProductDescription);
+
+    //Make new Vare.
+    //let newProd = VareModule.addVare(VareModule.newProdID(), newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductDescription);
+    
+    //const newProduct = new VareModule.Vare(VareModule.newProdID(), newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductDescription);
+    
+    console.log(newProdType);
+    console.log(newProdAllergies);
+    console.log(newProdName);
+    console.log(newProdPrice);
+    console.log(newProductDescription);
 }
+
