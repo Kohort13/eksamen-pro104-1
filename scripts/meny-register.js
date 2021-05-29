@@ -33,6 +33,7 @@ function initialise(){
     
     //ForEach loop that creates a table cell for each type of allergy.
     //Gets info from "let allegyNames = VareModule.getAllAllergies();"
+    
     allegyNames.forEach(name => {
         allergyTitles += `<td class="has-text-centered">${name}</td>`;
     });
@@ -66,19 +67,19 @@ function initialise(){
     //defines variable. Connecting the variable to HTML location with id = "allergies-checkbox"
     const checkAllergyTableBody = document.getElementById("allergies-checkbox");
     
-    //Adding allergyNames in cells.
-    let tableHeadCheck = "";
-    tableHeadCheck += `${allergyTitles}`;
     
-    //Adding a checkbox for each allergy
-    let tableBodyCheck ="";
-    allegyNames.forEach(name =>{
-        tableBodyCheck += `<td class="has-text-centered"><input type="checkbox" id="${name}"></td>`;
-    });
+    for(let i = 0; i < 2; i++){
+        let header = "";
+        let boxes = "";
+        for(let j = 0 + (i*5); j < 5 + (i*5); j++){
+            header += `<th class="has-text-centered">${allegyNames[j]}</th>`;
+            boxes += `<td class="has-text-centered"><input type="checkbox" id="${allegyNames[j]}"></td>`;
+        }
+        header = `<tr>${header}</tr>`;
+        boxes = `<tr>${boxes}</tr>`;
+        checkAllergyTableBody.innerHTML += `${header}${boxes}`;
+    }
 
-    //sending info to html.
-    checkAllergiesTableHead.innerHTML +=`<tr>${tableHeadCheck}</tr>`;
-    checkAllergyTableBody.innerHTML +=`<tr>${tableBodyCheck}</tr>`;
     
     
     //Creating button with click listner. Connecting to HTML.
