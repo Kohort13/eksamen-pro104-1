@@ -10,7 +10,7 @@ let sortIdBtn;
 let saveProdBtn;
 
 //defines variable. Gets info from "VareModule.getAllAllergies();"
-let allegyNames = VareModule.getAllAllergies();
+let allergyNames = VareModule.getAllAllergies();
 
 //Funcion that immediately runs on start. 
 function initialise(){
@@ -34,7 +34,7 @@ function initialise(){
     //ForEach loop that creates a table cell for each type of allergy.
     //Gets info from "let allegyNames = VareModule.getAllAllergies();"
     
-    allegyNames.forEach(name => {
+    allergyNames.forEach(name => {
         allergyTitles += `<td class="has-text-centered">${name}</td>`;
     });
     
@@ -72,8 +72,8 @@ function initialise(){
         let header = "";
         let boxes = "";
         for(let j = 0 + (i*5); j < 5 + (i*5); j++){
-            header += `<th class="has-text-centered">${allegyNames[j]}</th>`;
-            boxes += `<td class="has-text-centered"><input type="checkbox" id="${allegyNames[j]}"></td>`;
+            header += `<th class="has-text-centered">${allergyNames[j]}</th>`;
+            boxes += `<td class="has-text-centered"><input type="checkbox" id="${allergyNames[j]}"></td>`;
         }
         header = `<tr>${header}</tr>`;
         boxes = `<tr>${boxes}</tr>`;
@@ -266,7 +266,7 @@ function saveNewProd(){
     
     //checks user input on checkboxes for allergies.
     let newProdAllergies =[];
-    allegyNames.forEach(name =>{
+    allergyNames.forEach(name =>{
         newProdAllergies.push(document.getElementById(name).checked);
     });
     let newProdIsVegitarian = document.getElementById("is-vegitarian-checkbox").checked;
