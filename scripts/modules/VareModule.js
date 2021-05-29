@@ -199,10 +199,13 @@ const VareModule = (function(){
     const getAllProductTypes = () => {
         return productTypes;
     }
+    const getAllProductNames = () => {
+        return productName;
+    }
 
 
 
-    return {getAll, getByName, getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, 
+    return {getAll, getAllProductNames, getByName, getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, 
         getByProductType, getSortedByType, getByAllergies, getAllAllergies, findItemByname, getAllProductTypes, newProdID}
 }());
 export default VareModule;

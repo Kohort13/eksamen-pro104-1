@@ -60,7 +60,7 @@ function initialise(){
 
 
     //Used in Modal. Accessed by "addProductBtn"
-    //---------------------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------
     //defines variable. Connecting the variable to HTML location with id = "allergies-check-tablehead"
     const checkAllergiesTableHead = document.getElementById("allergies-check-tablehead");
     //defines variable. Connecting the variable to HTML location with id = "allergies-checkbox"
@@ -96,7 +96,8 @@ function initialise(){
     saveProdBtn = document.getElementById("save-prod-btn");
     saveProdBtn.addEventListener('click', saveNewProd);
 }
-//Run function initialise.
+
+//Run initialise function.
 initialise();
 
 //creating renderTable function.
@@ -135,12 +136,27 @@ function renderTable(array){
                 }
             });
             //add "results" in "menuBody".
-            menuBody.innerHTML += `<tr>${result}</tr>`;
+            menuBody.innerHTML += `<tr id = "${vare.productName}">${result}</tr>`;
         });
     }
 }
 //Prints "basic-table".
 renderTable(VareModule.getAll());
+
+function editProduct(){
+    let prodList = VareModule.getAll().length;
+    for (var i = 0; i<prodList; i++){
+        if(document.getElementsByTagName("tr")===VareModule.productName){
+            editProdBtn = document.getElementById(VareModule.productName)
+            editProdBtn.addEventListener('click', test)
+        }
+    }
+}
+
+editProduct();
+function test(){
+    alert("yo")
+}
 
 //Checks for input in search-bar.
 function menuSearch(){
