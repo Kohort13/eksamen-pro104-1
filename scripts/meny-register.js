@@ -6,6 +6,7 @@ let closeAddProductBtn;
 let sortPriceBtn;
 let sortNameBtn;
 let sortIdBtn;
+let saveProdBtn;
 
 let allegyNames = VareModule.getAllAllergies();
 
@@ -57,11 +58,13 @@ function initialise(){
     
     
     addProductBtn = document.getElementById("add-prod-btn");
-    addProductBtn.addEventListener('click', addProduct,);
+    addProductBtn.addEventListener('click', openAddProduct);
     
     closeAddProductBtn = document.getElementById("close-btn");
     closeAddProductBtn.addEventListener('click', exitAddProduct);
     
+    saveProdBtn = document.getElementById("save-prod-btn");
+    saveProdBtn.addEventListener('click', saveNewProd);
 }
 initialise();
 
@@ -146,38 +149,34 @@ const openModal = document.getElementById("add-prod-modal");
 
 function openAddProduct(){
     openModal.classList.toggle("is-active", true);
+    setNewProdId();
 }
 function exitAddProduct(){
     openModal.classList.toggle("is-active", false);
 }
 
-function addProduct(){
-    openAddProduct();
-    setNewProdId();
-}
 function setNewProdId(){
     const newProdID = document.getElementById("new-prod-id");
     let setProdID = VareModule.newProdID();
     newProdID.placeholder = setProdID;
 }
-function getInputFromAddProd(){
-    const newProdType = document.getElementById("new-prod-type");
-    const newProdName = document.getElementById("new-prod-name").value;
-    const newProdPrice = document.getElementById("new-prod-price").value;
 
-    console.log(newProdName);
 
+function saveNewProd(){
+    let newProdType = document.getElementById("new-prod-type").value;
+    
+    let newProdName = document.getElementById("new-prod-name").value;
+    let newProdPrice = document.getElementById("new-prod-price").value;
+    
     let newProdAllergies =``;
-    
     allegyNames.forEach(name =>{
-        newProdAllergies = document.getElementById(name).checked;
-        console.log(newProdAllergies);
+        newProdAllergies += document.getElementById(name).checked;
     });
-    
-    const newProductDescription = document.getElementById("new-prod-description");
 
-      
-
+    let newProductDescription = document.getElementById("new-prod-description").value;
+    // console.log(newProdType);
+    // console.log(newProdAllergies);
+    // console.log(newProdName);
+    // console.log(newProdPrice);
+    // console.log(newProductDescription);
 }
-getInputFromAddProd();
-
