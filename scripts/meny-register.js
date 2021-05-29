@@ -274,7 +274,6 @@ function saveNewProd(){
     //checks user input on description
     let newProductDescription = document.getElementById("new-prod-description").value;
 
-
     VareModule.addVare(VareModule.newProdID(), newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductDescription);
     //Prints new table with added product
     renderTable(VareModule.getAll());
