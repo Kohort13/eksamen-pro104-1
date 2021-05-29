@@ -101,7 +101,8 @@ const VareModule = (function(){
     const getAll = () => varer;
 
     function addVare(productID, productType, productName, price, allergies, isVegetarian, ingredients){
-        varer.push(new Vare(productID, productType, productName, price, allergies, isVegetarian, ingredients))
+        const allergiesObj = createAllergies(allergies[0],allergies[1],allergies[2],allergies[3],allergies[4],allergies[5],allergies[6],allergies[7],allergies[8],allergies[9])
+        varer.push(new Vare(productID, productType, productName, price, allergiesObj, isVegetarian, ingredients))
     }
 
 
