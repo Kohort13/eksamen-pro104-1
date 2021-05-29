@@ -71,7 +71,9 @@ function initialise(){
     for(let i = 0; i < 2; i++){
         let header = "";
         let boxes = "";
-        for(let j = 0 + (i*5); j < 5 + (i*5); j++){
+        let columns = 5;
+        //Multiplying by 5 to get 5 elements on each row (only works since we know that allergyNames.length is divisable by 5);
+        for(let j = 0 + (i*columns); j < columns + (i*columns); j++){
             header += `<th class="has-text-centered">${allergyNames[j]}</th>`;
             boxes += `<td class="has-text-centered"><input type="checkbox" id="${allergyNames[j]}"></td>`;
         }

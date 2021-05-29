@@ -13,6 +13,7 @@ let periodSelection = PeriodTypes.WEEK;
 
 const RenderModes = {ALL: 4}
 let renderMode, columns = RenderModes.ALL;
+let rows = [];
 
 const initialise = (function(){
     let children = document.getElementById("buttons").children;
@@ -124,16 +125,33 @@ function renderTable(array){
     renderAll(array);
 }
 
-function renderAll(array){
-    tableBody.innerHTML = "";
+//Function that renders all orders in an array
+function renderAll(array){    
+
     array.forEach(order =>{
-        tableBody.innerHTML += `
-            <td>${order.orderID}</td>
-            <td>${order.date.toISOString().substr(0, 10)}</td>
-            <td>${order.employeeID.fullName}</td>
-            <td>${order.getOrderSum()}</td>
-        `;
+        var id = document.createElement("td"),
+            date = document.createElement("td"),
+            employee = document.createElement("td"),
+            sum = document.createElement("td"),
+            row = document.createElement("tr");
+
+        id.textContent = order.orderID;
+        date.textContent = order.date.toISOString().substr(0, 10);
+        employee.textContent = order.employeeID.fullName;
+        sum.textContent = order.getOrderSum();
+
+        row.appendChild(id);
+        row.appendChild(date);
+        row.appendChild(employee);
+        row.appendChild(sum);
+        tableBody.appendChild(row);
+        row.addEventListener('click', viewOrderDetails);
     })
+}
+
+
+function viewOrderDetails(){
+    alert("hello world!");
 }
 /*function renderGenericContent(){
     tableBody.innerHTML = "";
