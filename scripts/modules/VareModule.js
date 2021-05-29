@@ -101,13 +101,9 @@ const VareModule = (function(){
     const getAll = () => varer;
 
     function addVare(productID, productType, productName, price, allergies, isVegetarian, ingredients){
-        console.log(varer);
         varer.push(new Vare(productID, productType, productName, price, allergies, isVegetarian, ingredients))
-        console.log(varer);
     }
-    // const addVare = (newVare) =>{
-    //     varer.push(newVare);
-    // }
+
 
     const getByName = (prodName) => {
         return varer.filter(vare => vare.productName.toLowerCase().includes(prodName.toLowerCase()));

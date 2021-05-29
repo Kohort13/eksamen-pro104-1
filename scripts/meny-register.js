@@ -276,13 +276,10 @@ function saveNewProd(){
 
 
     VareModule.addVare(VareModule.newProdID(), newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductDescription);
-
+    //Prints new table with added product
     renderTable(VareModule.getAll());
 
-    console.log(newProdType);
-    console.log(newProdAllergies);
-    console.log(newProdName);
-    console.log(newProdPrice);
-    console.log(newProductDescription);
+    //closes Modal
+    openModal.classList.toggle("is-active", false);
 }
 
