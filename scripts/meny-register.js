@@ -155,7 +155,7 @@ function editProduct(){
 
 editProduct();
 function test(){
-    alert("yo")
+    alert("yo");
 }
 
 //Checks for input in search-bar.
@@ -266,7 +266,7 @@ function saveNewProd(){
     //checks user input on checkboxes for allergies.
     let newProdAllergies =[];
     allegyNames.forEach(name =>{
-        newProdAllergies += document.getElementById(name).checked;
+        newProdAllergies.push(document.getElementById(name).checked);
     });
     let newProdIsVegitarian = document.getElementById("is-vegitarian-checkbox").checked;
 
@@ -274,11 +274,11 @@ function saveNewProd(){
     //checks user input on description
     let newProductDescription = document.getElementById("new-prod-description").value;
 
-    //Make new Vare.
-    //let newProd = VareModule.addVare(VareModule.newProdID(), newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductDescription);
-    
-    //const newProduct = new VareModule.Vare(VareModule.newProdID(), newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductDescription);
-    
+
+    VareModule.addVare(VareModule.newProdID(), newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductDescription);
+
+    renderTable(VareModule.getAll());
+
     console.log(newProdType);
     console.log(newProdAllergies);
     console.log(newProdName);

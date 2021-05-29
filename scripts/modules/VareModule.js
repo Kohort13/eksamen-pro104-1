@@ -100,6 +100,11 @@ const VareModule = (function(){
     ];
     const getAll = () => varer;
 
+    function addVare(productID, productType, productName, price, allergies, isVegetarian, ingredients){
+        console.log(varer);
+        varer.push(new Vare(productID, productType, productName, price, allergies, isVegetarian, ingredients))
+        console.log(varer);
+    }
     // const addVare = (newVare) =>{
     //     varer.push(newVare);
     // }
@@ -205,7 +210,7 @@ const VareModule = (function(){
 
 
 
-    return {getAll, getAllProductNames, getByName, getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, 
+    return {getAll, addVare, getAllProductNames, getByName, getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, 
         getByProductType, getSortedByType, getByAllergies, getAllAllergies, findItemByname, getAllProductTypes, newProdID}
 }());
 export default VareModule;
