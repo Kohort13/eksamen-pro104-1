@@ -32,7 +32,7 @@ function initialise(){
     
     const checkAllergiesTableHead = document.getElementById("allergies-check-tablehead");
     const checkAllergyTableBody = document.getElementById("allergies-checkbox");
-
+    
     let tableHeadCheck = "";
     tableHeadCheck += `${allergyTitles}`;
     
@@ -54,8 +54,8 @@ function initialise(){
     sortIdBtn = document.getElementById("prodId");
     sortIdBtn.innerHTML =`<span>ID</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
     sortIdBtn.addEventListener('click', sortById);
-
-
+    
+    
     addProductBtn = document.getElementById("add-prod-btn");
     addProductBtn.addEventListener('click', addProduct,);
     
@@ -150,15 +150,15 @@ function openAddProduct(){
 function exitAddProduct(){
     openModal.classList.toggle("is-active", false);
 }
-    
+
 function addProduct(){
     openAddProduct();
     setNewProdId();
 }
 function setNewProdId(){
-    let test = VareModule.newVareID;
     const newProdID = document.getElementById("new-prod-id");
-    newProdID.placeholder = test;
+    let setProdID = VareModule.newProdID();
+    newProdID.placeholder = setProdID;
 }
 function getInputFromAddProd(){
     const newProdType = document.getElementById("new-prod-type");

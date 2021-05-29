@@ -69,7 +69,7 @@ const VareModule = (function(){
     let noAllergies = createAllergies(false, false, false, false, false, false, false, false, false, false);
     const idGenerator = new UtilsModule.IdGenerator();
     const getUniqueID = () => { return idGenerator.getID()}
-    let varer = [
+    const varer = [
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Marinara", priceClass1, allergiesL, true, "tomatsaus"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Margherita", priceClass2, allergiesL, true, "tomatsaus og mozzarella"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Veronese", priceClass2, allergiesG_L, false, "tomatsaus, prosciutto, sopp"),
@@ -136,8 +136,8 @@ const VareModule = (function(){
             }
         }))
     }
-    const newVareID  = () => {
-        return varer.length;
+    const newProdID  = () => {
+        return varer.length + 1;
     }
 
     const getByPrice = (price) => {
@@ -199,6 +199,6 @@ const VareModule = (function(){
 
 
     return {getAll, getByName, getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, 
-        getByProductType, getSortedByType, getByAllergies, getAllAllergies, findItemByname, getAllProductTypes, newVareID}
+        getByProductType, getSortedByType, getByAllergies, getAllAllergies, findItemByname, getAllProductTypes, newProdID}
 }());
 export default VareModule;
