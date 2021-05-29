@@ -25,23 +25,52 @@
                   </header>
                   <section class="modal-card-body">
                     <!-- Content ... -->
-                    
-                    <p>Ny <b>produkt ID</b>:</p>
-                    <input class ="input" type="text" id="new-prod-id" disabled>
-                    <p>Skriv inn nytt <b>produkt navn</b>:</p>
-                    <input class ="input" type ="text" required placeholder="Produkt navn" id="new-prod-name">
-                    <p>Skriv inn <b>pris</b> på produktet:</p>
-                    <input class = "input" type="text" required placeholder="Pris" id="new-prod-price">
-                    <div class = "table-container">
-                        <p>Huk av allergener:</p>
-                        <table class ="table is-fullwidth is-striped is-narrow is-hoverable">
-                            <thead id = "allergies-check-tablehead"></thead>
-                            <tbody id = "allergies-checkbox"></tbody>
-                        </table> 
+                    <div class="card">
+                        <div class ="card-content">
+                            <p>Ny <b>produkt ID</b>:</p>
+                            <input class ="input" type="text" id="new-prod-id" disabled>
+                            <p>Velg <b>Produkt Type</b>:</p>
+                            <div class="select" id = "new-prod-type">
+                                <select>
+                                  <option>Pizza</option>
+                                  <option>Mineralvann</option>
+                                  <option>Øl</option>
+                                  <option>Vin</option>
+                                  <option>Varm drikke</option>
+                                </select>
+                              </div>
+                        </div>
                     </div>
-                    <!-- Gluten <input type="checkbox" id="gluten-check">
-                    Laktose <input type="checkbox"id = "lactose-check"> -->
-                    
+                    <div class="card">
+                        <div class ="card-content">
+                            <p>Skriv inn nytt <b>produkt navn</b>:</p>
+                            <input class ="input" type ="text" required placeholder="Produkt navn" id="new-prod-name">
+                            <p>Skriv inn <b>pris</b> på produktet:</p>
+                            <input class = "input" type="text" required placeholder="Pris" id="new-prod-price">
+                        </div>
+                    </div>
+                    <div class = "card">
+                        <div class = "card-content">
+                            <div class = "table-container">
+                                <p>Huk av allergener:</p>
+                                <table class ="table is-fullwidth is-striped is-narrow is-hoverable">
+                                    <thead id = "allergies-check-tablehead"></thead>
+                                    <tbody id = "allergies-checkbox"></tbody>
+                                </table> 
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class = "card">
+                        <div class = "card-content">
+                            Skriv en kort <b>beskrivelse</b> av produktet:
+                            <input class = "input" type="text" placeholder="beskrivelse" id="new-prod-description">
+                            <p>
+                                <em>Vegetar</em>:
+                                <input type = "checkbox" id = "is-vegitarian-checkbox">
+                            </p>
+                        </div>
+                    </div>
                 </section>
                   <footer class="modal-card-foot">
                     <button class="button is-success" type="button" id="save-prod-btn">Lagre Produkt</button>

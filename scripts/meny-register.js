@@ -147,21 +147,25 @@ const openModal = document.getElementById("add-prod-modal");
 function openAddProduct(){
     openModal.classList.toggle("is-active", true);
 }
+function exitAddProduct(){
+    openModal.classList.toggle("is-active", false);
+}
+    
 function addProduct(){
     openAddProduct();
     setNewProdId();
 }
-function exitAddProduct(){
-    openModal.classList.toggle("is-active", false);
-}
 function setNewProdId(){
-    let test = 2
+    let test = VareModule.newVareID;
     const newProdID = document.getElementById("new-prod-id");
     newProdID.placeholder = test;
 }
 function getInputFromAddProd(){
-    const newProdName = document.getElementById("new-prod-name");
-    const newProdPrice = document.getElementById("new-prod-price");
+    const newProdType = document.getElementById("new-prod-type");
+    const newProdName = document.getElementById("new-prod-name").value;
+    const newProdPrice = document.getElementById("new-prod-price").value;
+
+    console.log(newProdName);
 
     let newProdAllergies =``;
     
@@ -169,6 +173,11 @@ function getInputFromAddProd(){
         newProdAllergies = document.getElementById(name).checked;
         console.log(newProdAllergies);
     });
+    
+    const newProductDescription = document.getElementById("new-prod-description");
+
+      
+
 }
 getInputFromAddProd();
 
