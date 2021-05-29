@@ -1,22 +1,13 @@
 import VareModule from './modules/VareModule.js';
 
 //Defining various variables.
-let searchInput;
-let addProductBtn;
-let closeAddProductBtn;
-let sortPriceBtn;
-let sortNameBtn;
-let sortIdBtn;
-let saveProdBtn;
+let searchInput, addProductBtn, closeAddProductBtn, sortPriceBtn, sortNameBtn, sortIdBtn, saveProdBtn;
 
 //defines variable. Gets info from "VareModule.getAllAllergies();"
 let allergyNames = VareModule.getAllAllergies();
 
-//Funcion that immediately runs on start. 
 function initialise(){
-    //Defines searchInput. Connecting it to HTML location with id = "search-input".
     searchInput = document.getElementById("search-input");
-    //Adding "typing" listner. checks for any letter Will run menuSearch function.
     searchInput.addEventListener('keyup', menuSearch);
     
     //Creating tableTitles.
@@ -26,47 +17,45 @@ function initialise(){
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodName"></a></th>
     <th class ="is-narrow"><a class="has-text-grey-dark" id = "prodPrice"></a></th>
     <th colspan="10" class="has-text-centered"><a class="has-text-grey-dark" id = "prodAllergies">Allergener</a></th>`;
-    //emptyTitles are a set of merged empty table cells. To keep table organized.
-    let emptyTitles = `<td colspan="3"></td>`;
-    //Define empty variable.
+    
+    //ForEach loop that creates a table cell for each type of allergy in table header.
     let allergyTitles = "";
-    
-    //ForEach loop that creates a table cell for each type of allergy.
-    //Gets info from "let allegyNames = VareModule.getAllAllergies();"
-    
     allergyNames.forEach(name => {
         allergyTitles += `<td class="has-text-centered">${name}</td>`;
     });
     
-    // creating const variable for menuHead. Connecting it to HTML location with id = "menu-head"
     const menuHead = document.getElementById("menu-head");
+    //emptyTitles are a set of merged empty table cells. To keep table organized.
+    let emptyTitles = `<td colspan="3"></td>`;
     //Adds relevant data to menuHead
     menuHead.innerHTML = `<tr>${tableTitles}</tr><tr>${emptyTitles}${allergyTitles}</tr>`;
     
-    //Creating button with click listner. Connecting to HTML.
-    //Will sort table by price.
+    //Creating button that sorts table by price.
+    initialiseHeader();
+    initialiseModal();
+    renderTable(VareModule.getAll());    
+}
+initialise();
+
+
+function initialiseHeader() {
     sortPriceBtn = document.getElementById("prodPrice");
     sortPriceBtn.innerHTML = `<span>Pris</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
     sortPriceBtn.addEventListener('click', sortByPrice);
-    
-    //Creating button with click listner. Connecting to HTML.
+
+    //Creating button that sorts table by name.
     sortNameBtn = document.getElementById("prodName");
     sortNameBtn.innerHTML = `<span>Produkt Navn</span><span class="icon"><i class="fas fa-caret-down"></i></span>`;
     sortNameBtn.addEventListener('click', sortByName);
-    
-    //Creating button with click listner. Connecting to HTML.
+
+    //Creating button that sorts table by id.
     sortIdBtn = document.getElementById("prodId");
-    sortIdBtn.innerHTML =`<span>ID</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
+    sortIdBtn.innerHTML = `<span>ID</span><span class = "icon"><i class="fas fa-caret-down"></i></span>`;
     sortIdBtn.addEventListener('click', sortById);
+}
 
-
-    //Used in Modal. Accessed by "addProductBtn"
-    //-----------------------------------------------------
-    //defines variable. Connecting the variable to HTML location with id = "allergies-check-tablehead"
-    const checkAllergiesTableHead = document.getElementById("allergies-check-tablehead");
-    //defines variable. Connecting the variable to HTML location with id = "allergies-checkbox"
-    const checkAllergyTableBody = document.getElementById("allergies-checkbox");
-    
+function initialiseModal(){
+    const checkAllergyTableBody = document.getElementById("allergies-checkbox");    
     
     for(let i = 0; i < 2; i++){
         let header = "";
@@ -80,9 +69,7 @@ function initialise(){
         header = `<tr>${header}</tr>`;
         boxes = `<tr>${boxes}</tr>`;
         checkAllergyTableBody.innerHTML += `${header}${boxes}`;
-    }
-
-    
+    }    
     
     //Creating button with click listner. Connecting to HTML.
     //Opens the modal
@@ -100,65 +87,66 @@ function initialise(){
     saveProdBtn.addEventListener('click', saveNewProd);
 }
 
-//Run initialise function.
-initialise();
-
 //creating renderTable function.
 //Will print out the entire table of products. Including product info.
 function renderTable(array){
-    // creating const variable for menuBody. Connecting it to HTML location with id = "menu-body"
+    //Getting ref to body of table and clearing
     const menuBody = document.getElementById("menu-body");
-    //Leaving everything inside tag empty.
     menuBody.innerHTML = "";
     
-    //Define variable type
-    let type;
-    //Define variable types. Sets types as result from "getAllProductTypes" function from VareModule
-    let types = VareModule.getAllProductTypes();
-    //ForEach loop where we add table-content
+    //Define variables for loop to work (for loop won't work with inline declarations for some obscene, unfathomable, utterly shitty (probably) reason, conceived by the mad lads behind JS. #notAmused)
+    let type, types = VareModule.getAllProductTypes();
     for(type in types){
         //Adding table tags for menuBody. Fetch info from "let types = VareModule.getAllProductTypes();"
         //Prints a cells with ID-info, name-info, price-info and allegy-info
-        menuBody.innerHTML += `<tr><td colspan="13" class="has-text-centered"><b>${types[type]}</b></td><tr>`;
+        var divider = document.createElement("tr");
+        divider.innerHTML = `<td colspan="13" class="has-text-centered"><b>${types[type]}</b></td>`;
+
+        //Using appendChild for all direct children of menuBody; mixing the two caused bugs
+        menuBody.appendChild(divider);
         //Fetch info from VareModule.
         const byTypeArray = VareModule.getByProductType(types[type].toString(), array);
         byTypeArray.forEach(vare =>{
-            //Define results
-            let result = "";
-            result += `
-            <td class="is-narrow">${vare.productID}</td>
-            <td class="is-narrow" title="${vare.getDescription()}"><em>${vare.productName}</em></td>
-            <td>${vare.price},-</id></td>`;
+            var id = document.createElement("td"),
+                name = document.createElement("td"),
+                price = document.createElement("td"),
+                row = document.createElement("tr");
+            id.textContent = vare.productID;
+            name.innerHTML = `<a>${vare.productName}</a>`;
+            price.textContent = vare.price + ",-";
+            row.appendChild(id);
+            row.appendChild(name);
+            row.appendChild(price);
+            id.classList.add("is-narrow");
+            row.id = vare.productID;
+            name.classList.add("is-narrow");
+            name.title = vare.getDescription();
             
             //Adding status for all allergies (boolean). Set icon for true/false.
             vare.allergies.forEach(allergy =>{
+                var allergyTd = document.createElement("td");
+                allergyTd.classList.add("has-text-centered");
                 if(allergy.state){
-                    result += `<td class="has-text-centered"><span class = "icon"><i class="fas fa-check has-text-danger"></i></span></td>`;
+                    allergyTd.innerHTML = `<span class = "icon"><i class="fas fa-check has-text-danger"></i></span>`;
                 }else{
-                    result += `<td class="has-text-centered"><span class = "icon"><i class="fas fa-times has-text-info-dark"></i></span></td>`;
+                    allergyTd.innerHTML = `<span class = "icon"><i class="fas fa-times has-text-info-dark"></i></span>`;
                 }
+                row.appendChild(allergyTd);
             });
-            //add "results" in "menuBody".
-            menuBody.innerHTML += `<tr id = "${vare.productName}">${result}</tr>`;
+            menuBody.appendChild(row);
+            row.addEventListener('click', function(){editProduct(vare.productID)});
         });
     }
 }
-//Prints "basic-table".
-renderTable(VareModule.getAll());
 
-function editProduct(){
-    let prodList = VareModule.getAll().length;
-    for (var i = 0; i<prodList; i++){
-        if(document.getElementsByTagName("tr")===VareModule.productName){
-            editProdBtn = document.getElementById(VareModule.productName)
-            editProdBtn.addEventListener('click', test)
-        }
-    }
+function editProduct(id){
+    test(id);
 }
-
-editProduct();
-function test(){
-    alert("yo");
+function test(string){
+    if(string)
+        alert(string);
+    else
+        alert("yo");
 }
 
 //Checks for input in search-bar.
@@ -274,14 +262,13 @@ function saveNewProd(){
     let newProdIsVegitarian = document.getElementById("is-vegitarian-checkbox").checked;
 
 
-    //checks user input on description
-    let newProductDescription = document.getElementById("new-prod-description").value;
+    //checks user input on ingredients
+    let newProductIngredients = document.getElementById("new-prod-description").value.toLowerCase();
 
-    VareModule.addVare(VareModule.newProdID(), newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductDescription);
+    VareModule.addVare(VareModule.newProdID(), newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductIngredients);
     //Prints new table with added product
     renderTable(VareModule.getAll());
 
     //closes Modal
     openModal.classList.toggle("is-active", false);
 }
-
