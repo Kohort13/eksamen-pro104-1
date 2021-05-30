@@ -1,7 +1,7 @@
 import VareModule from './modules/VareModule.js';
 
 //Defining various variables.
-let searchInput, addProductBtn, closeAddProductBtn, sortPriceBtn, sortNameBtn, sortIdBtn, saveProdBtn;
+let searchInput, addProductBtn, closeAddProductBtn, sortPriceBtn, sortNameBtn, sortIdBtn, saveProdBtn, closeEditProductBtn;
 
 //defines variable. Gets info from "VareModule.getAllAllergies();"
 let allergyNames = VareModule.getAllAllergies();
@@ -33,6 +33,7 @@ function initialise(){
     //Creating button that sorts table by price.
     initialiseHeader();
     initialiseAddProdModal();
+    initialiseEditProdModal();
     renderTable(VareModule.getAll());    
 }
 initialise();
@@ -138,16 +139,38 @@ function renderTable(array){
         });
     }
 }
+//Defines openEditProdModal and HTML location
+function initialiseEditProdModal(){
 
+    closeEditProductBtn = document.getElementById("close-edit-btn");
+    closeEditProductBtn.addEventListener('click', closeEditProd);
+}
+
+const openEditProdModal = document.getElementById("edit-prod-modal")
+
+function openEditProd(){
+    openEditProdModal.classList.toggle("is-active", true);
+}
+function closeEditProd(){
+    openEditProdModal.classList.toggle("is-active",false);
+}
+//Getting prod id for clicked on row
+function getProdInfo(id){
+    const vareInfo = []
+    vareInfo.push(VareModule.getByIndex(id));
+    console.log(vareInfo);
+    vareInfo.forEach(id =>{
+        console.log(id.productID)
+        let productId = document.getElementById("prod-id");
+        productId.placeholder = id.productID;
+    })
+
+}
 function editProduct(id){
-    test(id);
+    openEditProd();
+    getProdInfo(id);
 }
-function test(string){
-    if(string)
-        alert(string);
-    else
-        alert("yo");
-}
+
 
 //Checks for input in search-bar.
 function menuSearch(){
@@ -159,8 +182,6 @@ function menuSearch(){
         renderTable(VareModule.getByName(searchInput.value));
     }
 }
-//Defines openModal and HTML location.
-const openModal = document.getElementById("add-prod-modal");
 
 //Sorts by price, direction depending on "arrow-up/down"
 function sortByPrice(){
@@ -194,7 +215,7 @@ function sortByName(){
         icon.classList.toggle("fa-caret-up", true);
         icon.classList.toggle("fa-caret-down", false);
     }else if(icon.classList.contains("fa-caret-up")){
-         //call on renderTable function with getSortedByName function from "VareModule" in mind.
+        //call on renderTable function with getSortedByName function from "VareModule" in mind.
         renderTable(VareModule.getSortedByName());
         //Changes icon from "arrow-up" to "arrow-down".
         icon.classList.toggle("fa-caret-up", false);
@@ -221,17 +242,19 @@ function sortById(){
 }
 
 
+//Defines openAddProdModal and HTML location.
+const openAddProdModal = document.getElementById("add-prod-modal");
 //Function for opening Modal.
 function openAddProduct(){
     //Sets modal to active
-    openModal.classList.toggle("is-active", true);
+    openAddProdModal.classList.toggle("is-active", true);
     //Call on function for premade newProductID.
     setNewProdId();
 }
 //Function that closes the modal.
 function exitAddProduct(){
     //Sets modal to not active
-    openModal.classList.toggle("is-active", false);
+    openAddProdModal.classList.toggle("is-active", false);
 }
 
 //Function that finds the next new productID
@@ -270,5 +293,5 @@ function saveNewProd(){
     renderTable(VareModule.getAll());
 
     //closes Modal
-    openModal.classList.toggle("is-active", false);
+    openAddProdModal.classList.toggle("is-active", false);
 }

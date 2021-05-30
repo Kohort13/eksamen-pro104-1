@@ -131,6 +131,7 @@ const VareModule = (function(){
     const getByID = (id) => {
         return varer[id];
     }
+
     const getSortedByID = () => {
         return varer.sort(((v, v2) => {
             if(v.productID > v2.productID){
@@ -202,12 +203,15 @@ const VareModule = (function(){
         return productTypes;
     }
     const getAllProductNames = () => {
-        return productName;
+        //return productName;
+    }
+    const getByIndex = (index) => {
+        return varer[index-1];
     }
 
 
 
-    return {getAll, addVare, getAllProductNames, getByName, getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, 
+    return {getAll, addVare, getByIndex, getAllProductNames, getByName, getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, 
         getByProductType, getSortedByType, getByAllergies, getAllAllergies, findItemByname, getAllProductTypes, newProdID}
 }());
 export default VareModule;
