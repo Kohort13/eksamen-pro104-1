@@ -9,15 +9,6 @@ const initialise = (function(){
     if(username === ""){
         window.location.href = "../html/login.html";
     }
-    if(username === "test"){
-        username = "Test-bruker"
-        
-    }else{
-        RestaurantModule.getAll().forEach(restaurant => {
-            if(restaurant.name.toLowerCase().includes(username.slice(3)))
-                username = restaurant.name;
-        });
-    }
     renderHeader(username);
 }());
 
