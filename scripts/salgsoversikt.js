@@ -13,7 +13,6 @@ let periodSelection = PeriodTypes.WEEK;
 
 const RenderModes = {ALL: 4}
 let renderMode, columns = RenderModes.ALL;
-let rows = [];
 
 const initialise = (function(){
     let children = document.getElementById("buttons").children;
@@ -28,6 +27,7 @@ const initialise = (function(){
     fromDateField.value = fromDate.toISOString().substr(0,10);
     toDateField.value = currentDate.toISOString().substr(0,10);
     runSearch();
+    document.getElementById("close-btn").addEventListener('click', function(){ document.getElementById("order-modal").classList.toggle("is-active", false)});
     
 }());
 
@@ -151,6 +151,9 @@ function renderAll(array){
 
 
 function viewOrderDetails(id){
-
-    alert("With ID " + id);
+    const modal = document.getElementById("order-modal");
+    const modalContent = document.getElementById("order-modal-content");
+    const modalTitle = document.getElementById("order-title");
+    modal.classList.toggle("is-active", true);
+    modalTitle.innerHTML = `Ordrenr. ${id}`
 }
