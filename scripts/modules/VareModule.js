@@ -202,36 +202,9 @@ const VareModule = (function(){
     const getAllProductTypes = () => {
         return productTypes;
     }
-    const getAllProductNames = () => {
-        //return productName;
-    }
-    const getIndex = (i) => {
-        return varer[i-1].productID;
-    }
-    const getType = (i) =>{
-        return varer[i-1].productType;
-    }
-    const getName = (i) =>{
-        return varer[i -1].productName;
-    }
-    const getPrice = (i) =>{
-        return varer[i-1].price;
-    }
-    const getAllergies = () =>{
-        let test = getAllAllergies();
-        return test;
-    }
-    const getIngredients = (i) =>{
-        return varer[i-1].ingredients;
-    }
-    const getIsVegitarian = (i) =>{
-        return varer[i-1].isVegetarian;
-    }
 
-
-
-    return {getAll, addVare, getType, getIngredients, getIsVegitarian, getName, getPrice, getIndex, getAllProductNames, getByName, 
+    return {getAll, addVare, getByName, 
         getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, getByProductType, getSortedByType, getByAllergies, 
-        getAllAllergies, findItemByname, getAllProductTypes, newProdID, getAllergies}
+        getAllAllergies, findItemByname, getAllProductTypes, newProdID}
 }());
 export default VareModule;

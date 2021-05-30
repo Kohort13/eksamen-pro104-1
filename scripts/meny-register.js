@@ -150,7 +150,7 @@ function initialiseEditProdModal(){
         //Multiplying by 5 to get 5 elements on each row (only works since we know that allergyNames.length is divisable by 5);
         for(let j = 0 + (i*columns); j < columns + (i*columns); j++){
             header += `<th class="has-text-centered">${allergyNames[j]}</th>`;
-            boxes += `<td class="has-text-centered"><input type="checkbox" id="${allergyNames[j]}"></td>`;
+            boxes += `<td class="has-text-centered"><input type="checkbox" id="edit-${allergyNames[j]}"></td>`;
         }
         header = `<tr>${header}</tr>`;
         boxes = `<tr>${boxes}</tr>`;
@@ -171,12 +171,15 @@ function closeEditProd(){
 }
 //Getting prod id for clicked on row
 function getProdInfo(id){
+    id--;
+    const product = VareModule.getByID(id);
+    
     //getting productId info for specified id (row). Adding info to placeholder
-    const productInfoId = VareModule.getIndex(id);
+    let productInfoId = product.productID;
     let productId = document.getElementById("prod-id");
     productId.placeholder = productInfoId;
 
-    const productInfoType = VareModule.getType(id);
+    let productInfoType = product.productType;
     let productType = document.getElementById("edit-prod-type").children;
     for (var i = 0; i<5; i++){
         if(productInfoType === productType[i].value){
@@ -185,37 +188,29 @@ function getProdInfo(id){
     }
 
     //getting productName info for specified id (row). Adding info to placeholder
-    const productInfoName = VareModule.getName(id);
+    let productInfoName = product.productName;
     let productName = document.getElementById("prod-name");
     productName.value = productInfoName;
     
     //getting productPrice info for specified id (row). Adding info to placeholder
-    const productInfoPrice = VareModule.getPrice(id);
+    let productInfoPrice = product.price;
     let productPrice = document.getElementById("prod-price");
     productPrice.value = productInfoPrice;
 
     //Getting productAllergy info for specified id (row). Adding info to placeholder
-    let type, types = VareModule.getAllProductTypes();
-    for(type in types){
-        const byTypeArray = VareModule.getByProductType(types[type].toString());
-        byTypeArray.forEach(vare =>{
-            vare.allergies.forEach(allergy =>{
-                if(allergy.state){
-                    console.log("true");
-                }else{
-                    console.log("false");
-                }
-            });
-        });
+    let productInfoAllergies = product.allergies;
+    //let productAllergies = document.getElementById("edit-allergies-checkbox");
+    for(let i = 0; i < productInfoAllergies.length; i++){
+        document.getElementById(`edit-${productInfoAllergies[i].name}`).checked = productInfoAllergies[i].state;
     }
 
     //Getting productIngredients info for specified id (row). Adding info to placeholder
-    const productInfoIngredients = VareModule.getIngredients(id);
+    let productInfoIngredients = product.ingredients;
     let productIngredients = document.getElementById("edit-prod-ingredients");
     productIngredients.value = productInfoIngredients;
 
     //Getting productIsVegitarian status for specified id (row). Adding info to placeholder
-    const productInfoIsVegitarian = VareModule.getIsVegitarian(id);
+    let productInfoIsVegitarian = product.isVegetarian;
     let productIsVegitarian = document.getElementById("edit-is-vegitarian-checkbox");
     productIsVegitarian.checked = productInfoIsVegitarian;
 
