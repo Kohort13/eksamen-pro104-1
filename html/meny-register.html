@@ -107,12 +107,12 @@
                     </div>
                 </div>
             </div>
-            <div class="modal is-active" id = "edit-prod-modal">
+            <div class="modal" id = "edit-prod-modal">
                 <div class="modal-background"></div>
                 <div class="modal-card">
                   <header class="modal-card-head">
                     <p class="modal-card-title">Endre Produkt</p>
-                    <button class="delete" aria-label="close" id = "close-btn"></button>
+                    <button class="delete" aria-label="close" id = "close-edit-btn"></button>
                   </header>
                   <section class="modal-card-body">
                     <!-- Content ... -->
@@ -135,13 +135,36 @@
                         </div>
                     <div class = "card">
                         <div class = "card-content">
-
+                            <p>Endre <b>produkt navn</b>:</p>
+                            <input class ="input" type ="text"  id="prod-name">
+                            <p>Endre <b>pris</b> på produktet:</p>
+                            <input class = "input" type="number"  id="prod-price">
+                        </div>
+                    </div>
+                    <div class = "card">
+                        <div class = "card-content">
+                            <div class = "table-container">
+                                <p>Endre allergener:</p>
+                                <table class ="table is-fullwidth is-striped is-narrow is-hoverable">
+                                    <thead id = "allergies-check-tablehead"></thead>
+                                    <tbody id = "allergies-checkbox"></tbody>
+                                </table> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "card">
+                        <div class = "card-content">
+                            <b>Ingredienser</b> i produktet:
+                            <input class = "input" type="text" id="prod-description">
+                            <p>
+                                <em>Vegetar</em>:
+                                <input type = "checkbox" id = "is-vegitarian-checkbox">
+                            </p>
                         </div>
                     </div>
                   </section>
                   <footer class="modal-card-foot">
                     <button class="button is-success">Save changes</button>
-                    <button class="button">Cancel</button>
                   </footer>
                 </div>
               </div>
