@@ -193,8 +193,8 @@ const VareModule = (function(){
     const getAllAllergies = ()=> {
         const allAllergies = createAllergies(false, false, false, false, false, false, false, false, false, false);
         const allergyNames = [];
-        allAllergies.forEach(allegy =>{
-            allergyNames.push(allegy.name);
+        allAllergies.forEach(allergy =>{
+            allergyNames.push(allergy.name);
         })
         return allergyNames;
     }
@@ -208,14 +208,18 @@ const VareModule = (function(){
     const getIndex = (i) => {
         return varer[i-1].productID;
     }
+    const getType = (i) =>{
+        return varer[i-1].productType;
+    }
     const getName = (i) =>{
         return varer[i -1].productName;
     }
     const getPrice = (i) =>{
         return varer[i-1].price;
     }
-    const getType = (i) =>{
-        return varer[i-1].productType;
+    const getAllergies = () =>{
+        let test = getAllAllergies();
+        return test;
     }
     const getIngredients = (i) =>{
         return varer[i-1].ingredients;
@@ -228,6 +232,6 @@ const VareModule = (function(){
 
     return {getAll, addVare, getType, getIngredients, getIsVegitarian, getName, getPrice, getIndex, getAllProductNames, getByName, 
         getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, getByProductType, getSortedByType, getByAllergies, 
-        getAllAllergies, findItemByname, getAllProductTypes, newProdID}
+        getAllAllergies, findItemByname, getAllProductTypes, newProdID, getAllergies}
 }());
 export default VareModule;

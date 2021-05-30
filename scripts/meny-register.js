@@ -194,6 +194,21 @@ function getProdInfo(id){
     let productPrice = document.getElementById("prod-price");
     productPrice.value = productInfoPrice;
 
+    //Getting productAllergy info for specified id (row). Adding info to placeholder
+    let type, types = VareModule.getAllProductTypes();
+    for(type in types){
+        const byTypeArray = VareModule.getByProductType(types[type].toString());
+        byTypeArray.forEach(vare =>{
+            vare.allergies.forEach(allergy =>{
+                if(allergy.state){
+                    console.log("true");
+                }else{
+                    console.log("false");
+                }
+            });
+        });
+    }
+
     //Getting productIngredients info for specified id (row). Adding info to placeholder
     const productInfoIngredients = VareModule.getIngredients(id);
     let productIngredients = document.getElementById("edit-prod-ingredients");
