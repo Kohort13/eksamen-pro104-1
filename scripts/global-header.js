@@ -1,9 +1,20 @@
 import LoginModule from './modules/LoginModule.js';
 
 const initialise = (function(){
+
+    //Checking if user is logged in is handled by the header (so if a page doesn't have the header, the user won't be logged out)
+    //Should be a separate script, but wrote it in here as a quick solution
+    if(LoginModule.getCookie("username") === ""){
+        window.location.href = "../html/login.html";
+    }
     renderHeader();
-    LoginModule.checkCookie();
 }());
+
+//Clears cookie
+function logout(){
+    LoginModule.logout();
+    window.location.href = "../html/login.html";
+}
 
 function renderHeader(){
     let mainHeader = document.getElementById("main-header");
@@ -36,12 +47,13 @@ function renderHeader(){
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a href="login.html"  class="button is-light">Log out</a>
+                            <a href="login.html"  id="logout-btn" class="button is-light">Log out</a>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>`; 
+    document.getElementById("logout-btn").addEventListener('click', logout)
 
     //Boilerplate burger-implementation from Bulma.io
     document.addEventListener('DOMContentLoaded', () => {
