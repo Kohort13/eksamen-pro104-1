@@ -1,7 +1,7 @@
 import VareModule from './modules/VareModule.js';
 
 //Defining various variables.
-let searchInput, addProductBtn, closeAddProductBtn, sortPriceBtn, sortNameBtn, sortIdBtn, saveProdBtn, closeEditProductBtn;
+let searchInput, addProductBtn, closeAddProductBtn, sortPriceBtn, sortNameBtn, sortIdBtn, saveProdBtn, closeEditProductBtn, saveEditProductBtn;
 
 //defines variable. Gets info from "VareModule.getAllAllergies();"
 let allergyNames = VareModule.getAllAllergies();
@@ -135,6 +135,7 @@ function renderTable(array){
                 row.appendChild(allergyTd);
             });
             menuBody.appendChild(row);
+            
             row.addEventListener('click', function(){editProduct(vare.productID)});
         });
     }
@@ -159,12 +160,17 @@ function initialiseEditProdModal(){
 
     closeEditProductBtn = document.getElementById("close-edit-btn");
     closeEditProductBtn.addEventListener('click', closeEditProd);
+
+    // saveEditProductBtn = document.getElementById("save-changes");
+    // saveEditProductBtn.addEventListener('click', saveProdInfo)
 }
 
 const openEditProdModal = document.getElementById("edit-prod-modal")
 
-function openEditProd(){
+function openEditProd(id){
     openEditProdModal.classList.toggle("is-active", true);
+    saveEditProductBtn = document.getElementById("save-changes");
+    saveEditProductBtn.onclick = function(){saveProdInfo(id)};
 }
 function closeEditProd(){
     openEditProdModal.classList.toggle("is-active",false);
@@ -216,10 +222,23 @@ function getProdInfo(id){
 
 }
 function saveProdInfo(id){
-    
+    //let prodId = document.getElementById("prod-id").placeholder;
+    let changedProdType = document.getElementById("edit-prod-type").value;
+    let changedProdName = document.getElementById("prod-name").value;
+    let changedProdPrice = document.getElementById("prod-price").value;
+    let changedProdAllergies =[];
+    allergyNames.forEach(name =>{
+        changedProdAllergies.push(document.getElementById(`edit-${name}`).checked);
+    });
+    let changedProdIngredients = document.getElementById("edit-prod-ingredients").value;
+    let changedProdIsVegitarian = document.getElementById("edit-is-vegitarian-checkbox").checked;
+
+    VareModule.changeProduct(id, changedProdType, changedProdName, changedProdPrice, changedProdAllergies, changedProdIngredients, changedProdIsVegitarian);
+    renderTable(VareModule.getAll());
+    closeEditProd();
 }
 function editProduct(id){
-    openEditProd();
+    openEditProd(id);
     getProdInfo(id);
 }
 
@@ -313,10 +332,8 @@ function exitAddProduct(){
 function setNewProdId(){
     //Connecting to HTML location
     const newProdID = document.getElementById("new-prod-id");
-    //Pulls info from "VareModule.newProdID();"
-    let setProdID = VareModule.newProdID();
     //Inserts informaton to HTML location as "placeholder value".
-    newProdID.placeholder = setProdID;
+    newProdID.placeholder = VareModule.getNextId();
 }
 
 //Function for saving information from user input.
@@ -340,7 +357,7 @@ function saveNewProd(){
     //checks user input on ingredients
     let newProductIngredients = document.getElementById("new-prod-ingredients").value.toLowerCase();
 
-    VareModule.addVare(VareModule.newProdID(), newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductIngredients);
+    VareModule.addVare(newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductIngredients);
     //Prints new table with added product
     renderTable(VareModule.getAll());
 

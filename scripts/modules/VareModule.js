@@ -100,12 +100,15 @@ const VareModule = (function(){
     ];
     const getAll = () => varer;
 
-    function addVare(productID, productType, productName, price, allergies, isVegetarian, ingredients){
+    function addVare(productType, productName, price, allergies, isVegetarian, ingredients){
         const allergiesObj = createAllergies(allergies[0],allergies[1],allergies[2],allergies[3],allergies[4],allergies[5],allergies[6],allergies[7],allergies[8],allergies[9])
-        varer.push(new Vare(productID, productType, productName, price, allergiesObj, isVegetarian, ingredients))
+        varer.push(new Vare(getUniqueID(), productType, productName, price, allergiesObj, isVegetarian, ingredients))
     }
-
-
+    function changeProduct(productID, productType, productName, price, allergies, isVegetarian, ingredients){
+        const allergiesObj = createAllergies(allergies[0],allergies[1],allergies[2],allergies[3],allergies[4],allergies[5],allergies[6],allergies[7],allergies[8],allergies[9])
+        // ProductID -1 => because array counts from 0, but id's counts from 1.
+        varer[productID-1] = new Vare(productID, productType, productName, price, allergiesObj, isVegetarian, ingredients);
+    }
     const getByName = (prodName) => {
         return varer.filter(vare => vare.productName.toLowerCase().includes(prodName.toLowerCase()));
     }
@@ -131,7 +134,9 @@ const VareModule = (function(){
     const getByID = (id) => {
         return varer[id];
     }
-
+    const getNextId = () =>{
+        return idGenerator.getNextId();
+    }
     const getSortedByID = () => {
         return varer.sort(((v, v2) => {
             if(v.productID > v2.productID){
@@ -142,9 +147,6 @@ const VareModule = (function(){
                 return -1;
             }
         }))
-    }
-    const newProdID  = () => {
-        return varer.length + 1;
     }
 
     const getByPrice = (price) => {
@@ -203,8 +205,8 @@ const VareModule = (function(){
         return productTypes;
     }
 
-    return {getAll, addVare, getByName, getSortedByName, getByID, getSortedByID, getByPrice, 
+    return {getAll, addVare, changeProduct, getByName, getSortedByName, getByID, getNextId, getSortedByID, getByPrice, 
         getSortedByPrice, getByProductType, getSortedByType, getByAllergies, 
-        getAllAllergies, findItemByname, getAllProductTypes, newProdID}
+        getAllAllergies, findItemByname, getAllProductTypes}
 }());
 export default VareModule;
