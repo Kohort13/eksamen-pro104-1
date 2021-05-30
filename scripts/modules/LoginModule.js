@@ -1,11 +1,46 @@
-const LoginModule = (function(){
+import RestaurantModule from './RestaurantModule.js';
 
-    const login = (inputUsername) => {
-        setCookie("username", inputUsername, 2);
+const LoginModule = (function(){
+    class User {
+        constructor(username, displayName, password){
+            this.username = username;
+            this.displayName = displayName;
+            this.password = password;
+        }
+    }
+    let users = [];
+    RestaurantModule.getAll().forEach(restaurant =>{
+        users.push(new User(restaurant.username, restaurant.name, "user"));
+    });
+    users.push(new User("test", "Test-bruker", "user"));
+
+    const login = (username, password) => {
+        let validLogin = false
+        users.forEach( user =>{
+            if(username == user.username && password == user.password){
+                setCookie("username", username, 2);
+                validLogin = true;
+            }
+        });
+        if(validLogin)
+            return true;
+        else{
+            document.getElementById("wrong-password").classList.toggle("is-hidden", false);
+            return false;
+        }
     }
 
     const logout = () => {
         setCookie("username", "", -2);
+        window.location.href = "../html/login.html";
+    }
+    const getDisplayName = () => {
+        let displayname = "";
+        users.forEach(user => {
+            if(user.username == getCookie("username"))
+                displayname = user.displayName;
+        })
+        return displayname;
     }
 
 
@@ -32,7 +67,7 @@ const LoginModule = (function(){
         return "";
     }
 
-    function checkCookie() {
+    /*function checkCookie() {
         var username = getCookie("username");
         if (username != "")
             alert("Welcome again " + username);
@@ -41,8 +76,8 @@ const LoginModule = (function(){
             if (username != "" && username != null)
                 setCookie("username", username, 2);
         }
-    }
-    return {setCookie, getCookie, checkCookie, login, logout};
+    }*/
+    return {getDisplayName, login, logout};
 }());
 
 export default LoginModule;

@@ -1,7 +1,8 @@
 const RestaurantModule = (function(){
     class Restaurant {
-        constructor(id, name, address, phone){
+        constructor(id, username, name, address, phone){
             this.id = id;
+            this.username = username;
             this.name = name;
             this.address = address;
             this._phone = phone;
@@ -14,10 +15,10 @@ const RestaurantModule = (function(){
     }
 
     const restaurants = [
-        new Restaurant(1, "Avd. Storgata", "Storgata 27, 0000 OSLO", 12345678),
-        new Restaurant(2, "Avd. Bjølsen", "Storgata 27, 0000 OSLO", 23456789),
-        new Restaurant(3, "Avd. Løkka", "Storgata 27, 0000 OSLO", 34567890),
-        new Restaurant(4, "Avd. Bislett", "Thereses Gate 12, 0000 OSLO", 45678901)
+        new Restaurant(1, "gp-storgata", "Avd. Storgata", "Storgata 27, 0000 OSLO", 12345678),
+        new Restaurant(2, "gp-bjølsen", "Avd. Bjølsen", "Storgata 27, 0000 OSLO", 23456789),
+        new Restaurant(3, "gp-løkka", "Avd. Løkka", "Storgata 27, 0000 OSLO", 34567890),
+        new Restaurant(4, "gp-bislett", "Avd. Bislett", "Thereses Gate 12, 0000 OSLO", 45678901)
     ];
 
     const getAll = () => restaurants;
