@@ -1,6 +1,15 @@
 const LoginModule = (function(){
 
-    //Cookie implementation from https://www.w3schools.com/js/js_cookies.asp
+    const login = (inputUsername) => {
+        setCookie("username", inputUsername, 2);
+    }
+
+    const logout = () => {
+        setCookie("username", "", -2);
+    }
+
+
+    //Cookie implementation from https://www.w3schools.com/js/js_cookies.asp    
     const setCookie = (name, value, expirydays) => {
         var d = new Date();
         d.setTime(d.getTime() + (expirydays*24*60*60*1000));
@@ -30,10 +39,10 @@ const LoginModule = (function(){
         else {
             username = prompt("Please enter your name:", "");
             if (username != "" && username != null)
-                setCookie("username", username, 365);
+                setCookie("username", username, 2);
         }
     }
-    return {setCookie, getCookie, checkCookie};
+    return {setCookie, getCookie, checkCookie, login, logout};
 }());
 
 export default LoginModule;
