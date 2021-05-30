@@ -145,13 +145,14 @@ function renderAll(array){
         row.appendChild(employee);
         row.appendChild(sum);
         tableBody.appendChild(row);
-        row.addEventListener('click', viewOrderDetails);
+        row.addEventListener('click', function() {viewOrderDetails(order.orderID)});
     })
 }
 
 
-function viewOrderDetails(){
-    alert("hello world!");
+function viewOrderDetails(id){
+
+    alert("With ID " + id);
 }
 /*function renderGenericContent(){
     tableBody.innerHTML = "";

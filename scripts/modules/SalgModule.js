@@ -101,7 +101,15 @@ const SalgModule = (function(){
         sum = sum.toString().replace(/(.)(?=(\d{3})+$)/g,'$1 ');
         return sum;
     }
-    return {getAll, getByDate, getSumOfOrders, getTodaysProfits, getByDateRange}
+    const getById = (id) => {
+        //let order;
+        orders.forEach(order => {
+            if(id == order.orderID)
+                return order;
+        });
+        return null;
+    }
+    return {getAll, getByDate, getById, getSumOfOrders, getTodaysProfits, getByDateRange}
 
 }());
 

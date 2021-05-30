@@ -1,5 +1,8 @@
-const initialise = (function(){
+import LoginModule from './modules/LoginModule.js';
 
+const initialise = (function(){
+    renderHeader();
+    LoginModule.checkCookie();
 }());
 
 function renderHeader(){
@@ -65,4 +68,3 @@ function renderHeader(){
         }
     });
 }
-renderHeader();
