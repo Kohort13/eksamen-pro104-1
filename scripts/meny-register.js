@@ -215,6 +215,9 @@ function getProdInfo(id){
     productIsVegitarian.checked = productInfoIsVegitarian;
 
 }
+function saveProdInfo(id){
+    
+}
 function editProduct(id){
     openEditProd();
     getProdInfo(id);

@@ -203,8 +203,8 @@ const VareModule = (function(){
         return productTypes;
     }
 
-    return {getAll, addVare, getByName, 
-        getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, getByProductType, getSortedByType, getByAllergies, 
+    return {getAll, addVare, getByName, getSortedByName, getByID, getSortedByID, getByPrice, 
+        getSortedByPrice, getByProductType, getSortedByType, getByAllergies, 
         getAllAllergies, findItemByname, getAllProductTypes, newProdID}
 }());
 export default VareModule;
