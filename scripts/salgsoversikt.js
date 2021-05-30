@@ -1,5 +1,5 @@
 import SalgModule from "./modules/SalgModule.js";
-import UtilsModule from "./modules/UtilsModule.js"
+
 const tableBody = document.getElementById("table-body");
 const tableHeader = document.getElementById("table-head");
 const tableFooter = document.getElementById("table-foot");
@@ -154,20 +154,3 @@ function viewOrderDetails(id){
 
     alert("With ID " + id);
 }
-/*function renderGenericContent(){
-    tableBody.innerHTML = "";
-    let cellNr = 1;
-    let rows = 10;
-    const orderVertically = true;
-    for(let i = 0; i < rows; i++){
-        let cells = ""; 
-        for(let j = 0; j < columns; j++){
-            if(orderVertically)
-                cells += `<td>Cell ${(i + j*rows)+1}</td>`;
-            else
-                cells += `<td>Cell ${cellNr++}</td>`;
-                
-        }
-        tableBody.innerHTML += `<tr>${cells}</tr>`;
-    }
-}*/
