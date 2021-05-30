@@ -32,7 +32,7 @@ function initialise(){
     
     //Creating button that sorts table by price.
     initialiseHeader();
-    initialiseModal();
+    initialiseAddProdModal();
     renderTable(VareModule.getAll());    
 }
 initialise();
@@ -54,7 +54,7 @@ function initialiseHeader() {
     sortIdBtn.addEventListener('click', sortById);
 }
 
-function initialiseModal(){
+function initialiseAddProdModal(){
     const checkAllergyTableBody = document.getElementById("allergies-checkbox");    
     
     for(let i = 0; i < 2; i++){
@@ -159,6 +159,8 @@ function menuSearch(){
         renderTable(VareModule.getByName(searchInput.value));
     }
 }
+//Defines openModal and HTML location.
+const openModal = document.getElementById("add-prod-modal");
 
 //Sorts by price, direction depending on "arrow-up/down"
 function sortByPrice(){
@@ -218,8 +220,6 @@ function sortById(){
     }
 }
 
-//Defines openModal and HTML location.
-const openModal = document.getElementById("add-prod-modal");
 
 //Function for opening Modal.
 function openAddProduct(){
