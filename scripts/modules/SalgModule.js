@@ -41,7 +41,6 @@ const SalgModule = (function(){
     const generateRandomOrder = (afterDate, specificDate) => {
         const id = idGenerator.getID() + UtilsModule.leadingZeros(getRandom(0, 10000),5);
         const employee = AnsattModule.getRandomWaiter();
-        console.log(employee);
         const restaurant = employee._restaurant;
         
         let linesToGenerate = getRandom(1, 4);
@@ -84,7 +83,6 @@ const SalgModule = (function(){
             return (dateA - dateB);
         }); 
         const user = LoginModule.getUser().username;
-        console.log(user);
         if(user == "test"){
             return orders;
         }else{
