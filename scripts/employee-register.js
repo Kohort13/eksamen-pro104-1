@@ -1,4 +1,4 @@
-import AnsattModule from './modules/AnsattModule.js';
+import EmployeeModule from './modules/EmployeeModule.js';
 
 var ansattModal = document.querySelector(`#ansatt-modal`);
 function renderModal(id) {
@@ -6,7 +6,7 @@ function renderModal(id) {
     document.getElementById("ansatt-module");
     var ansattModal = document.querySelector(`#ansatt-modal`);
     ansattModal.classList.toggle('is-active',true);
-    const employee = AnsattModule.getByIndex(id);
+    const employee = EmployeeModule.getByIndex(id);
     var modalContent = document.getElementById("modal-content");
     modalContent.innerHTML = 
     `
@@ -54,7 +54,7 @@ function renderModal(id) {
 function ansattRegister(){
     var ansattMain = document.getElementById("main-body");
     var ansatte;
-        ansatte = AnsattModule.getAll();
+        ansatte = EmployeeModule.getAll();
     for(let i = 0; i < ansatte.length; i++){
        var row = document.createElement(`tr`);
        row.id = `employee-${i}`

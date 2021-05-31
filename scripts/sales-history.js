@@ -1,4 +1,4 @@
-import SalgModule from "./modules/SalgModule.js";
+import SalesModule from "./modules/SalesModule.js";
 
 const tableBody = document.getElementById("table-body");
 const tableHeader = document.getElementById("table-head");
@@ -38,16 +38,16 @@ function runSearch(){
     switch(periodSelection){
         case PeriodTypes.WEEK:
             toDate.setDate(toDate.getDate()+7);
-            renderTable(SalgModule.getByDateRange(fromDate, toDate));
+            renderTable(SalesModule.getByDateRange(fromDate, toDate));
             break;
             case PeriodTypes.DAY:
                 toDate.setDate(toDate.getDate());
-                renderTable(SalgModule.getByDate(fromDate));
+                renderTable(SalesModule.getByDate(fromDate));
             break;
         case PeriodTypes.FREE:
             toDate = new Date(toDateField.value);
             toDate.setDate(toDate.getDate()+1);
-            renderTable(SalgModule.getByDateRange(fromDate, toDate));
+            renderTable(SalesModule.getByDateRange(fromDate, toDate));
             break;
     }
 }
@@ -114,7 +114,7 @@ function renderHeader(){
 
 function renderFooter(array){
     
-    const sumCell = `<td>${SalgModule.getSumOfOrders(array)},-</td>`;
+    const sumCell = `<td>${SalesModule.getSumOfOrders(array)},-</td>`;
     tableFooter.innerHTML = `<tr><td colspan = "3"></td>${sumCell}</tr>`;
     tableFooter.classList.add("has-background-white")
     tableFooter.style = "position:sticky; bottom:-0; transform:translate(0,2px);"
@@ -160,7 +160,7 @@ function viewOrderDetails(id){
     modal.classList.toggle("is-active", true);
     modalTitle.innerHTML = `Ordrenr. ${id}`;
 
-    let orderInfo = SalgModule.getById(id);
+    let orderInfo = SalesModule.getById(id);
     
     let orderInfoId = orderInfo.date.toISOString().substr(0,10);
     let orderInfoEmployee = orderInfo.employeeID.fullName;

@@ -1,10 +1,10 @@
-import VareModule from './modules/VareModule.js';
+import ProductModule from './modules/ProductModule.js';
 
 //Defining various variables.
 let searchInput, addProductBtn, closeAddProductBtn, sortPriceBtn, sortNameBtn, sortIdBtn, saveProdBtn, closeEditProductBtn, saveEditProductBtn;
 
-//defines variable. Gets info from "VareModule.getAllAllergies();"
-let allergyNames = VareModule.getAllAllergies();
+//defines variable. Gets info from "ProductModule.getAllAllergies();"
+let allergyNames = ProductModule.getAllAllergies();
 
 function initialise(){
     searchInput = document.getElementById("search-input");
@@ -34,7 +34,7 @@ function initialise(){
     initialiseHeader();
     initialiseAddProdModal();
     initialiseEditProdModal();
-    renderTable(VareModule.getAll());    
+    renderTable(ProductModule.getAll());    
 }
 initialise();
 
@@ -96,17 +96,17 @@ function renderTable(array){
     menuBody.innerHTML = "";
     
     //Define variables for loop to work (for loop won't work with inline declarations for some obscene, unfathomable, utterly shitty (probably) reason, conceived by the mad lads behind JS. #notAmused)
-    let type, types = VareModule.getAllProductTypes();
+    let type, types = ProductModule.getAllProductTypes();
     for(type in types){
-        //Adding table tags for menuBody. Fetch info from "let types = VareModule.getAllProductTypes();"
+        //Adding table tags for menuBody. Fetch info from "let types = ProductModule.getAllProductTypes();"
         //Prints a cells with ID-info, name-info, price-info and allegy-info
         var divider = document.createElement("tr");
         divider.innerHTML = `<td colspan="13" class="has-text-centered"><b>${types[type]}</b></td>`;
 
         //Using appendChild for all direct children of menuBody; mixing the two caused bugs
         menuBody.appendChild(divider);
-        //Fetch info from VareModule.
-        const byTypeArray = VareModule.getByProductType(types[type].toString(), array);
+        //Fetch info from ProductModule.
+        const byTypeArray = ProductModule.getByProductType(types[type].toString(), array);
         byTypeArray.forEach(vare =>{
             var id = document.createElement("td"),
                 name = document.createElement("td"),
@@ -178,7 +178,7 @@ function closeEditProd(){
 //Getting prod id for clicked on row
 function getProdInfo(id){
     id--;
-    const product = VareModule.getByID(id);
+    const product = ProductModule.getByID(id);
     
     //getting productId info for specified id (row). Adding info to placeholder
     let productInfoId = product.productID;
@@ -233,8 +233,8 @@ function saveProdInfo(id){
     let changedProdIngredients = document.getElementById("edit-prod-ingredients").value;
     let changedProdIsVegitarian = document.getElementById("edit-is-vegitarian-checkbox").checked;
 
-    VareModule.changeProduct(id, changedProdType, changedProdName, changedProdPrice, changedProdAllergies, changedProdIngredients, changedProdIsVegitarian);
-    renderTable(VareModule.getAll());
+    ProductModule.changeProduct(id, changedProdType, changedProdName, changedProdPrice, changedProdAllergies, changedProdIngredients, changedProdIsVegitarian);
+    renderTable(ProductModule.getAll());
     closeEditProd();
 }
 function editProduct(id){
@@ -247,10 +247,10 @@ function editProduct(id){
 function menuSearch(){
     if(searchInput.value == ""){
         //Nothing written
-        renderTable(VareModule.getSortedByType());
+        renderTable(ProductModule.getSortedByType());
     }else{
         //Anything written
-        renderTable(VareModule.getByName(searchInput.value));
+        renderTable(ProductModule.getByName(searchInput.value));
     }
 }
 
@@ -259,15 +259,15 @@ function sortByPrice(){
     //Finding the correct element to "look" at within "sortPriceBtn".
     let icon = sortPriceBtn.children[1].firstChild;
     if(icon.classList.contains("fa-caret-down")){
-        //call on renderTable function with getSortedByPrice function from "VareModule" in mind.
+        //call on renderTable function with getSortedByPrice function from "ProductModule" in mind.
         //Reversed order.
-        renderTable(VareModule.getSortedByPrice().reverse());
+        renderTable(ProductModule.getSortedByPrice().reverse());
         //Changes icon from "arrow-down" to "arrow-up".
         icon.classList.toggle("fa-caret-up", true);
         icon.classList.toggle("fa-caret-down", false);
     }else if(icon.classList.contains("fa-caret-up")){
-        //call on renderTable function with getSortedByPrice function from "VareModule" in mind.
-        renderTable(VareModule.getSortedByPrice());
+        //call on renderTable function with getSortedByPrice function from "ProductModule" in mind.
+        renderTable(ProductModule.getSortedByPrice());
         //Changes icon from "arrow-up" to "arrow-down".
         icon.classList.toggle("fa-caret-up", false);
         icon.classList.toggle("fa-caret-down", true);
@@ -279,15 +279,15 @@ function sortByName(){
     //Finding the correct element to "look" at within "sortNameBtn".
     let icon = sortNameBtn.children[1].firstChild;
     if(icon.classList.contains("fa-caret-down")){
-        //call on renderTable function with getSortedByName function from "VareModule" in mind.
+        //call on renderTable function with getSortedByName function from "ProductModule" in mind.
         //Revesed order.
-        renderTable(VareModule.getSortedByName().reverse());
+        renderTable(ProductModule.getSortedByName().reverse());
         //Changes icon from "arrow-down" to "arrow-up".
         icon.classList.toggle("fa-caret-up", true);
         icon.classList.toggle("fa-caret-down", false);
     }else if(icon.classList.contains("fa-caret-up")){
-        //call on renderTable function with getSortedByName function from "VareModule" in mind.
-        renderTable(VareModule.getSortedByName());
+        //call on renderTable function with getSortedByName function from "ProductModule" in mind.
+        renderTable(ProductModule.getSortedByName());
         //Changes icon from "arrow-up" to "arrow-down".
         icon.classList.toggle("fa-caret-up", false);
         icon.classList.toggle("fa-caret-down", true);
@@ -297,15 +297,15 @@ function sortById(){
     //Finding the correct element to "look" at within "sortIdBtn".
     let icon = sortIdBtn.children[1].firstChild;
     if(icon.classList.contains("fa-caret-down")){
-        //call on renderTable function with getSortedById function from "VareModule" in mind.
+        //call on renderTable function with getSortedById function from "ProductModule" in mind.
         //Revesed order.
-        renderTable(VareModule.getSortedByID().reverse());
+        renderTable(ProductModule.getSortedByID().reverse());
         //Changes icon from "arrow-down" to "arrow-up"
         icon.classList.toggle("fa-caret-up", true);
         icon.classList.toggle("fa-caret-down", false);
     }else if(icon.classList.contains("fa-caret-up")){
-        //call on renderTable function with getSortedById function from "VareModule" in mind.
-        renderTable(VareModule.getSortedByID());
+        //call on renderTable function with getSortedById function from "ProductModule" in mind.
+        renderTable(ProductModule.getSortedByID());
         //Changes icon from "arrow-up" to "arrow-down".
         icon.classList.toggle("fa-caret-up", false);
         icon.classList.toggle("fa-caret-down", true);
@@ -333,7 +333,7 @@ function setNewProdId(){
     //Connecting to HTML location
     const newProdID = document.getElementById("new-prod-id");
     //Inserts informaton to HTML location as "placeholder value".
-    newProdID.placeholder = VareModule.getNextId();
+    newProdID.placeholder = ProductModule.getNextId();
 }
 
 //Function for saving information from user input.
@@ -357,9 +357,9 @@ function saveNewProd(){
     //checks user input on ingredients
     let newProductIngredients = document.getElementById("new-prod-ingredients").value.toLowerCase();
 
-    VareModule.addVare(newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductIngredients);
+    ProductModule.addVare(newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductIngredients);
     //Prints new table with added product
-    renderTable(VareModule.getAll());
+    renderTable(ProductModule.getAll());
 
     //closes Modal
     openAddProdModal.classList.toggle("is-active", false);

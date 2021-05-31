@@ -1,6 +1,6 @@
 import UtilsModule from "./UtilsModule.js";
 
-const VareModule = (function(){
+const ProductModule = (function(){
 
     const productTypes = {
         PIZZA: 'Pizza',
@@ -209,4 +209,4 @@ const VareModule = (function(){
         getSortedByPrice, getByProductType, getSortedByType, getByAllergies, 
         getAllAllergies, findItemByname, getAllProductTypes}
 }());
-export default VareModule;
+export default ProductModule;

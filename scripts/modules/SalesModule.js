@@ -1,9 +1,9 @@
-import VareModule from "./VareModule.js";
-import AnsattModule from "./AnsattModule.js";
+import ProductModule from "./ProductModule.js";
+import EmployeeModule from "./EmployeeModule.js";
 import UtilsModule from "./UtilsModule.js";
 import LoginModule from "./LoginModule.js";
 
-const SalgModule = (function(){
+const SalesModule = (function(){
     class OrderLine {
         constructor(item, quantity){
             this._item = item;
@@ -40,13 +40,13 @@ const SalgModule = (function(){
 
     const generateRandomOrder = (afterDate, specificDate) => {
         const id = idGenerator.getID() + UtilsModule.leadingZeros(getRandom(0, 10000),5);
-        const employee = AnsattModule.getRandomWaiter();
+        const employee = EmployeeModule.getRandomWaiter();
         const restaurant = employee._restaurant;
         
         let linesToGenerate = getRandom(1, 4);
         let orderLines = [];
         for(; linesToGenerate >= 1; linesToGenerate--){
-            let product = VareModule.getByID(getRandom(0, numOfItems));
+            let product = ProductModule.getByID(getRandom(0, numOfItems));
             orderLines.push(new OrderLine(product, getRandom(1, 5)));
         }
         if(specificDate){
@@ -57,8 +57,8 @@ const SalgModule = (function(){
 
     //Generates 60 random orders for the database
     let orders = [];
-    const numOfEmployees = AnsattModule.getAll().length;
-    const numOfItems = VareModule.getAll().length;
+    const numOfEmployees = EmployeeModule.getAll().length;
+    const numOfItems = ProductModule.getAll().length;
     for(let i = 0; i < 60; i++){
         orders.push(generateRandomOrder());
     }
@@ -122,4 +122,4 @@ const SalgModule = (function(){
 
 }());
 
-export default SalgModule;
+export default SalesModule;

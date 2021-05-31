@@ -1,7 +1,7 @@
 import UtilsModule from "./UtilsModule.js";
 import RestaurantModule from "./RestaurantModule.js"
 
-const AnsattModule = (function(){
+const EmployeeModule = (function(){
 
     const Positions = {
         MANAGER: 'Avdelingsleder',
@@ -77,4 +77,4 @@ const AnsattModule = (function(){
     return {getAll, getByPosition, getByIndex, getRandomWaiter}
 }());
 
-export default AnsattModule;
+export default EmployeeModule;

@@ -1,4 +1,4 @@
-import VareModule from "./modules/VareModule.js"
+import ProductModule from "./modules/ProductModule.js"
 
 var pizzaDiv = document.getElementById("pizza");
 var sodaDiv = document.getElementById("soda");
@@ -9,7 +9,7 @@ var wineDiv = document.getElementById("wine");
 
 //GENERATING PIZZAS
 function generatePizza(){
-    const pizzaer = VareModule.getByProductType("Pizza");
+    const pizzaer = ProductModule.getByProductType("Pizza");
     for (let i = 0; i < pizzaer.length; i++) {
         if(pizzaer[i].isVegetarian){
 
@@ -35,11 +35,11 @@ function generatePizza(){
         }        
     }    
 }
-generatePizza(VareModule.getAll);
+generatePizza(ProductModule.getAll);
 
 //GENERATING ALL OF THE DIFFERENT DRINKS (SODA, HOT DRINKS AND BEER)
 function generateSoda(){
-    const brus = VareModule.getByProductType("Mineralvann");
+    const brus = ProductModule.getByProductType("Mineralvann");
     for (let i = 0; i < brus.length; i++){
 
         sodaDiv.innerHTML += `
@@ -51,11 +51,11 @@ function generateSoda(){
         `;
     }
 }
-generateSoda(VareModule.getAll);
+generateSoda(ProductModule.getAll);
 
 
 function generateHotDrinks(){
-    const hotDrink = VareModule.getByProductType("Varm drikke");
+    const hotDrink = ProductModule.getByProductType("Varm drikke");
     for (let i = 0; i < hotDrink.length; i++){
 
         hotDrinksDiv.innerHTML += `
@@ -67,11 +67,11 @@ function generateHotDrinks(){
         `;
     }
 }
-generateHotDrinks(VareModule.getAll);
+generateHotDrinks(ProductModule.getAll);
 
 
 function generateBeer(){
-    const beer = VareModule.getByProductType("Øl");
+    const beer = ProductModule.getByProductType("Øl");
     for (let i = 0; i < beer.length; i++){
 
         beerDiv.innerHTML += `
@@ -83,11 +83,11 @@ function generateBeer(){
         `;
     }
 }
-generateBeer(VareModule.getAll);
+generateBeer(ProductModule.getAll);
 
 
 function generateWine(){
-    const wine = VareModule.getByProductType("Vin");
+    const wine = ProductModule.getByProductType("Vin");
     for (let i = 0; i < wine.length; i++){
 
         wineDiv.innerHTML += `
@@ -99,6 +99,6 @@ function generateWine(){
         `;
     }
 }
-generateWine(VareModule.getAll);
+generateWine(ProductModule.getAll);
 
 

@@ -1,6 +1,6 @@
 import LoremModule from "./modules/LoremModule.js";
-import SalgModule from "./modules/SalgModule.js";
-import AnsattModule from "./modules/AnsattModule.js";
+import SalesModule from "./modules/SalesModule.js";
+import EmployeeModule from "./modules/EmployeeModule";
 import RestaurantModule from "./modules/RestaurantModule.js";
 import LoginModule from './modules/LoginModule.js'
 
@@ -22,7 +22,7 @@ function renderAnnouncements() {
     renderFreeShifts(stickyAnnouncements);
 
     kunngjøringText.innerHTML += createAnnouncement("Ferie og fridager i skolen: alle må si i fra når de vil ha ferie i sommeren før slutten av mai", "fa-exclamation", "has-text-danger");
-    kunngjøringText.innerHTML += createAnnouncement(`Hurra! ${AnsattModule.getByIndex(0).fullName} har bursdag neste uke! 🍰`, "fa-user");
+    kunngjøringText.innerHTML += createAnnouncement(`Hurra! ${EmployeeModule.getByIndex(0).fullName} har bursdag neste uke! 🍰`, "fa-user");
     kunngjøringText.innerHTML += createAnnouncement("Innkalling til hastemøte for Oslos åpning til sommeren.");
     kunngjøringText.innerHTML += createAnnouncement("Rørleggerbesøk 03.juni. Kjøkkenet må eventuelt stenges neste helg pga lekkasje. Heng en lapp på døra asap.");
     kunngjøringText.innerHTML += createAnnouncement("Møte i starten av uken om ny sommer-meny. Alle servitører skal delta");
@@ -50,7 +50,7 @@ function createAnnouncement(announcement, icon, colour) {
 }
 function renderProfits(output) {
     // Solution for formatting number from https://stackoverflow.com/a/32355056
-    let profit = String(SalgModule.getTodaysProfits());
+    let profit = String(SalesModule.getTodaysProfits());
     const user = LoginModule.getUser();
 
     output.innerHTML += 
