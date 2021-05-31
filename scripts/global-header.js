@@ -51,7 +51,7 @@ function renderHeader(user){
                     </div>
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a href="login.html"  id="logout-btn" class="button is-light">Log out</a>
+                            <a href="login.html"  id="logout-btn" class="button is-light">Logg ut</a>
                         </div>
                     </div>
                 </div>
