@@ -7,7 +7,7 @@
     <title>Hovedside</title> <!--Kan endre tittel senere-->
     <script src="../scripts/global-import.js"></script>
     <script type="module" src="../scripts/index.js"></script>
-    <script type="module" src="../scripts/global-header.js" defer></script>
+    <script type="module" src="../scripts/global-header.js" ></script>
 
     <style>
         a .card:hover{
@@ -19,114 +19,109 @@
 <body>
     <div class="container" id="main-header"></div>
     
-    <section class="section">
+    <div class="section">
         <div class="container">
-        <section class="columns">
-            <div class="column is-8">
-                <section class="columns">
-                    <div class="column">
-                        <a href="ansatt-register.html">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="block pt-6 has-text-centered">
-                                        <span class="icon">
-                                            <i class="fas fa-user-circle" style="font-size: 800%;"></i>
-                                        </span>
-                                    </div>
-                                    <div class="block">
-                                        <h2 class="title is-size-5 has-text-centered">Ansatte</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="column">
-                        <a href="meny-register.html">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="block pt-6 has-text-centered">
-                                        <span class="icon">
-                                            <i class="fas fa-book-open" style="font-size: 800%;"></i>
-                                        </span>
-                                    </div>
-                                    <div class="block">
-                                        <h2 class="title is-size-5 has-text-centered">Vareregister</h2>
+            <div class="columns">
+                <!--Large buttons for important sub-pages-->
+                <div class="column is-8">
+                    <div class="columns">
+                        <div class="column">
+                            <a href="ansatt-register.html">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="block pt-6 has-text-centered">
+                                            <span class="icon">
+                                                <i class="fas fa-user-circle" style="font-size: 800%;"></i>
+                                            </span>
+                                        </div>
+                                        <div class="block">
+                                            <h2 class="title is-size-5 has-text-centered">Ansatte</h2>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                   <div class="column">
-                       <a href="salgsoversikt.html">
-                           <div class="card">
-                                <div class="card-content">
-                                    <div class="block pt-6 has-text-centered">
-                                        <span class="icon">
-                                            <i class="fas fa-chart-line" style="font-size: 800%;"></i>
-                                        </span>
-                                    </div>
-                                    <div class="block">
-                                        <h2 class="title is-size-5 has-text-centered">Salgsoversikt</h2>
+                            </a>
+                        </div>
+                        <div class="column">
+                            <a href="meny-register.html">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="block pt-6 has-text-centered">
+                                            <span class="icon">
+                                                <i class="fas fa-book-open" style="font-size: 800%;"></i>
+                                            </span>
+                                        </div>
+                                        <div class="block">
+                                            <h2 class="title is-size-5 has-text-centered">Vareregister</h2>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                       </a>
+                            </a>
+                        </div>
+                        <div class="column">
+                            <a href="salgsoversikt.html">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="block pt-6 has-text-centered">
+                                            <span class="icon">
+                                                <i class="fas fa-chart-line" style="font-size: 800%;"></i>
+                                            </span>
+                                        </div>
+                                        <div class="block">
+                                            <h2 class="title is-size-5 has-text-centered">Salgsoversikt</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </section>
-                <section>
-                    <nav class="panel">
-                        <p class="panel-heading has-background-primary" >Kunngjøringer</p>
-                        <div class="panel-block is-hidden"><!--TODO: implement search if time-->
-                            <p class="control has-icons-left">
-                                <input class="input" type="text" placeholder="Søk">
-                                <span class="icon is-left">
-                                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <div>
+                        <nav class="panel">
+                            <p class="panel-heading has-background-primary" >Kunngjøringer</p>
+                            <div class="panel-block is-hidden"><!--TODO: implement search if time-->
+                                <p class="control has-icons-left">
+                                    <input class="input" type="text" placeholder="Søk">
+                                    <span class="icon is-left">
+                                        <i class="fas fa-search" aria-hidden="true"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="card is-radiusless" id="sticky-announcements"></div>
+                            <div style="height: 300px; overflow-x: hidden; overflow-y: auto;" id="kunngjøring"></div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="column is-4">
+                    <div class="card">
+                    <!--Panel for informasjon skal inn her-->
+                        <header class="card-header has-background-primary">
+                            <p class="card-header-title">Ressurser</p>
+                        </header>
+                        <div class="card-content">
+                            <h3 class="is-size-6 has-text-weight-bold pb-2">Åpningstider:</h3>
+                            <p>Mandag: 12-22 <br>Tirsdag: 12-22 <br>Onsdag: 12-22 <br>Torsdag: 8-22 <br>Fredag: 12-00 <br>Lørdag: 12-00 <br>Søndag: 12-00</p>
+                            <p>
+                                <span class="icon-text pt-2">
+                                    <span><a href="documents.html">Diverse dokumenter</a></span>
+                                    <span class="icon">
+                                        <i class="fas fa-file-alt " aria-hidden="true"></i>
+                                    </span>
                                 </span>
                             </p>
-                        </div>
-                        <div class="card is-radiusless" id="sticky-announcements"></div>
-                        <div style="height: 300px; overflow-x: hidden; overflow-y: auto;" id="kunngjøring">
-                        </div>
-                    </nav>
-                </section>
-            </div>
-            <div class="column is-4">
-                <div class="card">
-                    <!--Panel for informasjon skal inn her-->
-                    <header class="card-header has-background-primary">
-                        <p class="card-header-title">Ressurser</p>
-                    </header>
-                    <div class="card-content">
-                        <h3 class="is-size-6 has-text-weight-bold pb-2">Åpningstider:</h3>
-                        <p>
-                           Mandag: 12-22 <br>Tirsdag: 12-22 <br>Onsdag: 12-22 <br>Torsdag: 8-22 <br>Fredag: 12-00 <br>Lørdag: 12-00 <br>Søndag: 12-00
-                        </p>
-                        <a>
-                            <span class="icon-text pt-2">
-                                <div class="box">
-                                <span class=""><a href="documents.html">Dokumenter, skjema, kontrakter og maler</a></span>
-                                
-                                <span class="icon">
-                                    <i class="fas fa-file-alt " style="font-size: 150%"; aria-hidden="true"></i>
+                            <p>
+                                <span class="icon-text pt-2">
+                                    <span>Telefonnummer</span>
+                                    <span class="icon">
+                                        <i class="fas fa-phone" aria-hidden="true"></i>
+                                    </span>
                                 </span>
-                                </div>
-                            </span>
-                        </a>
-                        <p>
-                            <span class="icon-text pt-2">
-                                <span>Telefonnummer</span>
-                                <span class="icon">
-                                    <i class="fas fa-phone" aria-hidden="true"></i>
-                                </span>
-                            </span>
-                        </p>
-                        <p id="telephone-numbers">
-                        </p>
+                            </p>
+                            <p id="telephone-numbers"></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-        </section>
+        </div>
+    </div>
     
 </body>
 </html>
