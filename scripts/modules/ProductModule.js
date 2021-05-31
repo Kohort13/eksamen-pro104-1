@@ -171,10 +171,10 @@ const ProductModule = (function(){
         return products.filter(product => product.productType.toLowerCase().includes(type.toLowerCase()));
     }
     const getSortedByType = ()=>{
-        return products.sort((v, v2) => {
-            if(v.type > v2.type){
+        return products.sort((p1, p2) => {
+            if(p1.type > p2.type){
                 return 1;
-            }else if(v.type === v2.type){
+            }else if(p1.type === p2.type){
                 return 0;                
             }else{
                 return -1;
