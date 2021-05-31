@@ -1,5 +1,4 @@
 import LoginModule from './modules/LoginModule.js';
-import RestaurantModule from './modules/RestaurantModule.js';
 
 const initialise = (function(){
 
@@ -19,11 +18,12 @@ function logout(){
 
 function renderHeader(user){
     let mainHeader = document.getElementById("main-header");
+    mainHeader.style.backgroundColor = "#444444";
     mainHeader.innerHTML = `
         <nav class="navbar is-size-4" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="index.html">
-                <img src="../resources/logoforslag.png">
+                    <img src="../resources/logoforslag.png">
                 </a>
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
