@@ -4,7 +4,7 @@ const initialise = (function(){
 
     //Checking if user is logged in is handled by the header (so if a page doesn't have the header, the user won't be logged out)
     //Should be a separate script, but wrote it in here as a quick solution
-    let username = LoginModule.getDisplayName();
+    let username = LoginModule.getUser().displayName;
     if(username === ""){
         window.location.href = "../html/login.html";
     }

@@ -13,6 +13,8 @@ const LoginModule = (function(){
         users.push(new User(restaurant.username, restaurant.name, "user"));
     });
     users.push(new User("test", "Test-bruker", "user"));
+    
+    let currentUser = null;
 
     const login = (username, password) => {
         let validLogin = false
@@ -20,6 +22,7 @@ const LoginModule = (function(){
             if(username == user.username && password == user.password){
                 setCookie("username", username, 2);
                 validLogin = true;
+                currentUser = user;
             }
         });
         if(validLogin)
@@ -33,16 +36,8 @@ const LoginModule = (function(){
     const logout = () => {
         setCookie("username", "", -2);
         window.location.href = "../html/login.html";
+        currentUser = null;
     }
-    const getDisplayName = () => {
-        let displayname = "";
-        users.forEach(user => {
-            if(user.username == getCookie("username"))
-                displayname = user.displayName;
-        })
-        return displayname;
-    }
-
 
     //Cookie implementation from https://www.w3schools.com/js/js_cookies.asp    
     const setCookie = (name, value, expirydays) => {
@@ -77,7 +72,20 @@ const LoginModule = (function(){
                 setCookie("username", username, 2);
         }
     }*/
-    return {getDisplayName, login, logout};
+
+    const getUser = () => {
+        const storedUsername = getCookie("username");
+        if(storedUsername != ""){
+            users.forEach( user => {
+                if(user.username == storedUsername)
+                    currentUser = user;
+            })
+            return currentUser;
+        }else{
+            return null;
+        }
+    }
+    return {getUser, login, logout};
 }());
 
 export default LoginModule;
