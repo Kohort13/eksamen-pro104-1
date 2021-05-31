@@ -1,11 +1,17 @@
 import EmployeeModule from './modules/EmployeeModule.js';
 
-var employeeModal = document.querySelector(`#ansatt-modal`);
+const employeeModal = document.querySelector(`#ansatt-modal`);
+const searchInput = document.getElementById("search-input");
+const employeeMain = document.getElementById("main-body");
+searchInput.addEventListener('keyup', employeeSearch);
+
+
 function renderModal(id) {
     
     document.getElementById("ansatt-module");
     employeeModal.classList.toggle('is-active',true);
     const employee = EmployeeModule.getByIndex(id);
+    console.log(employee);
     var modalContent = document.getElementById("modal-content");
     modalContent.innerHTML = 
     `
@@ -48,28 +54,37 @@ function renderModal(id) {
     `;    
 }
 
-function employeeRegister(){
-    var employeeMain = document.getElementById("main-body");
-    var employees = EmployeeModule.getAll();
-    for(let i = 0; i < employees.length; i++){
-       var row = document.createElement(`tr`);
-       row.id = `employee-${i}`
-       row.addEventListener(`click`,function(){renderModal(i)});
-        employeeMain.appendChild(row);
-        row.innerHTML = 
-        `
-        <td> 
-        <figure class="image is-32x32">
-        <img class="is-rounded" src="../resources/images/${employees[i]._picture}">
-        </figure>
-        </td>
-        <td>
-        ${employees[i].fullName}
-        </td>
-        <td> ${employees[i]._position}</td>
-            
-        `
-    };
+function employeeSearch(){
+    if(searchInput.value == ""){
+        //Nothing written
+        renderTable(EmployeeModule.getAll());
+    }else{
+        //Anything written
+        renderTable(EmployeeModule.getByName(searchInput.value));
+    }
+}
+
+function renderTable(array){
+    var employees = array;
+    employeeMain.innerHTML = "";
+
+    employees.forEach(employee => {
+        var row = document.createElement(`tr`);
+        row.addEventListener(`click`,function(){renderModal(employee._id)});
+         employeeMain.appendChild(row);
+         row.innerHTML = 
+         `
+         <td> 
+         <figure class="image is-32x32">
+         <img class="is-rounded" src="../resources/images/${employee._picture}">
+         </figure>
+         </td>
+         <td>
+         ${employee.fullName}
+         </td>
+         <td> ${employee._position}</td>
+         `;
+    })
     
     
     var modalCloseBtn = document.querySelector('#image-modal-close');
@@ -83,5 +98,5 @@ function employeeRegister(){
         employeeModal.classList.remove('is-active');
       });
 }
-employeeRegister();
+renderTable(EmployeeModule.getAll());
 

@@ -62,17 +62,6 @@ const LoginModule = (function(){
         return "";
     }
 
-    /*function checkCookie() {
-        var username = getCookie("username");
-        if (username != "")
-            alert("Welcome again " + username);
-        else {
-            username = prompt("Please enter your name:", "");
-            if (username != "" && username != null)
-                setCookie("username", username, 2);
-        }
-    }*/
-
     const getUser = () => {
         const storedUsername = getCookie("username");
         if(storedUsername != ""){
