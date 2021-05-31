@@ -1,6 +1,6 @@
 import LoremModule from "./modules/LoremModule.js";
 import SalesModule from "./modules/SalesModule.js";
-import EmployeeModule from "./modules/EmployeeModule";
+import EmployeeModule from "./modules/EmployeeModule.js";
 import RestaurantModule from "./modules/RestaurantModule.js";
 import LoginModule from './modules/LoginModule.js'
 
