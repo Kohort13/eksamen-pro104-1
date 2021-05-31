@@ -14,6 +14,7 @@ let periodSelection = PeriodTypes.WEEK;
 const RenderModes = {ALL: 4}
 let renderMode, columns = RenderModes.ALL;
 
+
 const initialise = (function(){
     let children = document.getElementById("buttons").children;
     for(let i = 0; i < children.length; i++){
@@ -140,6 +141,9 @@ function renderAll(array){
         employee.textContent = order.employeeID.fullName;
         sum.textContent = order.getOrderSum();
 
+        //Maria
+        row.id = order.orderID;
+
         row.appendChild(id);
         row.appendChild(date);
         row.appendChild(employee);
@@ -155,5 +159,19 @@ function viewOrderDetails(id){
     const modalContent = document.getElementById("order-modal-content");
     const modalTitle = document.getElementById("order-title");
     modal.classList.toggle("is-active", true);
-    modalTitle.innerHTML = `Ordrenr. ${id}`
+    modalTitle.innerHTML = `Ordrenr. ${id}`;
+
+    //Maria
+    let test = SalgModule.getById(id);
+    console.log(test)
+
+    var card = document.createElement("card")
+    var cardContent = document.createElement("card-content");
+
+    var dato = document.createElement("p");
+    dato.innerHTML = `<b>Dato:</b> xx.xx.xx`;
+
+    cardContent.innerHTML = dato;
+    card.appendChild(cardContent)
+    modalContent.appendChild(card);
 }
