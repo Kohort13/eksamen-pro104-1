@@ -141,8 +141,6 @@ function renderAll(array){
         employee.textContent = order.employeeID.fullName;
         sum.textContent = order.getOrderSum();
 
-        //Maria
-        row.id = order.orderID;
 
         row.appendChild(id);
         row.appendChild(date);
@@ -161,23 +159,33 @@ function viewOrderDetails(id){
     modal.classList.toggle("is-active", true);
     modalTitle.innerHTML = `Ordrenr. ${id}`;
 
-    //Maria
     let orderInfo = SalgModule.getById(id);
     
-    let orderInfoId = orderInfo.date;
+    let orderInfoId = orderInfo.date.toISOString().substr(0,10);
     let orderInfoEmployee = orderInfo.employeeID.fullName;
 
     let orderInfoProducts = orderInfo.orderLines;
-    let quantity;
-    let productInfoId;
-    let productInfoName;
-    let productInfoPrice;
+    var rows = "";
+
+    
     for (var i = 0; i< orderInfoProducts.length; i++){
         const product = orderInfoProducts[i].item;
-        quantity = orderInfoProducts[i].quantity;
-        productInfoId = product.productID;
-        productInfoName = product.productName;
-        productInfoPrice = product.price;
+        const quantity = orderInfoProducts[i].quantity;
+        const productInfoId = product.productID;
+        const productInfoName = product.productName;
+        const productInfoPrice = product.price;
+        
+        let total = productInfoPrice*quantity;
+        
+        rows += `
+            <tr>
+            <td>${productInfoId}</td>
+            <td>${productInfoName}</td>
+            <td>${productInfoPrice}</td>
+            <td>${quantity}</td>
+            <td>${total}</td>
+            </tr>
+        `;
     }
 
     var content = `
@@ -185,8 +193,9 @@ function viewOrderDetails(id){
         <a href = "../html/ansatt-register.html">
             <b class = "has-text-grey-dark">Ansatt:</b>
         ${orderInfoEmployee}</a>
+        
 
-        <div class = "table-container">
+        <div class = "table-container mt-4">
             <table class ="table is-fullwidth is-striped is-narrow is-hoverable">
                 <p><b>Varer: </b></p>
                 <tr>
@@ -197,6 +206,7 @@ function viewOrderDetails(id){
                     <th>Sum: </th>
                 </tr>
                 <tr>
+                ${rows}
                 </tr>
             </table>
         </div>
