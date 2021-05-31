@@ -41,7 +41,7 @@ ansattRegister();
 */
 
 function ansattRegister(){
-    var menuBody = document.getElementById("testid");
+    var ansattMain = document.getElementById("main-body");
     var ansatte;
         ansatte = AnsattModule.getAll();
     for(var i = 0; i < ansatte.length; i++){
@@ -49,16 +49,21 @@ function ansattRegister(){
         result += 
         `
             <br>
-            <div id="ansatt-box" class="box">
+            <div class="box">
             <strong>${ansatte[i]._firstName} ${ansatte[i]._lastName}</strong> - <strong>${ansatte[i]._position}</strong> 
             <br>
-            <a id="modal-button${[i]}" class = "button is-secondary modal-button" data-target = "#modal">Se mer informasjon</a>
+            <a id="modal-button" class = "button is-secondary modal-button" data-target = "#modal">Se mer informasjon</a>
 
 
 
-                <div id="ansatt-modal${[i]}" class="modal" >
-                    <div class="modal-background"></div>
-                    <div class="modal-content">
+            <div id="ansatt-modalINACTIVE" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Ansatt Informasjon</p>
+                <button id="image-modal-closeINACTIVE" class="delete" aria-label="close"></button>
+              </header> 
+              <section class="modal-card-body">
 
 
                 <article class="media">
@@ -94,28 +99,30 @@ function ansattRegister(){
                             </p>
                         </div>
                     </div>
-                    </div>
-                        <button id="image-modal-close" class="modal-close"></button>
-                    </div>
-                </article>
-
-                    </div>
-                    <button class="modal-close is-large" aria-label="close"></button>
-                </div>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <button id="modal-closeINACTIVE" class="button">Lukk</button>
+                    </footer>
+            </div>
+            </div>
               
             </div>
         `;
            
-        menuBody.innerHTML += `${result}`;
+        ansattMain.innerHTML += `${result}`;
     }
-    var modalButton = document.querySelector(`#modal-button${[i]}`);
-    var ansattModal = document.querySelector(`#ansatt-modal${[i]}`)
+    var modalButton = document.querySelector(`#modal-button`);
+    var ansattModal = document.querySelector(`#ansatt-modal`)
     var modalCloseBtn = document.querySelector('#image-modal-close');
+    var modalClose = document.querySelector(`#close-modal-button`)
     modalButton.addEventListener('click', function(){
         ansattModal.classList.add('is-active');
       });
     
       modalCloseBtn.addEventListener('click', function(){
+        ansattModal.classList.remove('is-active');
+      });
+      modalClose.addEventListener('click', function(){
         ansattModal.classList.remove('is-active');
       });
 }
