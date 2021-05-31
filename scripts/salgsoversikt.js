@@ -162,16 +162,47 @@ function viewOrderDetails(id){
     modalTitle.innerHTML = `Ordrenr. ${id}`;
 
     //Maria
-    let test = SalgModule.getById(id);
-    console.log(test)
+    let orderInfo = SalgModule.getById(id);
+    
+    let orderInfoId = orderInfo.date;
+    let orderInfoEmployee = orderInfo.employeeID.fullName;
 
-    var card = document.createElement("card")
-    var cardContent = document.createElement("card-content");
+    let orderInfoProducts = orderInfo.orderLines;
+    let quantity;
+    let productInfoId;
+    let productInfoName;
+    let productInfoPrice;
+    for (var i = 0; i< orderInfoProducts.length; i++){
+        const product = orderInfoProducts[i].item;
+        quantity = orderInfoProducts[i].quantity;
+        productInfoId = product.productID;
+        productInfoName = product.productName;
+        productInfoPrice = product.price;
+    }
 
-    var dato = document.createElement("p");
-    dato.innerHTML = `<b>Dato:</b> xx.xx.xx`;
+    var content = `
+        <p><b>Dato: </b>${orderInfoId}</p>
+        <a href = "../html/ansatt-register.html">
+            <b class = "has-text-grey-dark">Ansatt:</b>
+        ${orderInfoEmployee}</a>
 
-    cardContent.innerHTML = dato;
-    card.appendChild(cardContent)
-    modalContent.appendChild(card);
+        <div class = "table-container">
+            <table class ="table is-fullwidth is-striped is-narrow is-hoverable">
+                <p><b>Varer: </b></p>
+                <tr>
+                    <th>Id: </th>
+                    <th>Navn: </th>
+                    <th>Pris: </th>
+                    <th>Antall: </th>
+                    <th>Sum: </th>
+                </tr>
+                <tr>
+                </tr>
+            </table>
+        </div>
+        `;
+        
+        
+        
+    modalContent.innerHTML = content;
 }
