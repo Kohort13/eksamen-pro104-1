@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hovedside</title> <!--Kan endre tittel senere-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <script src="../scripts/global-import.js"></script>
     <script type="module" src="../scripts/index.js"></script>
     <script type="module" src="../scripts/global-header.js" defer></script>
 
@@ -76,7 +75,7 @@
                 </section>
                 <section>
                     <nav class="panel">
-                        <p class="panel-heading" >Kunngjøringer</p>
+                        <p class="panel-heading has-background-primary" >Kunngjøringer</p>
                         <div class="panel-block is-hidden"><!--TODO: implement search if time-->
                             <p class="control has-icons-left">
                                 <input class="input" type="text" placeholder="Søk">
@@ -94,7 +93,7 @@
             <div class="column is-4">
                 <div class="card">
                     <!--Panel for informasjon skal inn her-->
-                    <header class="card-header has-background-white-ter">
+                    <header class="card-header has-background-primary">
                         <p class="card-header-title">Ressurser</p>
                     </header>
                     <div class="card-content">
@@ -104,10 +103,13 @@
                         </p>
                         <a>
                             <span class="icon-text pt-2">
-                                <span><a href="documents.html">Documents</a></span>
+                                <div class="box">
+                                <span class=""><a href="documents.html">Dokumenter, skjema, kontrakter og maler</a></span>
+                                
                                 <span class="icon">
-                                    <i class="fas fa-file" aria-hidden="true"></i>
+                                    <i class="fas fa-file-alt " style="font-size: 150%"; aria-hidden="true"></i>
                                 </span>
+                                </div>
                             </span>
                         </a>
                         <p>

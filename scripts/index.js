@@ -2,6 +2,7 @@ import LoremModule from "./modules/LoremModule.js";
 import SalgModule from "./modules/SalgModule.js";
 import AnsattModule from "./modules/AnsattModule.js";
 import RestaurantModule from "./modules/RestaurantModule.js";
+import LoginModule from './modules/LoginModule.js'
 
 //Funksjoner for index-siden
 
@@ -50,13 +51,14 @@ function createAnnouncement(announcement, icon, colour) {
 function renderProfits(output) {
     // Solution for formatting number from https://stackoverflow.com/a/32355056
     let profit = String(SalgModule.getTodaysProfits());
+    const user = LoginModule.getUser();
 
     output.innerHTML += 
     `<a class="panel-block">
         <span class="panel-icon has-text-success">
             <i class="fas fa-chart-line" aria-hidden="true"></i>
         </span>
-        <span>Dagens omsetning: ${profit},-</span>
+        <span>Dagens omsetning for ${user.displayName}: ${profit},-</span>
     </a>`;
     
 }

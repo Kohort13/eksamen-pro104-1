@@ -14,6 +14,7 @@ let periodSelection = PeriodTypes.WEEK;
 const RenderModes = {ALL: 4}
 let renderMode, columns = RenderModes.ALL;
 
+
 const initialise = (function(){
     let children = document.getElementById("buttons").children;
     for(let i = 0; i < children.length; i++){
@@ -107,15 +108,16 @@ function renderHeader(){
             <th>Ansatt</th>
             <th>Beløp</th>
         </tr>`;
+        tableHeader.classList.add("has-background-white")
+        tableHeader.style = "position:sticky; top:0; transform:translate(0,-10px);"
 }
 
 function renderFooter(array){
-    let cells = "";
-    for(let i = 0; i < columns-1; i++){
-        cells += `<td>Sum ${i+1}</td>`;
-    }
-    const sumCell = `<td>${SalgModule.getSumOfOrders(array)}</td>`;
-    tableFooter.innerHTML = `<tr>${cells}${sumCell}</tr>`;
+    
+    const sumCell = `<td>${SalgModule.getSumOfOrders(array)},-</td>`;
+    tableFooter.innerHTML = `<tr><td colspan = "3"></td>${sumCell}</tr>`;
+    tableFooter.classList.add("has-background-white")
+    tableFooter.style = "position:sticky; bottom:-0; transform:translate(0,2px);"
 }
 
 function renderTable(array){
@@ -140,6 +142,7 @@ function renderAll(array){
         employee.textContent = order.employeeID.fullName;
         sum.textContent = order.getOrderSum();
 
+
         row.appendChild(id);
         row.appendChild(date);
         row.appendChild(employee);
@@ -155,5 +158,62 @@ function viewOrderDetails(id){
     const modalContent = document.getElementById("order-modal-content");
     const modalTitle = document.getElementById("order-title");
     modal.classList.toggle("is-active", true);
-    modalTitle.innerHTML = `Ordrenr. ${id}`
+    modalTitle.innerHTML = `Ordrenr. ${id}`;
+
+    let orderInfo = SalgModule.getById(id);
+    
+    let orderInfoId = orderInfo.date.toISOString().substr(0,10);
+    let orderInfoEmployee = orderInfo.employeeID.fullName;
+
+    let orderInfoProducts = orderInfo.orderLines;
+    var rows = "";
+
+    
+    for (var i = 0; i< orderInfoProducts.length; i++){
+        const product = orderInfoProducts[i].item;
+        const quantity = orderInfoProducts[i].quantity;
+        const productInfoId = product.productID;
+        const productInfoName = product.productName;
+        const productInfoPrice = product.price;
+        
+        let total = productInfoPrice*quantity;
+        
+        rows += `
+            <tr>
+            <td>${productInfoId}</td>
+            <td>${productInfoName}</td>
+            <td>${productInfoPrice}</td>
+            <td>${quantity}</td>
+            <td>${total}</td>
+            </tr>
+        `;
+    }
+
+    var content = `
+        <p><b>Dato: </b>${orderInfoId}</p>
+        <a href = "../html/ansatt-register.html">
+            <b class = "has-text-grey-dark">Ansatt:</b>
+        ${orderInfoEmployee}</a>
+        
+
+        <div class = "table-container mt-4">
+            <table class ="table is-fullwidth is-striped is-narrow is-hoverable">
+                <p><b>Varer: </b></p>
+                <tr>
+                    <th>Id: </th>
+                    <th>Navn: </th>
+                    <th>Pris: </th>
+                    <th>Antall: </th>
+                    <th>Sum: </th>
+                </tr>
+                <tr>
+                ${rows}
+                </tr>
+            </table>
+        </div>
+        `;
+        
+        
+        
+    modalContent.innerHTML = content;
 }

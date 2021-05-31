@@ -1,24 +1,37 @@
-//import DocumentsModule from "./modules/DocumentsModule.js"
+const output = document.getElementById("document-list");
 
-//cards in html contain the title and link to the .txt file
-let cards = "";
-let documentsList = [egenmeldingsskjema, permisjon, medatbeidersamtale, lovverk, personalrabatter,
-     ferieoverføring, nyansatte, avviksskjema, varsling];
-     documentsList.forEach(myFunction);
-     document.getElementById("document-list").innerHTML = documentsList;
+//Array of dummy documents
+const documentsList = [
+    {displayName: "Egenmeldingsskjema", icon: "fa-book", link: "egenmeldingsskjema.txt"},
+    {displayName: "Fødsel eller adopsjons permisjon", icon: "fa-baby", link: "permisjonsskjema.txt"},
+    {displayName: "Medarbeidersamtale sjekkeliste", icon: "fa-comment", link: "medarbeidersamtale.txt"},
+    {displayName: "Lovverk til arbeidsgiver", icon: "fa-balance-scale", link: "lovverk.txt"},
+    {displayName: "Oversikt personalrabatter_Mal", icon: "fa-money-check-alt", link: "personalrabatter.txt"},
+    {displayName: "Søknad om overføring av ferie", icon: "fa-calendar-alt", link: "ferieoverføring.txt"},
+    {displayName: "Sjekkeliste til nyansatte", icon: "fa-list", link: "nyansatte.txt"},
+    {displayName: "Skade- og avviksskjema", icon: "fa-hammer", link: "avviksskjema.txt"},
+    {displayName: "Rutine for intern varsling", icon: "fa-book", link: "varsling.txt"},
+];
 
-     //not sure if Array should have the ⬇ arrays name ??!!
-function myFunction(value, index, documentsList) {
-  cards = cards + value + `<a href="${link}" download="${skjemanavn}.txt">
-                        <div class="card-content">
-                            <div class="block pt-7 has-text-centered">
-                                <span class="icon">
-                                    <i class="fas fa-${icon}"></i>
-                                </span>
-                            </div>
-                            <div class="block">
-                                <h2 class="title is-size-7 has-text-centered">${cardsTitle}</h2>
-                            </div>
-                        </div>
-                    </a>`; 
+documentsList.forEach(document => myFunction(document));
+
+function myFunction(document) {
+
+    output.innerHTML += `
+    <div class="column is-3">
+        <div class="card">
+            <a href="/resources/Documents/${document.link}" download="${document.link}">
+                <div class="card-content">
+                    <div class="block pt-7 has-text-centered">
+                        <span class="icon">
+                            <i class="fas ${document.icon}"></i>
+                        </span>
+                    </div>
+                    <div class="block">
+                        <h2 class="title is-size-7 has-text-centered">${document.displayName}</h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>`; 
 }

@@ -1,11 +1,10 @@
 import LoginModule from './modules/LoginModule.js';
-import RestaurantModule from './modules/RestaurantModule.js';
 
 const initialise = (function(){
 
     //Checking if user is logged in is handled by the header (so if a page doesn't have the header, the user won't be logged out)
     //Should be a separate script, but wrote it in here as a quick solution
-    let username = LoginModule.getDisplayName();
+    let username = LoginModule.getUser().displayName;
     if(username === ""){
         window.location.href = "../html/login.html";
     }
@@ -19,11 +18,12 @@ function logout(){
 
 function renderHeader(user){
     let mainHeader = document.getElementById("main-header");
+    mainHeader.style.backgroundColor = "#444444";
     mainHeader.innerHTML = `
         <nav class="navbar is-size-4" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="index.html">
-                <img src="../resources/logoforslag.png">
+                    <img src="../resources/logoforslag.png">
                 </a>
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                     <span aria-hidden="true"></span>
@@ -51,7 +51,7 @@ function renderHeader(user){
                     </div>
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a href="login.html"  id="logout-btn" class="button is-light">Log out</a>
+                            <a href="login.html"  id="logout-btn" class="button is-light">Logg ut</a>
                         </div>
                     </div>
                 </div>
