@@ -40,15 +40,15 @@ function runSearch(){
             toDate.setDate(toDate.getDate()+7);
             renderTable(SalesModule.getByDateRange(fromDate, toDate));
             break;
-            case PeriodTypes.DAY:
-                toDate.setDate(toDate.getDate());
-                renderTable(SalesModule.getByDate(fromDate));
+        case PeriodTypes.DAY:
+            toDate.setDate(toDate.getDate());
+            renderTable(SalesModule.getByDate(fromDate));
             break;
         case PeriodTypes.FREE:
             toDate = new Date(toDateField.value);
             toDate.setDate(toDate.getDate()+1);
             renderTable(SalesModule.getByDateRange(fromDate, toDate));
-            break;
+        break;
     }
 }
 
@@ -108,27 +108,27 @@ function renderHeader(){
             <th>Ansatt</th>
             <th>Beløp</th>
         </tr>`;
-        tableHeader.classList.add("has-background-white")
-        tableHeader.style = "position:sticky; top:0; transform:translate(0,-10px);"
+        //tableHeader.classList.add("has-background-white")
+        //tableHeader.style = "position:sticky; top:0; transform:translate(0,-10px);"
 }
 
 function renderFooter(array){
     
     const sumCell = `<td>${SalesModule.getSumOfOrders(array)},-</td>`;
     tableFooter.innerHTML = `<tr><td colspan = "3"></td>${sumCell}</tr>`;
-    tableFooter.classList.add("has-background-white")
-    tableFooter.style = "position:sticky; bottom:-0; transform:translate(0,2px);"
+    //tableFooter.classList.add("has-background-white")
+    //tableFooter.style = "position:sticky; bottom:-0; transform:translate(0,2px);"
 }
 
 function renderTable(array){
     renderHeader();
     renderFooter(array);
-    //renderGenericContent(); //This generates 10 rows of cell data    
     renderAll(array);
 }
 
 //Function that renders all orders in an array
-function renderAll(array){    
+function renderAll(array){
+    tableBody.innerHTML = "";   
 
     array.forEach(order =>{
         var id = document.createElement("td"),

@@ -98,7 +98,8 @@ const SalesModule = (function(){
     const getByDateRange = (from, to) => {
         from.setDate(from.getDate());
         to.setDate(to.getDate());
-        return getAll().filter( order => order.date > from && order.date < to);
+        const filteredArray = getAll().filter( order => order.date > from && order.date < to);
+        return filteredArray;
     }
 
     //Returns the sum of all sales from the current date, formatted with spaces between 10^2;
