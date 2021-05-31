@@ -1,6 +1,5 @@
 import VareModule from "./VareModule.js";
 import AnsattModule from "./AnsattModule.js";
-import RestaurantModule from "./RestaurantModule.js"
 import UtilsModule from "./UtilsModule.js";
 import LoginModule from "./LoginModule.js";
 
@@ -41,8 +40,8 @@ const SalgModule = (function(){
 
     const generateRandomOrder = (afterDate, specificDate) => {
         const id = idGenerator.getID() + UtilsModule.leadingZeros(getRandom(0, 10000),5);
-        const restaurant = RestaurantModule.getById(getRandom(0, 3));
         const employee = AnsattModule.getByIndex(getRandom(0, numOfEmployees));
+        const restaurant = employee._restaurant;
         
         let linesToGenerate = getRandom(1, 4);
         let orderLines = [];
@@ -75,17 +74,24 @@ const SalgModule = (function(){
         return sumString;
     }
 
-    //Returns all elements, sorted chronologically
+    /*This function returns orders sorted chronologically, as well as filtered by which user is logged in. 
+    This is to avoid one restaurant accidentally editing data that doesn't belong to it. All other exposed functions use this, so data is always displayed for the relevant restaurant*/
     const getAll = () => {
         orders.sort(function(a, b){
             const dateA = a.date.valueOf();
             const dateB = b.date.valueOf();
             return (dateA - dateB);
-        });        
-        return orders;
+        }); 
+        const user = LoginModule.getUser().username;
+        console.log(user);
+        if(user == "test"){
+            return orders;
+        }else{
+            return orders.filter(order => order.restaurantID.username == user);
+        }
     }
     const getByDate = (date) => {
-        return orders.filter( (order) => {
+        return getAll().filter( (order) => {
             if(order.date.getFullYear() === date.getFullYear() && order.date.getMonth() === date.getMonth() && order.date.getDate() === date.getDate())
                 return true;
         });
@@ -93,21 +99,21 @@ const SalgModule = (function(){
     const getByDateRange = (from, to) => {
         from.setDate(from.getDate());
         to.setDate(to.getDate());
-        return orders.filter( order => order.date > from && order.date < to);
+        return getAll().filter( order => order.date > from && order.date < to);
     }
 
     //Returns the sum of all sales from the current date, formatted with spaces between 10^2;
     const getTodaysProfits = () => {
         const todaysOrders = getByDate(new Date());
-        
-        let sum = getSumOfOrders(getByDate(new Date()));
+        let sum = getSumOfOrders(todaysOrders);
         sum = sum.toString().replace(/(.)(?=(\d{3})+$)/g,'$1 ');
         return sum;
     }
+
+    
     const getById = (id) => {
-        //let order;
         let foundOrder = null;
-        orders.forEach(order => {
+        getAll().forEach(order => {
             if(id == order.orderID)
                 foundOrder = order;
         });

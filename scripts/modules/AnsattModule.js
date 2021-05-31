@@ -33,9 +33,9 @@ const AnsattModule = (function(){
     };
     const randomBirthDate = () => { return UtilsModule.getRandomDate(1969, 1999)};
     const ansatte = [
-        new Ansatt("Ola", "Nordmensch", randomPhoneNr(), "ola@nordmench.org", "Storgata 12, 0858 Oslo", randomBirthDate(), "465 000kr", Positions.ASS_CHEF, RestaurantModule.getById(1).name), 
-        new Ansatt("Trine", "Svenskamensch", randomPhoneNr(), "trine@svensk.se", "Storgata 14, 0858 Oslo", randomBirthDate(), "647 000kr", Positions.CHEF, RestaurantModule.getById(2).name), 
-        new Ansatt("Bob Kåre", "Johnniebjørn", randomPhoneNr(), "bob@kåre.org", "Storgata 66, 0858 Oslo", randomBirthDate(), "731 000kr", Positions.ASS_MANAGER, RestaurantModule.getById(3).name)
+        new Ansatt("Ola", "Nordmensch", randomPhoneNr(), "ola@nordmench.org", "Storgata 12, 0858 Oslo", randomBirthDate(), "465 000kr", Positions.ASS_CHEF, RestaurantModule.getById(1)), 
+        new Ansatt("Trine", "Svenskamensch", randomPhoneNr(), "trine@svensk.se", "Storgata 14, 0858 Oslo", randomBirthDate(), "647 000kr", Positions.CHEF, RestaurantModule.getById(2)), 
+        new Ansatt("Bob Kåre", "Johnniebjørn", randomPhoneNr(), "bob@kåre.org", "Storgata 66, 0858 Oslo", randomBirthDate(), "731 000kr", Positions.ASS_MANAGER, RestaurantModule.getById(3))
     ];
 
     const getAll = () => ansatte;
