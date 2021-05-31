@@ -48,7 +48,7 @@ const AnsattModule = (function(){
         new Ansatt("mann4.png", "Gustav", "Jonson", randomPhoneNr(), "gustav.jonson@coldmail.com", randomAdresss(), randomBirthDate(), "587 000kr", Positions.ASS_CHEF, RestaurantModule.getById(2)), 
         new Ansatt("female6.png","Sarah", "Wallenius", randomPhoneNr(), "s.wallenius@coldmail.com", randomAdresss(), randomBirthDate(), "465 000kr", Positions.WAITER, RestaurantModule.getById(2)), 
         new Ansatt("man5.png","Petter", "Måneberg", randomPhoneNr(), "its_not_the_fart@coldmail.com", randomAdresss(), randomBirthDate(), "465 000kr", Positions.WAITER, RestaurantModule.getById(2)), 
-        new Ansatt("female7.png", "Birgitte", "", randomPhoneNr(), "joh.bergersen@coldmail.com", randomAdresss(), randomBirthDate(), "465 000kr", Positions.WAITER, RestaurantModule.getById(2)),
+        new Ansatt("female7.png", "Birgitte", "Valentýna", randomPhoneNr(), "its_the_smell@coldmail.com", randomAdresss(), randomBirthDate(), "465 000kr", Positions.WAITER, RestaurantModule.getById(2)),
         //Restaurant 3
         new Ansatt("man6.png","Adrian", "Overgård", randomPhoneNr(), "aoverg@coldmail.com", randomAdresss(), randomBirthDate(), "712 000kr", Positions.MANAGER, RestaurantModule.getById(3)), 
         new Ansatt("female8.png", "Charlotte", "Hansen", randomPhoneNr(), "ch.hansen@coldmail.com", randomAdresss(), randomBirthDate(), "647 000kr", Positions.CHEF, RestaurantModule.getById(3)), 
