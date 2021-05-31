@@ -1,11 +1,10 @@
 import EmployeeModule from './modules/EmployeeModule.js';
 
-var ansattModal = document.querySelector(`#ansatt-modal`);
+var employeeModal = document.querySelector(`#ansatt-modal`);
 function renderModal(id) {
     
     document.getElementById("ansatt-module");
-    var ansattModal = document.querySelector(`#ansatt-modal`);
-    ansattModal.classList.toggle('is-active',true);
+    employeeModal.classList.toggle('is-active',true);
     const employee = EmployeeModule.getByIndex(id);
     var modalContent = document.getElementById("modal-content");
     modalContent.innerHTML = 
@@ -46,31 +45,28 @@ function renderModal(id) {
         </div>
     </div>
     
-    `
-    
-    console.log(employee);
+    `;    
 }
 
-function ansattRegister(){
-    var ansattMain = document.getElementById("main-body");
-    var ansatte;
-        ansatte = EmployeeModule.getAll();
-    for(let i = 0; i < ansatte.length; i++){
+function employeeRegister(){
+    var employeeMain = document.getElementById("main-body");
+    var employees = EmployeeModule.getAll();
+    for(let i = 0; i < employees.length; i++){
        var row = document.createElement(`tr`);
        row.id = `employee-${i}`
        row.addEventListener(`click`,function(){renderModal(i)});
-        ansattMain.appendChild(row);
+        employeeMain.appendChild(row);
         row.innerHTML = 
         `
         <td> 
         <figure class="image is-32x32">
-        <img class="is-rounded" src="../resources/images/${ansatte[i]._picture}">
+        <img class="is-rounded" src="../resources/images/${employees[i]._picture}">
         </figure>
         </td>
         <td>
-        ${ansatte[i].fullName}
+        ${employees[i].fullName}
         </td>
-        <td> ${ansatte[i]._position}</td>
+        <td> ${employees[i]._position}</td>
             
         `
     };
@@ -81,11 +77,11 @@ function ansattRegister(){
    
     
       modalCloseBtn.addEventListener('click', function(){
-        ansattModal.classList.remove('is-active');
+        employeeModal.classList.remove('is-active');
       });
       modalClose.addEventListener('click', function(){
-        ansattModal.classList.remove('is-active');
+        employeeModal.classList.remove('is-active');
       });
 }
-ansattRegister();
+employeeRegister();
 
