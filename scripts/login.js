@@ -1,18 +1,20 @@
-//Funksjon for login-knapp
+import LoginModule from './modules/LoginModule.js';
+
+
+//Function for logging in
 document.getElementById('login-form').onsubmit = function() {
+    //Returns true or false depending upon whether login was successful. 
+    //If invalid, the submission of the form is cancelled, and the action of the form (action="index.html") is not executed.
     return validateUser();
 };
 function validateUser() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    
-    if(username !== "user" || password !== "user"){ //Terrible security, only here as a proof-of-concept
-        document.getElementById("wrong-password").classList.toggle("is-hidden", false);
-        return false;
-    }
+
+    return LoginModule.login(username, password);
 }
 
-const rmCheck = document.getElementById("remember"), usernameInput = document.getElementById("username"), passwordInput = document.getElementById("password");
+// const rmCheck = document.getElementById("remember"), usernameInput = document.getElementById("username"), passwordInput = document.getElementById("password");
 
 /*if (localStorage.checkbox && localStorage.checkbox !== "") {
     rmCheck.setAttribute("checked","checked");

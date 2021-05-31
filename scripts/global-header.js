@@ -1,8 +1,23 @@
+import LoginModule from './modules/LoginModule.js';
+import RestaurantModule from './modules/RestaurantModule.js';
+
 const initialise = (function(){
 
+    //Checking if user is logged in is handled by the header (so if a page doesn't have the header, the user won't be logged out)
+    //Should be a separate script, but wrote it in here as a quick solution
+    let username = LoginModule.getDisplayName();
+    if(username === ""){
+        window.location.href = "../html/login.html";
+    }
+    renderHeader(username);
 }());
 
-function renderHeader(){
+//Clears cookie
+function logout(){
+    LoginModule.logout();
+}
+
+function renderHeader(user){
     let mainHeader = document.getElementById("main-header");
     mainHeader.innerHTML = `
         <nav class="navbar is-size-4" role="navigation" aria-label="main navigation">
@@ -32,13 +47,17 @@ function renderHeader(){
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
+                        <p class="is-size-6 is-italic"><b>Logget inn som: </b>${user}</p>
+                    </div>
+                    <div class="navbar-item">
                         <div class="buttons">
-                            <a href="login.html"  class="button is-light">Log out</a>
+                            <a href="login.html"  id="logout-btn" class="button is-light">Log out</a>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>`; 
+    document.getElementById("logout-btn").addEventListener('click', logout);
 
     //Boilerplate burger-implementation from Bulma.io
     document.addEventListener('DOMContentLoaded', () => {
@@ -65,4 +84,3 @@ function renderHeader(){
         }
     });
 }
-renderHeader();

@@ -70,7 +70,8 @@ const SalgModule = (function(){
     const getSumOfOrders = (array) => {
         let sum = 0;
         array.forEach(element => sum += element.getOrderSum());
-        return sum;
+        let sumString = sum.toString().replace(/(.)(?=(\d{3})+$)/g,'$1 ');
+        return sumString;
     }
 
     //Returns all elements, sorted chronologically
@@ -94,11 +95,21 @@ const SalgModule = (function(){
         return orders.filter( order => order.date > from && order.date < to);
     }
 
+    //Returns the sum of all sales from the current date, formatted with spaces between 10^2;
     const getTodaysProfits = () => {
-        //TODO - actually calculate profits for today
-        return getSumOfOrders(getByDate(new Date()));
+        let sum = getSumOfOrders(getByDate(new Date()));
+        sum = sum.toString().replace(/(.)(?=(\d{3})+$)/g,'$1 ');
+        return sum;
     }
-    return {getAll, getByDate, getSumOfOrders, getTodaysProfits, getByDateRange}
+    const getById = (id) => {
+        //let order;
+        orders.forEach(order => {
+            if(id == order.orderID)
+                return order;
+        });
+        return null;
+    }
+    return {getAll, getByDate, getById, getSumOfOrders, getTodaysProfits, getByDateRange}
 
 }());
 

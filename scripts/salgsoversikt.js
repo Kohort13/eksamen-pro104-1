@@ -1,5 +1,5 @@
 import SalgModule from "./modules/SalgModule.js";
-import UtilsModule from "./modules/UtilsModule.js"
+
 const tableBody = document.getElementById("table-body");
 const tableHeader = document.getElementById("table-head");
 const tableFooter = document.getElementById("table-foot");
@@ -27,6 +27,7 @@ const initialise = (function(){
     fromDateField.value = fromDate.toISOString().substr(0,10);
     toDateField.value = currentDate.toISOString().substr(0,10);
     runSearch();
+    document.getElementById("close-btn").addEventListener('click', function(){ document.getElementById("order-modal").classList.toggle("is-active", false)});
     
 }());
 
@@ -124,31 +125,35 @@ function renderTable(array){
     renderAll(array);
 }
 
-function renderAll(array){
-    tableBody.innerHTML = "";
+//Function that renders all orders in an array
+function renderAll(array){    
+
     array.forEach(order =>{
-        tableBody.innerHTML += `
-            <td>${order.orderID}</td>
-            <td>${order.date.toISOString().substr(0, 10)}</td>
-            <td>${order.employeeID.fullName}</td>
-            <td>${order.getOrderSum()}</td>
-        `;
+        var id = document.createElement("td"),
+            date = document.createElement("td"),
+            employee = document.createElement("td"),
+            sum = document.createElement("td"),
+            row = document.createElement("tr");
+
+        id.textContent = order.orderID;
+        date.textContent = order.date.toISOString().substr(0, 10);
+        employee.textContent = order.employeeID.fullName;
+        sum.textContent = order.getOrderSum();
+
+        row.appendChild(id);
+        row.appendChild(date);
+        row.appendChild(employee);
+        row.appendChild(sum);
+        tableBody.appendChild(row);
+        row.addEventListener('click', function() {viewOrderDetails(order.orderID)});
     })
 }
-/*function renderGenericContent(){
-    tableBody.innerHTML = "";
-    let cellNr = 1;
-    let rows = 10;
-    const orderVertically = true;
-    for(let i = 0; i < rows; i++){
-        let cells = ""; 
-        for(let j = 0; j < columns; j++){
-            if(orderVertically)
-                cells += `<td>Cell ${(i + j*rows)+1}</td>`;
-            else
-                cells += `<td>Cell ${cellNr++}</td>`;
-                
-        }
-        tableBody.innerHTML += `<tr>${cells}</tr>`;
-    }
-}*/
+
+
+function viewOrderDetails(id){
+    const modal = document.getElementById("order-modal");
+    const modalContent = document.getElementById("order-modal-content");
+    const modalTitle = document.getElementById("order-title");
+    modal.classList.toggle("is-active", true);
+    modalTitle.innerHTML = `Ordrenr. ${id}`
+}

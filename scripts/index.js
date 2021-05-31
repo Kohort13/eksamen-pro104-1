@@ -1,9 +1,20 @@
 import LoremModule from "./modules/LoremModule.js";
 import SalgModule from "./modules/SalgModule.js";
-import AnsattModule from "./modules/AnsattModule.js"
+import AnsattModule from "./modules/AnsattModule.js";
+import RestaurantModule from "./modules/RestaurantModule.js";
 
 //Funksjoner for index-siden
-function renderAnnouncement() {
+
+const initialise = (function(){
+    const phoneNumbers = document.getElementById("telephone-numbers");
+    RestaurantModule.getAll().forEach(restaurant => {
+        phoneNumbers.innerHTML += `${restaurant.name}: ${restaurant.phone}<br>`;
+    })
+    renderAnnouncements();
+})();
+
+
+function renderAnnouncements() {
     let kunngjøringText = document.getElementById('kunngjøring');
     let stickyAnnouncements = document.getElementById('sticky-announcements');
     renderProfits(stickyAnnouncements);
@@ -18,8 +29,6 @@ function renderAnnouncement() {
     kunngjøringText.innerHTML += createAnnouncement("Sommer-meny klar til bruk!");
     kunngjøringText.innerHTML += createAnnouncement("Opplæring om sikkerhet neste mandag før åpningstid. Alle må være på møte.");
     kunngjøringText.innerHTML += createAnnouncement("Ny ledig stilling som servitør-ringevikar til sommeren.");
-
-
 
     for (let i = 0; i < 10; i++) {
         kunngjøringText.innerHTML += createAnnouncement(LoremModule.getLorem());        
@@ -40,7 +49,7 @@ function createAnnouncement(announcement, icon, colour) {
 }
 function renderProfits(output) {
     // Solution for formatting number from https://stackoverflow.com/a/32355056
-    let profit = String(SalgModule.getTodaysProfits()).replace(/(.)(?=(\d{3})+$)/g,'$1 ');
+    let profit = String(SalgModule.getTodaysProfits());
 
     output.innerHTML += 
     `<a class="panel-block">
@@ -62,4 +71,3 @@ function renderFreeShifts(output) {
     </a>`;
     
 }
-renderAnnouncement();

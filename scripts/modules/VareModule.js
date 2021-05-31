@@ -41,7 +41,7 @@ const VareModule = (function(){
         get allergies() { return this._allergies; }
         get isVegetarian() { return this._isVegetarian; }
         get ingredients() { return this._ingredients; }
-        getDescription(){
+        getProductIngredients(){
             switch(this.productType){
                 case productTypes.PIZZA: 
                     return `Pizza med ${this.ingredients}`;
@@ -73,16 +73,16 @@ const VareModule = (function(){
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Marinara", priceClass1, allergiesL, true, "tomatsaus"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Margherita", priceClass2, allergiesL, true, "tomatsaus og mozzarella"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Veronese", priceClass2, allergiesG_L, false, "tomatsaus, prosciutto, sopp"),
-        new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Quattro stagioni", priceClass2, allergiesG_L_E, false, "tomatsaus, artisjokk, oliven, paprika, mozzarella, tomater, kokt egg og mushrooms"),
+        new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Quattro stagioni", priceClass2, allergiesG_L_E, false, "tomatsaus, artisjokk, oliven, paprika, mozzarella, tomater, kokt egg og sopp"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Pugliese", priceClass1, allergiesG_L, true, "tomatsaus, oliven, kapers, mozzarella, tomater"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza alla Napoletana", priceClass1, allergiesG_L_F, false, "tomatsaus, oliven, kapers, mozzarella, tomater"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Capricciosa", priceClass3, allergiesG_L, false, "tomatsaus, mozzarella, skinke, artisjokk, sopp og svarte oliven"),
-        new Vare(getUniqueID(), productTypes.PIZZA, "Prosciutto e funghi", priceClass4, allergiesG_L_PN, false, "tomatsaus, mozzarella, prosciutto, sopp, ruccola og pinjekjenren"),
+        new Vare(getUniqueID(), productTypes.PIZZA, "Prosciutto e funghi", priceClass4, allergiesG_L_PN, false, "tomatsaus, mozzarella, prosciutto, sopp, ruccola og pinjekjerner"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Quatro Formaggi", priceClass3, allergiesG_L, true, "tomatsaus, mozzarella, gorgonzola, fontina og parmesan"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Pepperoni", priceClass2, allergiesG_L, false, "tomatsaus, mozzarella, pepperoni"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Pesto", priceClass2, allergiesG_L_PN, true, "tomatsaus, mozzarella, pesto"),
         new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Di Parma", priceClass4, allergiesG_L_PN, false, "crème fraîche, cherry tomater, atiskokkbunner, mozzarella, parmaskinke, ruccolasalat og pinjekjerner"),
-        new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, true, "tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk og toppet med basilikum"),
+        new Vare(getUniqueID(), productTypes.PIZZA, "Pizza Ortolana", priceClass3, allergiesG_L, true, "tomatsaus, mozzarella, paprika, grillet aubergine, artisjokk. Toppet med basilikum"),
         new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Coca Cola", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass mineralvann"),
         new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Coca Cola Zero", nonAlcoholicDrinkPrice, noAllergies, false, "500ml glass mineralvann"),
         new Vare(getUniqueID(), productTypes.MINERAL_WATER, "Fanta", nonAlcoholicDrinkPrice, noAllergies, false, "500ml mineralvann"),
@@ -100,6 +100,15 @@ const VareModule = (function(){
     ];
     const getAll = () => varer;
 
+    function addVare(productType, productName, price, allergies, isVegetarian, ingredients){
+        const allergiesObj = createAllergies(allergies[0],allergies[1],allergies[2],allergies[3],allergies[4],allergies[5],allergies[6],allergies[7],allergies[8],allergies[9])
+        varer.push(new Vare(getUniqueID(), productType, productName, price, allergiesObj, isVegetarian, ingredients))
+    }
+    function changeProduct(productID, productType, productName, price, allergies, isVegetarian, ingredients){
+        const allergiesObj = createAllergies(allergies[0],allergies[1],allergies[2],allergies[3],allergies[4],allergies[5],allergies[6],allergies[7],allergies[8],allergies[9])
+        // ProductID -1 => because array counts from 0, but id's counts from 1.
+        varer[productID-1] = new Vare(productID, productType, productName, price, allergiesObj, isVegetarian, ingredients);
+    }
     const getByName = (prodName) => {
         return varer.filter(vare => vare.productName.toLowerCase().includes(prodName.toLowerCase()));
     }
@@ -124,6 +133,9 @@ const VareModule = (function(){
 
     const getByID = (id) => {
         return varer[id];
+    }
+    const getNextId = () =>{
+        return idGenerator.getNextId();
     }
     const getSortedByID = () => {
         return varer.sort(((v, v2) => {
@@ -183,8 +195,8 @@ const VareModule = (function(){
     const getAllAllergies = ()=> {
         const allAllergies = createAllergies(false, false, false, false, false, false, false, false, false, false);
         const allergyNames = [];
-        allAllergies.forEach(allegy =>{
-            allergyNames.push(allegy.name);
+        allAllergies.forEach(allergy =>{
+            allergyNames.push(allergy.name);
         })
         return allergyNames;
     }
@@ -193,9 +205,8 @@ const VareModule = (function(){
         return productTypes;
     }
 
-
-
-    return {getAll, getByName, getSortedByName, getByID, getSortedByID, getByPrice, getSortedByPrice, 
-        getByProductType, getSortedByType, getByAllergies, getAllAllergies, findItemByname, getAllProductTypes}
+    return {getAll, addVare, changeProduct, getByName, getSortedByName, getByID, getNextId, getSortedByID, getByPrice, 
+        getSortedByPrice, getByProductType, getSortedByType, getByAllergies, 
+        getAllAllergies, findItemByname, getAllProductTypes}
 }());
 export default VareModule;

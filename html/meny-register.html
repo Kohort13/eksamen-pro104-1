@@ -8,7 +8,7 @@
     <script src="../scripts/global-import.js"></script>
 
     <script type="module" src ="../scripts/meny-register.js"></script>
-    <script src="../scripts/global-header.js" defer></script>
+    <script type="module" src="../scripts/global-header.js"></script>
 
 </head>
 <body>
@@ -25,29 +25,59 @@
                   </header>
                   <section class="modal-card-body">
                     <!-- Content ... -->
-                    
-                    <p>Ny <b>produkt ID</b>:</p>
-                    <input class ="input" type="text" id="new-prod-id" disabled>
-                    <p>Skriv inn nytt <b>produkt navn</b>:</p>
-                    <input class ="input" type ="text" required placeholder="Produkt navn" id="new-prod-name">
-                    <p>Skriv inn <b>pris</b> på produktet:</p>
-                    <input class = "input" type="text" required placeholder="Pris" id="new-prod-price">
-                    <div class = "table-container">
-                        <p>Huk av allergener:</p>
-                        <table class ="table is-fullwidth is-striped is-narrow is-hoverable">
-                            <thead id = "allergies-check-tablehead"></thead>
-                            <tbody id = "allergies-checkbox"></tbody>
-                        </table> 
+                    <div class="card">
+                        <div class ="card-content">
+                            <p>Ny <b>produkt ID</b>:</p>
+                            <input class ="input" type="text" id="new-prod-id" disabled>
+
+                            <p>Velg <b>Produkt Type</b>:</p>
+                            <div class="select">
+                                <select id = "new-prod-type">
+                                  <option value="Pizza">Pizza</option>
+                                  <option value="Mineralvann">Mineralvann</option>
+                                  <option value="Øl">Øl</option>
+                                  <option value="Vin">Vin</option>
+                                  <option value="Varm drikke">Varm drikke</option>
+                                </select>
+                              </div>
+                        </div>
                     </div>
-                    <!-- Gluten <input type="checkbox" id="gluten-check">
-                    Laktose <input type="checkbox"id = "lactose-check"> -->
-                    
+                    <div class="card">
+                        <div class ="card-content">
+                            <p>Skriv inn nytt <b>produkt navn</b>:</p>
+                            <input class ="input" type ="text"  placeholder="Produkt navn" id="new-prod-name">
+                            <p>Skriv inn <b>pris</b> på produktet:</p>
+                            <input class = "input" type="number"  placeholder="Pris" id="new-prod-price">
+                        </div>
+                    </div>
+                    <div class = "card">
+                        <div class = "card-content">
+                            <div class = "table-container">
+                                <p>Huk av allergener:</p>
+                                <table class ="table is-fullwidth is-striped is-narrow is-hoverable">
+                                    <thead id = "allergies-check-tablehead"></thead>
+                                    <tbody id = "allergies-checkbox"></tbody>
+                                </table> 
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class = "card">
+                        <div class = "card-content">
+                            <b>Ingredienser</b> i produktet:
+                            <textarea class = "textarea" type="text" placeholder="ingredienser" id="new-prod-ingredients"></textarea>
+                            <p>
+                                <em>Vegetar</em>:
+                                <input type = "checkbox" id = "is-vegitarian-checkbox">
+                            </p>
+                        </div>
+                    </div>
                 </section>
-                  <footer class="modal-card-foot">
+                <footer class="modal-card-foot">
                     <button class="button is-success" type="button" id="save-prod-btn">Lagre Produkt</button>
                   </footer>
                 </div>
-              </div>
+            </div>
             <div class = "columns">
                 <div class= "column is-narrow">
                     <div class = "card">
@@ -65,6 +95,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
             <div class ="columns">
                 <div class="column">
                     <div class="table-container">
@@ -75,6 +107,67 @@
                     </div>
                 </div>
             </div>
+            <div class="modal" id = "edit-prod-modal">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                  <header class="modal-card-head">
+                    <p class="modal-card-title">Endre Produkt</p>
+                    <button class="delete" aria-label="close" id = "close-edit-btn"></button>
+                  </header>
+                  <section class="modal-card-body">
+                    <!-- Content ... -->
+                    <div class="card">
+                        <div class = "card-content">
+                            <p><b>Produkt ID</b>:</p>
+                            <input class ="input" type="text" id="prod-id" disabled>
+
+                            <p>Endre <b>Produkt Type</b>:</p>
+                            <div class="select">
+                                <select id = "edit-prod-type">
+                                  <option value="Pizza">Pizza</option>
+                                  <option value="Mineralvann">Mineralvann</option>
+                                  <option value="Øl">Øl</option>
+                                  <option value="Vin">Vin</option>
+                                  <option value="Varm drikke">Varm drikke</option>
+                                </select>
+                              </div>
+                            </div>
+                        </div>
+                    <div class = "card">
+                        <div class = "card-content">
+                            <p>Endre <b>produkt navn</b>:</p>
+                            <input class ="input" type ="text"  id="prod-name">
+                            <p>Endre <b>pris</b> på produktet:</p>
+                            <input class = "input" type="number"  id="prod-price">
+                        </div>
+                    </div>
+                    <div class = "card">
+                        <div class = "card-content">
+                            <div class = "table-container">
+                                <p>Endre allergener:</p>
+                                <table class ="table is-fullwidth is-striped is-narrow is-hoverable">
+                                    <thead id = "allergies-check-tablehead"></thead>
+                                    <tbody id = "edit-allergies-checkbox"></tbody>
+                                </table> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "card">
+                        <div class = "card-content">
+                            <b>Ingredienser</b> i produktet:
+                            <textarea class="textarea" type="text" id="edit-prod-ingredients"></textarea>
+                            <p>
+                                <em>Vegetar</em>:
+                                <input type="checkbox" id = "edit-is-vegitarian-checkbox">
+                            </p>
+                        </div>
+                    </div>
+                  </section>
+                  <footer class="modal-card-foot">
+                    <button class="button is-success" id="save-changes">Lagre Endringer</button>
+                  </footer>
+                </div>
+              </div>
         </div>
     </section>
 </body>

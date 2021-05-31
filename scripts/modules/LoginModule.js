@@ -1,6 +1,50 @@
-const LoginModule = (function(){
+import RestaurantModule from './RestaurantModule.js';
 
-    //Cookie implementation from https://www.w3schools.com/js/js_cookies.asp
+const LoginModule = (function(){
+    class User {
+        constructor(username, displayName, password){
+            this.username = username;
+            this.displayName = displayName;
+            this.password = password;
+        }
+    }
+    let users = [];
+    RestaurantModule.getAll().forEach(restaurant =>{
+        users.push(new User(restaurant.username, restaurant.name, "user"));
+    });
+    users.push(new User("test", "Test-bruker", "user"));
+
+    const login = (username, password) => {
+        let validLogin = false
+        users.forEach( user =>{
+            if(username == user.username && password == user.password){
+                setCookie("username", username, 2);
+                validLogin = true;
+            }
+        });
+        if(validLogin)
+            return true;
+        else{
+            document.getElementById("wrong-password").classList.toggle("is-hidden", false);
+            return false;
+        }
+    }
+
+    const logout = () => {
+        setCookie("username", "", -2);
+        window.location.href = "../html/login.html";
+    }
+    const getDisplayName = () => {
+        let displayname = "";
+        users.forEach(user => {
+            if(user.username == getCookie("username"))
+                displayname = user.displayName;
+        })
+        return displayname;
+    }
+
+
+    //Cookie implementation from https://www.w3schools.com/js/js_cookies.asp    
     const setCookie = (name, value, expirydays) => {
         var d = new Date();
         d.setTime(d.getTime() + (expirydays*24*60*60*1000));
@@ -23,17 +67,17 @@ const LoginModule = (function(){
         return "";
     }
 
-    function checkCookie() {
+    /*function checkCookie() {
         var username = getCookie("username");
         if (username != "")
             alert("Welcome again " + username);
         else {
             username = prompt("Please enter your name:", "");
             if (username != "" && username != null)
-                setCookie("username", username, 365);
+                setCookie("username", username, 2);
         }
-    }
-    return {setCookie, getCookie, checkCookie};
+    }*/
+    return {getDisplayName, login, logout};
 }());
 
 export default LoginModule;

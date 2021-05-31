@@ -7,7 +7,7 @@
     <title>Meny</title>
     <script src="../scripts/global-import.js"></script>
     <script type="module" src="../scripts/meny.js"></script>
-    <script src="../scripts/global-header.js" defer></script>
+    <script type="module" src="../scripts/global-header.js"></script>
 
 </head>
 <body>
@@ -16,10 +16,7 @@
     <section class="section">
         <div class="container">
             <div>
-                <a href = "index.html">
-                    <img src="../resources/logoforslag.png" style="height: 100px; width: auto;">
-                </a>
-                <h3 class="subtitle is-italic">Meny</h3>
+                <h3 class="subtitle is-size-2 is-italic">Meny</h3>
             </div>
             
             <hr>
@@ -27,17 +24,17 @@
             <hr>
 
             <!--A SHORTCUT TO SKIP DOW TO THE DRINKS SECTION-->
-            <div class="tabs">
+            <div class="tabs has-background-white" style="position: sticky; top: 0;">
                 <ul>
-                    <li class="is-active">
-                        <a href="#pizza">Pizza
+                    <li>
+                        <a href="#pizza" id="pizza-btn">Pizza
                             <span class="icon is-small">
                               <i class="fas fa-pizza-slice"></i>
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a href="#drikke">Drikke
+                        <a href="#drikke" id="drink-btn">Drikke
                             <span class="icon is-small">
                                 <i class="fas fa-coffee"></i>
                             </span>

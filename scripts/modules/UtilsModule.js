@@ -27,8 +27,13 @@ const UtilsModule = (function(){
 
     class IdGenerator {
         id = 1;
+        //returns incremented id, for fake unique ids.
         getID(){
             return this.id++;
+        }
+        //returns id without incrementing, for display purposes only.
+        getNextId(){
+            return this.id;
         }
     }
     
