@@ -38,10 +38,10 @@ function renderHeader(user){
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">More</a>
                         <div class="navbar-dropdown">
-                            <a href="ansatt-register.html" class="navbar-item">👤 Ansattregister</a>
-                            <a href="meny-register.html" class="navbar-item">🍕 Vareregister</a>
-                            <a href="salgsoversikt.html" class="navbar-item">📈 Salgsoversikt</a>
-                            <a href="meny-test.html" class="navbar-item">📝 Menyen</a>
+                            <a href="employee-register.html" class="navbar-item">👤 Ansattregister</a>
+                            <a href="product-register.html" class="navbar-item">🍕 Vareregister</a>
+                            <a href="sales-history.html" class="navbar-item">📈 Salgsoversikt</a>
+                            <a href="menu.html" class="navbar-item">📝 Menyen</a>
                         </div>
                     </div>
                 </div>

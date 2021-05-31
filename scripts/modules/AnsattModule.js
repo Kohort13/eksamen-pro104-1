@@ -29,7 +29,6 @@ const AnsattModule = (function(){
     }
     const randomPhoneNr = () => { 
         let number = UtilsModule.randomNumberInRange(90000000, 99999999).toString();
-        //TODO - consider moving this to ansatt-register.js instead (so that class has phone stored as int instead of string)
         return `${number.substr(0, 3)} ${number.substr(2, 2)} ${number.substr(4, 3)}`; 
     };
     const randomBirthDate = () => { return UtilsModule.getRandomDate(1969, 1999)};

@@ -1,46 +1,5 @@
 import AnsattModule from './modules/AnsattModule.js';
-import UtilsModule from './modules/UtilsModule.js';
 
-//JavaScript for ansatt-registeret
-/*
-function ansattRegister(){
-    var menuBody = document.getElementById("testid");
-    var ansatte;
-        ansatte = AnsattModule.getAll();
-    for(var i = 0; i < ansatte.length; i++){
-        var result = "";
-        result += `
-            <br>
-            <div class="column">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="block">
-                        <div class="media-left">
-                            <figure class="image is-128x128 is-rounded">
-                                <img class="is-rounded" src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                            </figure>
-                            </div>
-                        </div>
-                            <div class="container is-fluid">
-                                <div class="notification ">
-                                ${ansatte[i]._firstName} ${ansatte[i]._lastName}
-                                </div>
-                            </div>
-                        <div class="block">
-                            <h2 class="title is-size-5 has-text-centered">${ansatte[i]._position}</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
-           
-        menuBody.innerHTML += `${result}`;
-    }
-}
-ansattRegister();
-
-
-*/
 var ansattModal = document.querySelector(`#ansatt-modal`);
 function renderModal(id) {
     

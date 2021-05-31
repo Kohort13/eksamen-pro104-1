@@ -191,7 +191,7 @@ function viewOrderDetails(id){
 
     var content = `
         <p><b>Dato: </b>${orderInfoId}</p>
-        <a href = "../html/ansatt-register.html">
+        <a href = "../html/employee-register.html">
             <b class = "has-text-grey-dark">Ansatt:</b>
         ${orderInfoEmployee}</a>
         
