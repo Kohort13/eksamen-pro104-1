@@ -40,7 +40,8 @@ const SalgModule = (function(){
 
     const generateRandomOrder = (afterDate, specificDate) => {
         const id = idGenerator.getID() + UtilsModule.leadingZeros(getRandom(0, 10000),5);
-        const employee = AnsattModule.getByIndex(getRandom(0, numOfEmployees));
+        const employee = AnsattModule.getRandomWaiter();
+        console.log(employee);
         const restaurant = employee._restaurant;
         
         let linesToGenerate = getRandom(1, 4);
