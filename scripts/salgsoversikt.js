@@ -108,15 +108,16 @@ function renderHeader(){
             <th>Ansatt</th>
             <th>Beløp</th>
         </tr>`;
+        tableHeader.classList.add("has-background-white")
+        tableHeader.style = "position:sticky; top:0; transform:translate(0,-10px);"
 }
 
 function renderFooter(array){
-    let cells = "";
-    for(let i = 0; i < columns-1; i++){
-        cells += `<td>Sum ${i+1}</td>`;
-    }
-    const sumCell = `<td>${SalgModule.getSumOfOrders(array)}</td>`;
-    tableFooter.innerHTML = `<tr>${cells}${sumCell}</tr>`;
+    
+    const sumCell = `<td>${SalgModule.getSumOfOrders(array)},-</td>`;
+    tableFooter.innerHTML = `<tr><td colspan = "3"></td>${sumCell}</tr>`;
+    tableFooter.classList.add("has-background-white")
+    tableFooter.style = "position:sticky; bottom:-0; transform:translate(0,2px);"
 }
 
 function renderTable(array){
