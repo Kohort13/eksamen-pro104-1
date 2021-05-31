@@ -103,11 +103,12 @@ const SalgModule = (function(){
     }
     const getById = (id) => {
         //let order;
+        let foundOrder = null;
         orders.forEach(order => {
             if(id == order.orderID)
-                return order;
+                foundOrder = order;
         });
-        return null;
+        return foundOrder;
     }
     return {getAll, getByDate, getById, getSumOfOrders, getTodaysProfits, getByDateRange}
 
