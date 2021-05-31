@@ -11,16 +11,21 @@ const toDateDiv = document.getElementById("optional-to-date");
 const PeriodTypes = {DAY: 'day', WEEK: 'week', FREE: 'free'};
 let periodSelection = PeriodTypes.WEEK;
 
-const RenderModes = {ALL: 4}
-let renderMode, columns = RenderModes.ALL;
+//The value of render mode is used to both clearly show what is being rendered, as well as dynamically changing the number of columns
+const RenderModes = {ALL: 4, PRODUCTS: 7};
+let renderMode = RenderModes.PRODUCTS;
 
 
 const initialise = (function(){
-    let children = document.getElementById("buttons").children;
-    for(let i = 0; i < children.length; i++){
-        if(children[i].hasAttribute("class", "button"))
-            children[i].addEventListener("click", function() {setTimePeriod(children, this)});
+    const periodBtnsChildren = document.getElementById("buttons").children;
+    const modeBtnsChildren = document.getElementById("mode-buttons").children;
+    for(let i = 0; i < periodBtnsChildren.length; i++){
+        if(periodBtnsChildren[i].hasAttribute("class", "button"))
+            periodBtnsChildren[i].addEventListener("click", function() {setTimePeriod(periodBtnsChildren, this)});
     }
+
+    document.getElementById("mode-product").addEventListener('click', function(){setRenderMode(modeBtnsChildren, this)})
+    document.getElementById("mode-all").addEventListener('click', function(){setRenderMode(modeBtnsChildren, this)})
     searchBtn.addEventListener('click', runSearch);
     const currentDate = new Date();
     let fromDate = new Date();
@@ -31,26 +36,6 @@ const initialise = (function(){
     document.getElementById("close-btn").addEventListener('click', function(){ document.getElementById("order-modal").classList.toggle("is-active", false)});
     
 }());
-
-function runSearch(){
-    let fromDate = new Date(fromDateField.value);
-    let toDate = new Date(fromDateField.value);
-    switch(periodSelection){
-        case PeriodTypes.WEEK:
-            toDate.setDate(toDate.getDate()+7);
-            renderTable(SalesModule.getByDateRange(fromDate, toDate));
-            break;
-        case PeriodTypes.DAY:
-            toDate.setDate(toDate.getDate());
-            renderTable(SalesModule.getByDate(fromDate));
-            break;
-        case PeriodTypes.FREE:
-            toDate = new Date(toDateField.value);
-            toDate.setDate(toDate.getDate()+1);
-            renderTable(SalesModule.getByDateRange(fromDate, toDate));
-        break;
-    }
-}
 
 function setTimePeriod(children, element){
     for(let i = 0; i < children.length; i++){
@@ -73,12 +58,45 @@ function setTimePeriod(children, element){
     runSearch();
 
 }
+function setRenderMode(children, element){
+    for(let i = 0; i < children.length; i++){
+        children[i].setAttribute("class", "button");
+    }    
+    element.setAttribute("class", "button is-info");
+    if(element.id === "mode-product"){
+        toDateDiv.classList.add("is-hidden");
+        renderMode = RenderModes.PRODUCTS;
+    }else if(element.id === "mode-all"){
+        toDateDiv.classList.add("is-hidden");
+        renderMode = RenderModes.ALL;
+    }
+    runSearch();
+}
+
+function runSearch(){
+    var fromDate = new Date(fromDateField.value);
+    var toDate = new Date(fromDateField.value);
+
+    switch(periodSelection){
+        case PeriodTypes.WEEK:
+            toDate.setDate(toDate.getDate()+6);
+            break;
+        case PeriodTypes.DAY:
+            break;
+        case PeriodTypes.FREE:
+            toDate = new Date(toDateField.value);
+            break;
+    }
+    renderTable(fromDate, toDate);
+}
+
+
 
 
 
 function renderHeader(){
     let cells = "";
-    for(let i = 0; i < columns; i++){
+    for(let i = 0; i < renderMode; i++){
         cells += `<th>Column ${i+1}</th>`;
     }
     tableHeader.innerHTML = `<tr>${cells}</tr>`;
@@ -92,66 +110,93 @@ function renderHeader(){
                 <th>Beløp</th>
             </tr>`;
         break;
-        default:
+        case RenderModes.PRODUCTS:
             tableHeader.innerHTML = `
             <tr>
                 <th class="is-narrow">ID</th>
-                <th>Dato</th>
-                <th>Ansatt</th>
-                <th>Beløp</th>
+                <th>Vare</th>
+                <th>FraDato</th>
+                <th>TilDato</th>
+                <th>Pris</th>
+                <th>Antall</th>
+                <th>Sum</th>
             </tr>`;
     }
-    tableHeader.innerHTML = `
-        <tr>
-            <th class="is-narrow has-text-centered">ID</th>
-            <th>Dato</th>
-            <th>Ansatt</th>
-            <th>Beløp</th>
-        </tr>`;
-        //tableHeader.classList.add("has-background-white")
-        //tableHeader.style = "position:sticky; top:0; transform:translate(0,-10px);"
 }
 
 function renderFooter(array){
-    
-    const sumCell = `<td>${SalesModule.getSumOfOrders(array)},-</td>`;
-    tableFooter.innerHTML = `<tr><td colspan = "3"></td>${sumCell}</tr>`;
-    //tableFooter.classList.add("has-background-white")
-    //tableFooter.style = "position:sticky; bottom:-0; transform:translate(0,2px);"
+
+    if(renderMode == RenderModes.ALL){
+        const sumCell = `<td>${SalesModule.getSumOfOrders(array)},-</td>`;
+        tableFooter.innerHTML = `<tr><td colspan = "3"></td>${sumCell}</tr>`;
+        
+    }else if(renderMode == RenderModes.PRODUCTS){
+        let sum = 0;
+        array.forEach(orderLine => {
+            sum += orderLine.item.price * orderLine.quantity;
+        })
+        let sumString = sum.toString().replace(/(.)(?=(\d{3})+$)/g,'$1 ');    
+        const sumCell = `<td>${sumString},-</td>`;
+        tableFooter.innerHTML = `<tr><td colspan = "6"></td>${sumCell}</tr>`;        
+    }
+    tableFooter.classList.add("has-background-white")
+    tableFooter.style = "position:sticky; bottom:-0; transform:translate(0,2px);"
 }
 
-function renderTable(array){
+function renderTable(fromDate, toDate){
+    let array = [];
+    if(renderMode == RenderModes.ALL){
+        array = SalesModule.getByDateRange(fromDate, toDate);
+    }else if(renderMode == RenderModes.PRODUCTS){
+        array = SalesModule.getOrderLinesInRange(fromDate, toDate);        
+    }
     renderHeader();
     renderFooter(array);
-    renderAll(array);
+    renderOrders(array, fromDate, toDate);
 }
 
 //Function that renders all orders in an array
-function renderAll(array){
-    tableBody.innerHTML = "";   
+function renderOrders(array, fromDate, toDate){
+    tableBody.innerHTML = "";  
 
-    array.forEach(order =>{
-        var id = document.createElement("td"),
-            date = document.createElement("td"),
-            employee = document.createElement("td"),
-            sum = document.createElement("td"),
-            row = document.createElement("tr");
-
-        id.textContent = order.orderID;
-        date.textContent = order.date.toISOString().substr(0, 10);
-        employee.textContent = order.employeeID.fullName;
-        sum.textContent = order.getOrderSum();
-
-
-        row.appendChild(id);
-        row.appendChild(date);
-        row.appendChild(employee);
-        row.appendChild(sum);
-        tableBody.appendChild(row);
-        row.addEventListener('click', function() {viewOrderDetails(order.orderID)});
-    })
+    if(renderMode == RenderModes.ALL){
+        array.forEach(order =>{
+            var id = document.createElement("td"),
+                date = document.createElement("td"),
+                employee = document.createElement("td"),
+                sum = document.createElement("td"),
+                row = document.createElement("tr");
+    
+            id.textContent = order.orderID;
+            date.textContent = order.date.toISOString().substr(0, 10);
+            employee.textContent = order.employeeID.fullName;
+            sum.textContent = order.getOrderSum();
+    
+    
+            row.appendChild(id);
+            row.appendChild(date);
+            row.appendChild(employee);
+            row.appendChild(sum);
+            tableBody.appendChild(row);
+            row.addEventListener('click', function() {viewOrderDetails(order.orderID)});
+        })
+    }else if(renderMode == RenderModes.PRODUCTS){
+        array.forEach(orderLine => {
+            let row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${orderLine.item.productID}</td>
+                <td class="is-narrow">${orderLine.item.productName}</td>
+                <td>${fromDate.toISOString().substr(0, 10)}</td>
+                <td>${toDate.toISOString().substr(0, 10)}</td>
+                <td>${orderLine.item.price}</td>
+                <td>${orderLine.quantity}</td>
+                <td>${orderLine.quantity * orderLine.item.price}</td>
+            `
+            tableBody.appendChild(row);
+     
+        })
+    }
 }
-
 
 function viewOrderDetails(id){
     const modal = document.getElementById("order-modal");

@@ -96,10 +96,34 @@ const SalesModule = (function(){
         });
     }
     const getByDateRange = (from, to) => {
-        from.setDate(from.getDate());
-        to.setDate(to.getDate());
-        const filteredArray = getAll().filter( order => order.date > from && order.date < to);
+        const fromDate = from;
+        let toDate = new Date(to.valueOf());
+        toDate.setDate(toDate.getDate()+1)
+        const filteredArray = getAll().filter( order => order.date > fromDate && order.date < toDate);
         return filteredArray;
+    }
+
+    //Returns an array of aggregated order lines within a given date range
+    const getOrderLinesInRange = (from, to) => {
+        const orders = getByDateRange(from, to);
+        let orderLines = [];
+        orders.forEach(order =>{
+            order.orderLines.forEach(orderLine => {
+                let match = false;
+                orderLines.forEach(storedOrderLine => {
+                    if(storedOrderLine.item == orderLine.item){
+                        match = true;
+                        storedOrderLine.quantity += orderLine.quantity;
+                    }
+                })
+                if(!match)
+                    orderLines.push({item: orderLine.item, quantity: orderLine.quantity});
+            })
+        })
+        orderLines.sort(function(a,b){
+            return a.item.productID - b.item.productID;
+        })
+        return orderLines;
     }
 
     //Returns the sum of all sales from the current date, formatted with spaces between 10^2;
@@ -119,7 +143,7 @@ const SalesModule = (function(){
         });
         return foundOrder;
     }
-    return {getAll, getByDate, getById, getSumOfOrders, getTodaysProfits, getByDateRange}
+    return {getAll, getByDate, getById, getSumOfOrders, getTodaysProfits, getByDateRange, getOrderLinesInRange}
 
 }());
 

@@ -28,6 +28,28 @@
                     <footer class = "modal-card-foot"></footer>
                 </div>
             </div>
+
+            <div class="field is-horizontal">
+                <div id="mode-buttons" class="buttons has-addons mr-3">
+                    <button id="mode-all" title="Viser aggregert salgsdata for alle varer" class="button is-inverted">
+                        <span class="icon is-small">
+                            <i class="fas fa-chart-line"></i>
+                        </span>
+                        <span>Totalt salg</span>
+                    </button>
+                    <button id="mode-product" class="button is-active is-info" title="Viser informasjon om en spesifikk vare">
+                        <span class="icon is-small">
+                            <i class="fas fa-pizza-slice"></i>
+                        </span>
+                        <span>Varesalg</span>
+                    </button>
+                </div>
+                <div class="control">
+                    <!--TODO - implement the search function; hide on RenderModes.ALL-->
+                    <input class="is-hidden" type="text" class="input" placeholder="Søk etter vare">
+                </div>                
+            </div>
+            
             <div class="field is-horizontal">
                 <div id="buttons" class="buttons has-addons mr-3">
                     <button id="period-day" title="Setter sluttdato til samme dag" class="button is-inverted">
@@ -77,6 +99,7 @@
                 </div>
                 <button id="filter-table" class="button is-success">Søk</button>
             </div>
+            
             <div class="columns">
                 <div class="column">
                     <div class="table-container" style="height: 50vh; overflow-y: scroll;">
