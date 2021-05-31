@@ -2,6 +2,7 @@ import VareModule from "./VareModule.js";
 import AnsattModule from "./AnsattModule.js";
 import RestaurantModule from "./RestaurantModule.js"
 import UtilsModule from "./UtilsModule.js";
+import LoginModule from "./LoginModule.js";
 
 const SalgModule = (function(){
     class OrderLine {
@@ -97,6 +98,8 @@ const SalgModule = (function(){
 
     //Returns the sum of all sales from the current date, formatted with spaces between 10^2;
     const getTodaysProfits = () => {
+        const todaysOrders = getByDate(new Date());
+        
         let sum = getSumOfOrders(getByDate(new Date()));
         sum = sum.toString().replace(/(.)(?=(\d{3})+$)/g,'$1 ');
         return sum;
