@@ -1,4 +1,6 @@
 import AnsattModule from './modules/AnsattModule.js';
+import UtilsModule from './modules/UtilsModule.js';
+
 //JavaScript for ansatt-registeret
 /*
 function ansattRegister(){
@@ -39,85 +41,80 @@ ansattRegister();
 
 
 */
+var ansattModal = document.querySelector(`#ansatt-modal`);
+function renderModal(id) {
+    
+    document.getElementById("ansatt-module");
+    var ansattModal = document.querySelector(`#ansatt-modal`);
+    ansattModal.classList.toggle('is-active',true);
+    const employee = AnsattModule.getByIndex(id);
+    var modalContent = document.getElementById("modal-content");
+    modalContent.innerHTML = 
+    `
+    <article class="media">
+    <div class="media-left">
+        <figure class="image is-128x128">
+            <img src="https://bulma.io/images/placeholders/256x256.png" alt="Placeholder Image">
+        </figure>
+    </div>
+    <div class="media-content">
+        <div class="content">
+            <p>
+                <strong>Kontaktinformasjon</strong> 
+                <br>
+                <small>
+                    <strong>Navn:</strong> ${employee.fullName}
+                    <br>
+                    <strong>Telefonnummer:</strong> ${employee._telephone}
+                    <br>
+                    <strong>Epost:</strong> ${employee._email}
+                    <br>
+                    <strong>Adresse:</strong> ${employee._address}
+                </small>
+                <br>
+                <br>
+                <strong>Stillingsinformasjon</strong> 
+                <br>
+                <small>
+                    <strong>Stilling:</strong> ${employee._position}
+                    <br>
+                    <strong>Lønn:</strong> ${employee._salary}
+                    <br>
+                    <strong>Epost:</strong> ${employee._email}
+                    <br>
+                    <strong>Adresse:</strong> ${employee._address}
+                </small>
+                <br>
+            </p>
+        </div>
+    </div>
+    
+    `
+    
+    console.log(employee);
+}
 
 function ansattRegister(){
     var ansattMain = document.getElementById("main-body");
     var ansatte;
         ansatte = AnsattModule.getAll();
-    for(var i = 0; i < ansatte.length; i++){
-        var result = "";
-        result += 
+    for(let i = 0; i < ansatte.length; i++){
+       var row = document.createElement(`tr`);
+       row.id = `employee-${i}`
+       row.addEventListener(`click`,function(){renderModal(i)});
+        ansattMain.appendChild(row);
+        row.innerHTML = 
         `
-            <br>
-            <div class="box">
-            <strong>${ansatte[i]._firstName} ${ansatte[i]._lastName}</strong> - <strong>${ansatte[i]._position}</strong> 
-            <br>
-            <a id="modal-button" class = "button is-secondary modal-button" data-target = "#modal">Se mer informasjon</a>
-
-
-
-            <div id="ansatt-modalINACTIVE" class="modal">
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Ansatt Informasjon</p>
-                <button id="image-modal-closeINACTIVE" class="delete" aria-label="close"></button>
-              </header> 
-              <section class="modal-card-body">
-
-
-                <article class="media">
-                    <div class="media-left">
-                        <figure class="image is-128x128">
-                            <img src="https://bulma.io/images/placeholders/256x256.png" alt="Placeholder Image">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>${ansatte[i]._firstName} ${ansatte[i]._lastName}</strong> 
-                                - 
-                                <strong>${ansatte[i]._position}</strong>
-                                <br>
-                                <small>
-                                <b>Kontaktinformasjon:</b>
-                                <br>
-                                ${ansatte[i]._birthDate}
-                                <br>
-                                ${ansatte[i]._telephone}
-                                <br>
-                                ${ansatte[i]._email}
-                                <br>
-                                ${ansatte[i]._address}
-                                <br>
-                                <b>Jobbinformasjon:</b>
-                                <br>
-                                ${ansatte[i]._position} - ${ansatte[i]._restaurant}
-                                <br>
-                                ${ansatte[i]._salary}
-                                </small>
-                            </p>
-                        </div>
-                    </div>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <button id="modal-closeINACTIVE" class="button">Lukk</button>
-                    </footer>
-            </div>
-            </div>
-              
-            </div>
-        `;
-           
-        ansattMain.innerHTML += `${result}`;
-    }
-    var modalButton = document.querySelector(`#modal-button`);
-    var ansattModal = document.querySelector(`#ansatt-modal`)
+        <td> ${ansatte[i].fullName}</td>
+        <td> ${ansatte[i]._position}</td>
+            
+        `
+    };
+    
+    
     var modalCloseBtn = document.querySelector('#image-modal-close');
-    var modalClose = document.querySelector(`#close-modal-button`)
-    modalButton.addEventListener('click', function(){
-        ansattModal.classList.add('is-active');
-      });
+    var modalClose = document.querySelector(`#close-modal-button`);
+   
     
       modalCloseBtn.addEventListener('click', function(){
         ansattModal.classList.remove('is-active');
