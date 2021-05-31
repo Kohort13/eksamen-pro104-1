@@ -107,24 +107,24 @@ function renderTable(array){
         menuBody.appendChild(divider);
         //Fetch info from ProductModule.
         const byTypeArray = ProductModule.getByProductType(types[type].toString(), array);
-        byTypeArray.forEach(vare =>{
+        byTypeArray.forEach(product =>{
             var id = document.createElement("td"),
                 name = document.createElement("td"),
                 price = document.createElement("td"),
                 row = document.createElement("tr");
-            id.textContent = vare.productID;
-            name.innerHTML = `<a>${vare.productName}</a>`;
-            price.textContent = vare.price + ",-";
+            id.textContent = product.productID;
+            name.innerHTML = `<a>${product.productName}</a>`;
+            price.textContent = product.price + ",-";
             row.appendChild(id);
             row.appendChild(name);
             row.appendChild(price);
             id.classList.add("is-narrow");
-            row.id = vare.productID;
+            row.id = product.productID;
             name.classList.add("is-narrow");
-            name.title = vare.getProductIngredients();
+            name.title = product.getProductIngredients();
             
             //Adding status for all allergies (boolean). Set icon for true/false.
-            vare.allergies.forEach(allergy =>{
+            product.allergies.forEach(allergy =>{
                 var allergyTd = document.createElement("td");
                 allergyTd.classList.add("has-text-centered");
                 if(allergy.state){
@@ -136,7 +136,7 @@ function renderTable(array){
             });
             menuBody.appendChild(row);
             
-            row.addEventListener('click', function(){editProduct(vare.productID)});
+            row.addEventListener('click', function(){editProduct(product.productID)});
         });
     }
 }
@@ -357,7 +357,7 @@ function saveNewProd(){
     //checks user input on ingredients
     let newProductIngredients = document.getElementById("new-prod-ingredients").value.toLowerCase();
 
-    ProductModule.addVare(newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductIngredients);
+    ProductModule.addProduct(newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductIngredients);
     //Prints new table with added product
     renderTable(ProductModule.getAll());
 
