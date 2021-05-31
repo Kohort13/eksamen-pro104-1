@@ -54,7 +54,7 @@ function renderModal(id) {
     <article class="media">
     <div class="media-left">
         <figure class="image is-128x128">
-            <img src="https://bulma.io/images/placeholders/256x256.png" alt="Placeholder Image">
+            <img src="../resources/images/${employee._picture}" alt="Placeholder Image">
         </figure>
     </div>
     <div class="media-content">
@@ -80,9 +80,7 @@ function renderModal(id) {
                     <br>
                     <strong>Lønn:</strong> ${employee._salary}
                     <br>
-                    <strong>Epost:</strong> ${employee._email}
-                    <br>
-                    <strong>Adresse:</strong> ${employee._address}
+                    <strong>Resturant:</strong> ${employee._restaurant.name}
                 </small>
                 <br>
             </p>
@@ -105,7 +103,14 @@ function ansattRegister(){
         ansattMain.appendChild(row);
         row.innerHTML = 
         `
-        <td> ${ansatte[i].fullName}</td>
+        <td> 
+        <figure class="image is-32x32">
+        <img class="is-rounded" src="../resources/images/${ansatte[i]._picture}">
+        </figure>
+        </td>
+        <td>
+        ${ansatte[i].fullName}
+        </td>
         <td> ${ansatte[i]._position}</td>
             
         `
