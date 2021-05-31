@@ -81,7 +81,7 @@ const EmployeeModule = (function(){
     }
     const getRandomWaiter = () => {
         const waiters = getByPosition(Positions.WAITER);
-        const randomId = UtilsModule.randomNumberInRange(0, waiters.length -1)
+        const randomId = UtilsModule.randomNumberInRange(0, waiters.length)
         return waiters[randomId];
     }
     const getByIndex = (index) => { 

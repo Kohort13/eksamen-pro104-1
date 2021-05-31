@@ -62,7 +62,7 @@ const SalesModule = (function(){
     for(let i = 0; i < 60; i++){
         orders.push(generateRandomOrder());
     }
-    for(let i = 0; i < 30; i++){
+    for(let i = 0; i < 70; i++){
         orders.push(generateRandomOrder(2021));
         orders.push(generateRandomOrder(null, new Date()));
     }
@@ -95,12 +95,20 @@ const SalesModule = (function(){
                 return true;
         });
     }
-    const getByDateRange = (from, to) => {
+    const getByDateRange = (from, to, bypassUser) => {
         const fromDate = from;
         let toDate = new Date(to.valueOf());
         toDate.setDate(toDate.getDate()+1)
-        const filteredArray = getAll().filter( order => order.date > fromDate && order.date < toDate);
-        return filteredArray;
+
+        //Poor security, but need this case to return stats for all restaurants regardless of user
+        if(bypassUser){
+            const filteredArray = orders.filter( order => order.date > fromDate && order.date < toDate);
+            return filteredArray;
+        }
+        else{
+            const filteredArray = getAll().filter( order => order.date > fromDate && order.date < toDate);
+            return filteredArray;
+        }
     }
 
     //Returns an array of aggregated order lines within a given date range
@@ -134,6 +142,70 @@ const SalesModule = (function(){
         return sum;
     }
 
+    //Returns the best employee and their order totals for a given period
+    const getBestEmployee = (fromDate, toDate) => {
+        let employeeStats = [];
+        const orders = getByDateRange(fromDate, toDate);
+        orders.forEach(order => {
+            let match = false; 
+            employeeStats.forEach(employee => {
+                if(order.employeeID == employee){
+                    employee.sumSales += order.getOrderSum();
+                    match = true;
+                }
+            })
+            if(!match){
+                employeeStats.push({employee: order.employeeID, sumSales: order.getOrderSum()});
+            }
+        })
+        employeeStats.sort(function(a,b){
+            return a.sumSales - b.sumSales;
+        });
+        return employeeStats[employeeStats.length-1];
+    }
+
+    //Returns the best product and the total sum for a given period
+    const getBestProduct = (fromDate, toDate) => {
+        let productStats = [];
+        const orders = getOrderLinesInRange(fromDate, toDate);
+        orders.forEach(orderLine => {
+            let match = false; 
+            productStats.forEach(product => {
+                if(orderLine.item == product.item){
+                    product.sumSales += orderLine.item.price * orderLine.quantity;
+                    product.sumQuantity += orderLine.quantity;
+                    match = true;
+                }
+            })
+            if(!match){
+                productStats.push({product: orderLine.item, sumQuantity: orderLine.quantity ,sumSales: orderLine.item.price * orderLine.quantity});
+            }
+        })
+        productStats.sort(function(a,b){
+            return a.sumSales - b.sumSales;
+        });
+        return productStats[productStats.length-1];
+    }
+
+    const getRestaurantsProfitsInRange = (fromDate, toDate) => {
+        let restaurantStats = [];
+        const allOrders = getByDateRange(fromDate, toDate, true);
+        allOrders.forEach(order => {
+            let match = false;
+            restaurantStats.forEach( statistic => {
+                if(order.restaurantID == statistic.restaurant){
+                    statistic.sumSales += order.getOrderSum();
+                    match = true;
+                }
+            })
+            if(!match)
+                restaurantStats.push({restaurant: order.restaurantID, sumSales: order.getOrderSum()});
+        })
+        restaurantStats.sort(function(a,b){
+            return a.sumSales - b.sumSales;
+        });
+        return restaurantStats;
+    }
     
     const getById = (id) => {
         let foundOrder = null;
@@ -143,7 +215,7 @@ const SalesModule = (function(){
         });
         return foundOrder;
     }
-    return {getAll, getByDate, getById, getSumOfOrders, getTodaysProfits, getByDateRange, getOrderLinesInRange}
+    return {getAll, getByDate, getById, getSumOfOrders, getTodaysProfits, getByDateRange, getOrderLinesInRange, getRestaurantsProfitsInRange, getBestEmployee, getBestProduct}
 
 }());
 

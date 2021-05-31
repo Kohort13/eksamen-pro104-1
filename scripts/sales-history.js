@@ -8,6 +8,10 @@ const toDateField = document.getElementById("to-date");
 const searchBtn = document.getElementById("filter-table");
 const toDateDiv = document.getElementById("optional-to-date");
 
+const restaurantsCard = document.getElementById("restaurant-stats");
+const bestProductCard = document.getElementById("best-product");
+const bestEmployeeCard = document.getElementById("best-employee");
+
 const PeriodTypes = {DAY: 'day', WEEK: 'week', FREE: 'free'};
 let periodSelection = PeriodTypes.WEEK;
 
@@ -90,7 +94,38 @@ function runSearch(){
     renderTable(fromDate, toDate);
 }
 
+function renderStatCards(fromDate, toDate){
+    const bestEmployee = SalesModule.getBestEmployee(fromDate, toDate);
+    const bestProduct = SalesModule.getBestProduct(fromDate, toDate);
+    const restaurantStats = SalesModule.getRestaurantsProfitsInRange(fromDate, toDate);
+    bestEmployeeCard.innerHTML = `
+        <div class="card-header mb-5">
+            <p class="card-header-title">Beste ansatt</p>
+        </div>
+        <div class="card-image has-text-centered">
+            <figure class="image is-inline-block is-128x128">
+                <img class="is-rounded" src="../resources/images/${bestEmployee.employee._picture}" alt="Placeholder Image">
+            </figure>
+        </div>
+        <div class="card-content has-text-centered">
+            <p class="has-text-weight-bold">${bestEmployee.employee.fullName}</p>
+            <p>Solgt for ${bestEmployee.sumSales},-</p>
 
+        </div>    
+    `;
+    bestProductCard.innerHTML = `
+        <p class="has-text-weight-bold">${bestProduct.product.productName}</p>
+        <p>Solgt ${bestProduct.sumQuantity} stk, til en sum av ${bestProduct.sumSales}</p>
+    `;
+
+    restaurantsCard.innerHTML = "";
+    restaurantStats.forEach( statistic => {
+        restaurantsCard.innerHTML += `
+            <p>${statistic.restaurant.name} solgt for: ${statistic.sumSales},-</p>
+        `;
+    })
+
+}
 
 
 
@@ -153,6 +188,7 @@ function renderTable(fromDate, toDate){
     renderHeader();
     renderFooter(array);
     renderOrders(array, fromDate, toDate);
+    renderStatCards(fromDate, toDate)
 }
 
 //Function that renders all orders in an array
