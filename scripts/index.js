@@ -6,13 +6,51 @@ import LoginModule from './modules/LoginModule.js'
 
 //Funksjoner for index-siden
 
+const restaurantModal = document.getElementById("restaurant-modal");
+const modalClose1 = document.getElementById("image-modal-close");
+const modalClose2 = document.getElementById("close-modal-button");
+const modalContent = document.getElementById("modal-content");
+
 const initialise = (function(){
-    const phoneNumbers = document.getElementById("telephone-numbers");
+
+    modalClose1.addEventListener('click', closeModal);
+    modalClose2.addEventListener('click', closeModal);
+    document.addEventListener('keyup', closeModal)
+    const contactInfo = document.getElementById("contact-info");
     RestaurantModule.getAll().forEach(restaurant => {
-        phoneNumbers.innerHTML += `${restaurant.name}: ${restaurant.phone}<br>`;
+        let info = document.createElement("a");
+        info.tabIndex = 0;
+        let lineShift = document.createElement("br");
+        info.innerHTML = `${restaurant.name}`;
+        info.addEventListener('click', function(){renderModal(restaurant.id)});
+        info.addEventListener('keyup', function(){renderModal(restaurant.id)});
+        contactInfo.appendChild(info);
+        contactInfo.appendChild(lineShift);
     })
     renderAnnouncements();
 })();
+
+function renderModal(id){
+    if(event.key == "Enter" || event.button == 0){
+        restaurantModal.classList.toggle("is-active", true);
+        const manager = EmployeeModule.getManager(id);
+        const restaurant = RestaurantModule.getById(id);
+        modalContent.innerHTML = `
+            <h3 class="is-size-3">${restaurant.name}</h3>
+            <p>Avdelingsleder ${manager.fullName}, tlf: ${manager._telephone}</p>
+            <p>Adresse: ${restaurant.address}</p>
+            <p>Tlf til avdeling: ${restaurant.phone}</p>
+        `; 
+    }
+
+    
+}
+
+function closeModal(){
+    if(event.key == "Escape" || event.button == 0);
+    restaurantModal.classList.toggle("is-active", false);
+
+}
 
 
 function renderAnnouncements() {

@@ -18,8 +18,27 @@
 </head>
 <body>
     <div class="container" id="main-header"></div>
+
+    <div class="modal" id ="restaurant-modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Kontaktinformasjon</p>
+            <button class="delete" aria-label="close" id = "image-modal-close"></button>
+          </header>
+          <section id="modal-content" class="modal-card-body">
+            <!-- Content ... -->
+            
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button" id="close-modal-button">Lukk</button>
+          </footer>
+        </div>
+      </div>
     
     <div class="section">
+
+        </div>
         <div class="container">
             <div class="columns">
                 <!--Large buttons for important sub-pages-->
@@ -89,25 +108,35 @@
                             <p class="card-header-title">Ressurser</p>
                         </header>
                         <div class="card-content">
-                            <h3 class="is-size-6 has-text-weight-bold pb-2">Åpningstider:</h3>
-                            <p>Mandag: 12-22 <br>Tirsdag: 12-22 <br>Onsdag: 12-22 <br>Torsdag: 8-22 <br>Fredag: 12-00 <br>Lørdag: 12-00 <br>Søndag: 12-00</p>
-                            <p>
+                            <div class="block">
                                 <span class="icon-text pt-2">
-                                    <span><a href="documents.html">Diverse dokumenter</a></span>
+                                    <span><b>Åpningstider</b></span>
                                     <span class="icon">
-                                        <i class="fas fa-file-alt " aria-hidden="true"></i>
+                                        <i class="fas fa-clock" aria-hidden="true"></i>
                                     </span>
                                 </span>
-                            </p>
-                            <p>
-                                <span class="icon-text pt-2">
-                                    <span>Telefonnummer</span>
-                                    <span class="icon">
-                                        <i class="fas fa-phone" aria-hidden="true"></i>
+                                    <p>Mandag: 12-22 <br>Tirsdag: 12-22 <br>Onsdag: 12-22 <br>Torsdag: 8-22 <br>Fredag: 12-00 <br>Lørdag: 12-00 <br>Søndag: 12-00</p>
+                                </div>
+                                
+                                <div class="block">
+                                    <span class="icon-text pt-2">
+                                        <span><b>Kontaktinformasjon</b></span>
+                                        <span class="icon">
+                                            <i class="fas fa-user" aria-hidden="true"></i>
+                                        </span>
                                     </span>
-                                </span>
-                            </p>
-                            <p id="telephone-numbers"></p>
+                                    <p id="contact-info"></p>
+                                </div>
+                                <div class="block">
+                                    <span class="icon-text pt-2">
+                                        <span><b>Diverse dokumenter</b></span>
+                                        <span class="icon">
+                                            <i class="fas fa-file-alt" aria-hidden="true"></i>
+                                        </span>
+                                    </span>
+                                    <br>
+                                    <a href="documents.html">Diverse dokumenter</a>
+                                </div>
                         </div>
                     </div>
                 </div>

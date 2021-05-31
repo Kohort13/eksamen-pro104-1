@@ -93,10 +93,20 @@ const EmployeeModule = (function(){
         return foundEmployee;
     }
 
+    //Gets the manager of a given restaurant, used for generating contact info
+    const getManager = (restaurantId) => {
+        let foundEmployee = null;
+        employees.forEach( employee => {
+            if(employee._restaurant.id == restaurantId && employee._position == Positions.MANAGER)
+                foundEmployee = employee;
+        })
+        return foundEmployee;
+    }
+
     const getByName = (name) => {
         return getAll().filter(employee => employee.fullName.toLowerCase().includes(name.toLowerCase()));
     }
-    return {getAll, getByPosition, getByIndex, getRandomWaiter, getByName}
+    return {getAll, getByPosition, getByIndex, getRandomWaiter, getByName, getManager}
 }());
 
 export default EmployeeModule;

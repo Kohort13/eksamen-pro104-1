@@ -81,6 +81,7 @@ function initialiseAddProdModal(){
     //closes the modal
     closeAddProductBtn = document.getElementById("close-btn");
     closeAddProductBtn.addEventListener('click', exitAddProduct);
+    document.addEventListener('keyup', exitAddProduct);
     
     //Creating button with click listner. Connecting to HTML.
     //Will save input.
@@ -135,8 +136,10 @@ function renderTable(array){
                 row.appendChild(allergyTd);
             });
             menuBody.appendChild(row);
+            row.tabIndex = 0;
             
             row.addEventListener('click', function(){editProduct(product.productID)});
+            row.addEventListener('keyup', function(){editProduct(product.productID)});
         });
     }
 }
@@ -160,6 +163,7 @@ function initialiseEditProdModal(){
 
     closeEditProductBtn = document.getElementById("close-edit-btn");
     closeEditProductBtn.addEventListener('click', closeEditProd);
+    document.addEventListener('keyup', closeEditProd);
 
     // saveEditProductBtn = document.getElementById("save-changes");
     // saveEditProductBtn.addEventListener('click', saveProdInfo)
@@ -173,7 +177,10 @@ function openEditProd(id){
     saveEditProductBtn.onclick = function(){saveProdInfo(id)};
 }
 function closeEditProd(){
-    openEditProdModal.classList.toggle("is-active",false);
+    console.log(event.key);
+    if(event.key === "Escape" || event.button == 0){
+        openEditProdModal.classList.toggle("is-active",false);
+    }
 }
 //Getting prod id for clicked on row
 function getProdInfo(id){
@@ -238,8 +245,10 @@ function saveProdInfo(id){
     closeEditProd();
 }
 function editProduct(id){
-    openEditProd(id);
-    getProdInfo(id);
+    if(event.key == "Enter" || event.button == 0){
+        openEditProd(id);
+        getProdInfo(id);
+    }
 }
 
 
@@ -324,8 +333,10 @@ function openAddProduct(){
 }
 //Function that closes the modal.
 function exitAddProduct(){
-    //Sets modal to not active
-    openAddProdModal.classList.toggle("is-active", false);
+    if(event.key === "Escape" || event.button == 0){
+        //Sets modal to not active
+        openAddProdModal.classList.toggle("is-active", false);        
+    }
 }
 
 //Function that finds the next new productID
