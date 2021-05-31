@@ -10,11 +10,14 @@ document.getElementById('login-form').onsubmit = function() {
 function validateUser() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-
-    return LoginModule.login(username, password);
+    const isSuccess = LoginModule.login(username, password);
+    return isSuccess;
 }
 
-// const rmCheck = document.getElementById("remember"), usernameInput = document.getElementById("username"), passwordInput = document.getElementById("password");
+
+function rememberMe(){
+    const rmCheck = document.getElementById("remember"), usernameInput = document.getElementById("username"), passwordInput = document.getElementById("password");
+}
 
 /*if (localStorage.checkbox && localStorage.checkbox !== "") {
     rmCheck.setAttribute("checked","checked");
