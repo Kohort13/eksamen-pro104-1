@@ -106,8 +106,10 @@ function renderStatCards(fromDate, toDate){
         <p>Solgt for ${bestEmployee.sumSales},-</p> 
     `;
     bestProductCard.innerHTML = `
-        <p class="has-text-weight-bold">${bestProduct.product.productName}</p>
-        <p>Solgt ${bestProduct.sumQuantity} stk, til en sum av ${bestProduct.sumSales}</p>
+        <p class="has-text-weight-bold">
+            ${bestProduct.product.productID}. ${bestProduct.product.productName}
+        </p>
+        <p>Solgt ${bestProduct.sumQuantity} stk, til en sum av ${bestProduct.sumSales},-</p>
     `;
 
     restaurantsCard.innerHTML = "";
