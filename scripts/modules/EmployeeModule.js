@@ -29,6 +29,8 @@ const EmployeeModule = (function(){
             return `${this._firstName} ${this._lastName}`;
         }
     }
+
+    //Some helper methods for cleaning up the initialisation of the employees array
     const randomPhoneNr = () => { 
         let number = UtilsModule.randomNumberInRange(90000000, 99999999).toString();
         return `${number.substr(0, 3)} ${number.substr(2, 2)} ${number.substr(4, 3)}`; 
@@ -68,6 +70,8 @@ const EmployeeModule = (function(){
         new Employee(getUniqueID(), "female13.png", "Mina", "Marinara", randomPhoneNr(), "min.mar@coldmail.com", randomAdresss(), randomBirthDate(), "465 000kr", Positions.WAITER, RestaurantModule.getById(4)),
     ];
 
+
+    //Gets all the employees for the restaurant that is logged in, used in most other functions to maintain privacy
     const getAll = () => {
         const user = LoginModule.getUser().username;
         if(user == "test"){
@@ -93,7 +97,7 @@ const EmployeeModule = (function(){
         return foundEmployee;
     }
 
-    //Gets the manager of a given restaurant, used for generating contact info
+    //Gets the manager of a given restaurant, used for generating contact info. This does not use getAll(), as we need the manager of other restaurants as well
     const getManager = (restaurantId) => {
         let foundEmployee = null;
         employees.forEach( employee => {
@@ -103,6 +107,7 @@ const EmployeeModule = (function(){
         return foundEmployee;
     }
 
+    //Gets a collection of employees by name
     const getByName = (name) => {
         return getAll().filter(employee => employee.fullName.toLowerCase().includes(name.toLowerCase()));
     }

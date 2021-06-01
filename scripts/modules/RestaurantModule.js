@@ -1,3 +1,5 @@
+//Simple database for all the restaurants
+
 const RestaurantModule = (function(){
     class Restaurant {
         constructor(id, username, name, address, phone){

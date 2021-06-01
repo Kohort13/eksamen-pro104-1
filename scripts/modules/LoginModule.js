@@ -1,5 +1,7 @@
 import RestaurantModule from './RestaurantModule.js';
 
+
+//Module for pseudo-handling user login. This is in no ways a secure method, but is here to showcase the functionality
 const LoginModule = (function(){
     class User {
         constructor(username, displayName, password){
@@ -62,6 +64,7 @@ const LoginModule = (function(){
         return "";
     }
 
+    //Method for returning the currently logged in user
     const getUser = () => {
         const storedUsername = getCookie("username");
         if(storedUsername != ""){

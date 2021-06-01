@@ -177,7 +177,6 @@ function openEditProd(id){
     saveEditProductBtn.onclick = function(){saveProdInfo(id)};
 }
 function closeEditProd(){
-    console.log(event.key);
     if(event.key === "Escape" || event.button == 0){
         openEditProdModal.classList.toggle("is-active",false);
     }

@@ -1,3 +1,5 @@
+
+//Module for generating pseudo-random lorem text via js, used to fill dynamic content
 const LoremModule = (function(){
 
     const loremText = [

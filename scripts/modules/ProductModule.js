@@ -1,5 +1,6 @@
 import UtilsModule from "./UtilsModule.js";
 
+//Database for all the products the restaurants offer
 const ProductModule = (function(){
 
     const productTypes = {
@@ -50,23 +51,27 @@ const ProductModule = (function(){
             }
         }
     }
-    let priceClass1 = 99;
-    let priceClass2 = 149;
-    let priceClass3 = 169;
-    let priceClass4 = 219;
-    let nonAlcoholicDrinkPrice = 55;
-    let alcoholicDrinkPrice = 89;
-    let craftAlcoholicDrinkPrice = 129;
-    let expensiveWine = 1500;
-    let glassOfWine = 149;
 
-    let allergiesG = createAllergies(true, false, false, false, false, false, false, false, false, false);
-    let allergiesG_L = createAllergies(true, true, false, false, false, false, false, false, false, false);
-    let allergiesG_L_E = createAllergies(true, true, true, false, false, false, false, false, false, false);
-    let allergiesL = createAllergies(false, true, false, false, false, false, false, false, false, false);
-    let allergiesG_L_PN = createAllergies(true, true, false, false, false, false, false, true, false, false);
-    let allergiesG_L_F = createAllergies(true, true, false, false, false, false, true, false, false, false);
-    let noAllergies = createAllergies(false, false, false, false, false, false, false, false, false, false);
+
+    //Fields and helper methods for cleaning up initialization of the products array
+    const priceClass1 = 99;
+    const priceClass2 = 149;
+    const priceClass3 = 169;
+    const priceClass4 = 219;
+    const nonAlcoholicDrinkPrice = 55;
+    const alcoholicDrinkPrice = 89;
+    const craftAlcoholicDrinkPrice = 129;
+    const expensiveWine = 1500;
+    const glassOfWine = 149;
+
+    const allergiesG = createAllergies(true, false, false, false, false, false, false, false, false, false);
+    const allergiesG_L = createAllergies(true, true, false, false, false, false, false, false, false, false);
+    const allergiesG_L_E = createAllergies(true, true, true, false, false, false, false, false, false, false);
+    const allergiesL = createAllergies(false, true, false, false, false, false, false, false, false, false);
+    const allergiesG_L_PN = createAllergies(true, true, false, false, false, false, false, true, false, false);
+    const allergiesG_L_F = createAllergies(true, true, false, false, false, false, true, false, false, false);
+    const noAllergies = createAllergies(false, false, false, false, false, false, false, false, false, false);
+    
     const idGenerator = new UtilsModule.IdGenerator();
     const getUniqueID = () => { return idGenerator.getID()}
     const products = [
@@ -100,6 +105,7 @@ const ProductModule = (function(){
     ];
     const getAll = () => products;
 
+    //Function that adds a product to the database. Note that this isn't stored persistently
     function addProduct(productType, productName, price, allergies, isVegetarian, ingredients){
         const allergiesObj = createAllergies(allergies[0],allergies[1],allergies[2],allergies[3],allergies[4],allergies[5],allergies[6],allergies[7],allergies[8],allergies[9])
         products.push(new Product(getUniqueID(), productType, productName, price, allergiesObj, isVegetarian, ingredients))
@@ -153,14 +159,8 @@ const ProductModule = (function(){
         return products.filter(product => product.price === price);
     }
     const getSortedByPrice = () =>{
-        return products.sort((v, v2) => {
-            if(v.price > v2.price){
-                return 1;
-            }else if(v.price === v2.price){
-                return 0;
-            }else{
-                return -1;
-            }
+        return products.sort((p1, p2) => {
+            return p1.price - p2.price;
         })
     }
 
@@ -170,6 +170,7 @@ const ProductModule = (function(){
         }
         return products.filter(product => product.productType.toLowerCase().includes(type.toLowerCase()));
     }
+
     const getSortedByType = ()=>{
         return products.sort((p1, p2) => {
             if(p1.type > p2.type){
@@ -182,6 +183,7 @@ const ProductModule = (function(){
         });
     }
 
+    //Function for outputting an array of products with a given input allergy. Not used in the final product
     const getByAllergies = (inputAllergy) => {
         let outputArray = [];
         products.forEach(product => {
