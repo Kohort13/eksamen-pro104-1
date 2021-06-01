@@ -99,19 +99,11 @@ function renderStatCards(fromDate, toDate){
     const bestProduct = SalesModule.getBestProduct(fromDate, toDate);
     const restaurantStats = SalesModule.getRestaurantsProfitsInRange(fromDate, toDate);
     bestEmployeeCard.innerHTML = `
-        <div class="card-header mb-5">
-            <p class="card-header-title">Beste ansatt</p>
-        </div>
-        <div class="card-image has-text-centered">
-            <figure class="image is-inline-block is-128x128">
-                <img class="is-rounded" src="../resources/images/${bestEmployee.employee._picture}" alt="Placeholder Image">
-            </figure>
-        </div>
-        <div class="card-content has-text-centered">
-            <p class="has-text-weight-bold">${bestEmployee.employee.fullName}</p>
-            <p>Solgt for ${bestEmployee.sumSales},-</p>
-
-        </div>    
+        <figure class="image is-inline-block is-128x128">
+            <img class="is-rounded" src="../resources/images/${bestEmployee.employee._picture}" alt="Placeholder Image">
+        </figure>
+        <p class="has-text-weight-bold">${bestEmployee.employee.fullName}</p>
+        <p>Solgt for ${bestEmployee.sumSales},-</p> 
     `;
     bestProductCard.innerHTML = `
         <p class="has-text-weight-bold">${bestProduct.product.productName}</p>
