@@ -98,19 +98,26 @@ function renderStatCards(fromDate, toDate){
     const bestEmployee = SalesModule.getBestEmployee(fromDate, toDate);
     const bestProduct = SalesModule.getBestProduct(fromDate, toDate);
     const restaurantStats = SalesModule.getRestaurantsProfitsInRange(fromDate, toDate);
-    bestEmployeeCard.innerHTML = `
-        <figure class="image is-inline-block is-128x128">
-            <img class="is-rounded" src="../resources/images/${bestEmployee.employee._picture}" alt="Placeholder Image">
-        </figure>
-        <p class="has-text-weight-bold">${bestEmployee.employee.fullName}</p>
-        <p>Solgt for ${bestEmployee.sumSales},-</p> 
-    `;
-    bestProductCard.innerHTML = `
-        <p class="has-text-weight-bold">
-            ${bestProduct.product.productID}. ${bestProduct.product.productName}
-        </p>
-        <p>Solgt ${bestProduct.sumQuantity} stk, til en sum av ${bestProduct.sumSales},-</p>
-    `;
+    bestEmployeeCard.innerHTML = "";
+    bestProductCard.innerHTML = "";
+    
+    if(bestEmployee){
+        bestEmployeeCard.innerHTML = `
+            <figure class="image is-inline-block is-128x128">
+                <img class="is-rounded" src="../resources/images/${bestEmployee.employee._picture}" alt="Placeholder Image">
+            </figure>
+            <p class="has-text-weight-bold">${bestEmployee.employee.fullName}</p>
+            <p>Solgt for ${bestEmployee.sumSales},-</p> 
+        `;        
+    }
+    if(bestProduct){
+        bestProductCard.innerHTML = `
+            <p class="has-text-weight-bold">
+                ${bestProduct.product.productID}. ${bestProduct.product.productName}
+            </p>
+            <p>Solgt ${bestProduct.sumQuantity} stk, til en sum av ${bestProduct.sumSales},-</p>
+        `;
+    }
 
     restaurantsCard.innerHTML = "";
     restaurantStats.forEach( statistic => {
