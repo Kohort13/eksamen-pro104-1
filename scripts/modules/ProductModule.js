@@ -113,7 +113,13 @@ const ProductModule = (function(){
     function changeProduct(productID, productType, productName, price, allergies, isVegetarian, ingredients){
         const allergiesObj = createAllergies(allergies[0],allergies[1],allergies[2],allergies[3],allergies[4],allergies[5],allergies[6],allergies[7],allergies[8],allergies[9])
         // ProductID -1 => because array counts from 0, but id's counts from 1.
-        products[productID-1] = new Product(productID, productType, productName, price, allergiesObj, isVegetarian, ingredients);
+        let product = getByID(productID); //new Product(productID, productType, productName, price, allergiesObj, isVegetarian, ingredients);
+        product._productType = productType;
+        product._productName = productName;
+        product._price = price;
+        product._allergies = allergiesObj;
+        product._isVegetarian = isVegetarian;
+        product._ingredients = ingredients;
     }
     const getByName = (prodName) => {
         return products.filter(product => product.productName.toLowerCase().includes(prodName.toLowerCase()));
