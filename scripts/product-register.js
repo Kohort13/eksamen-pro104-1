@@ -137,9 +137,8 @@ function renderTable(array){
             });
             menuBody.appendChild(row);
             row.tabIndex = 0;
-            
-            row.addEventListener('click', function(){editProduct(product.productID)});
-            row.addEventListener('keyup', function(){editProduct(product.productID)});
+            row.onclick = function(){editProduct(product.productID)};
+            row.onkeyup = function(){editProduct(product.productID)};
         });
     }
 }
@@ -164,14 +163,12 @@ function initialiseEditProdModal(){
     closeEditProductBtn = document.getElementById("close-edit-btn");
     closeEditProductBtn.addEventListener('click', closeEditProd);
     document.addEventListener('keyup', closeEditProd);
-
-    // saveEditProductBtn = document.getElementById("save-changes");
-    // saveEditProductBtn.addEventListener('click', saveProdInfo)
 }
 
 const openEditProdModal = document.getElementById("edit-prod-modal")
 
 function openEditProd(id){
+
     openEditProdModal.classList.toggle("is-active", true);
     saveEditProductBtn = document.getElementById("save-changes");
     saveEditProductBtn.onclick = function(){saveProdInfo(id)};
@@ -183,7 +180,6 @@ function closeEditProd(){
 }
 //Getting prod id for clicked on row
 function getProdInfo(id){
-    id--;
     const product = ProductModule.getByID(id);
     
     //getting productId info for specified id (row). Adding info to placeholder
@@ -367,7 +363,7 @@ function saveNewProd(){
     //checks user input on ingredients
     let newProductIngredients = document.getElementById("new-prod-ingredients").value.toLowerCase();
 
-    ProductModule.addProduct(newProdType, newProdName,newProdPrice, newProdAllergies, newProdIsVegitarian, newProductIngredients);
+    ProductModule.addProduct(newProdType, newProdName, newProdPrice, newProdAllergies, newProdIsVegitarian, newProductIngredients);
     //Prints new table with added product
     renderTable(ProductModule.getAll());
 

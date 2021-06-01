@@ -138,7 +138,12 @@ const ProductModule = (function(){
     }
 
     const getByID = (id) => {
-        return products[id];
+        let foundProduct = null;
+        products.forEach(product => {
+            if(product.productID == id)
+                foundProduct = product;
+        })
+        return foundProduct;
     }
     const getNextId = () =>{
         return idGenerator.getNextId();
